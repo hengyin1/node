@@ -1,6 +1,7 @@
 const koa = require('koa');
 const mount = require('koa-mount');
 const static = require('koa-static');
+const rpcClient = require('./client');
 
 const app = new koa();
 
@@ -15,6 +16,11 @@ app.use(
     }
 
     const result = await new Promise((resolve, reject) => {
+      rpcClient.write({
+        columnid: ctx.query.columnid
+      }, function (err, data) {
+        err ? reject(err) : resolve(data)
+      })
       resolve();
     })
 
