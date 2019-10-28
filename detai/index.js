@@ -2,8 +2,11 @@ const koa = require('koa');
 const mount = require('koa-mount');
 const static = require('koa-static');
 const rpcClient = require('./client');
+const compileTemplate = require('./template');
 
 const app = new koa();
+
+const detailTemplate = compileTemplate(__dirname + '/template/index.html');
 
 app.use(mount('/static', static(__dirname + '/source/static/')));
 
@@ -25,7 +28,7 @@ app.use(
     })
 
     ctx.status = 200;
-    ctx.body = '';
+    ctx.body = detailTemplate(result);
   })
 );
 
