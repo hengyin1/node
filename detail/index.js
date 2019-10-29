@@ -11,7 +11,7 @@ const detailTemplate = compileTemplate(__dirname + '/template/index.html');
 app.use(mount('/static', static(__dirname + '/source/static/')));
 
 app.use(
-  mount('/', async (ctx) => {
+  async (ctx) => {
     if (!ctx.query.columnid) {
       ctx.status = 400;
       ctx.body = 'invalid columnid';
@@ -19,6 +19,7 @@ app.use(
     }
 
     const result = await new Promise((resolve, reject) => {
+      console.log("columnid", ctx.query.columnid);
       rpcClient.write({
         columnid: ctx.query.columnid
       }, function (err, data) {
@@ -29,7 +30,7 @@ app.use(
 
     ctx.status = 200;
     ctx.body = detailTemplate(result);
-  })
+  }
 );
 
 app.listen(3000);

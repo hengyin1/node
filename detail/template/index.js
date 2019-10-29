@@ -12,13 +12,15 @@ const templateContext = vm.createContext({
 
 const compileTemplate = function (templatePath) {
   templateCache[templatePath] = vm.runInContext(
-    `function (data) {
-      width(data) {
-        return `${fs.readFileSync(templatePath, 'utf-8')}`
+    `(function (data) {
+      with (data) {
+        return \`${fs.readFileSync(templatePath, 'utf-8')}\`
       }
-    }`,
+    })`,
     templateContext
   )
+  
+  return templateCache[templatePath];
 }
 
 module.exports = compileTemplate
