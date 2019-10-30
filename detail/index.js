@@ -23,10 +23,13 @@ app.use(
       rpcClient.write({
         columnid: ctx.query.columnid
       }, function (err, data) {
+        console.log("data", data);
+        
         err ? reject(err) : resolve(data)
       })
-      resolve();
     })
+
+    console.log("result", result);
 
     ctx.status = 200;
     ctx.body = detailTemplate(result);

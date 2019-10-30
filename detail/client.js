@@ -5,7 +5,7 @@ const schemas = protobuf(fs.readFileSync(__dirname + '/detail-service/proto/deta
 
 const easySock = new EasySock({
   ip: '127.0.0.1',
-  port: 400,
+  port: 4000,
   timeout: 500,
   keepAlive: true
 })
@@ -25,7 +25,8 @@ easySock.encode = function (data, seq) {
 easySock.decode = function (buffer) {
   const seq = buffer.readInt32BE();
   const body = schemas.ColumnResponse.decode(buffer.slice(8));
-
+  // console.log("body", body);
+  
   return {
     seq,
     result: body

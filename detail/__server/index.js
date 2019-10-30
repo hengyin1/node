@@ -53,23 +53,25 @@ const listData = {
 };
 
 const server = new RPC({
-  decodeRequest: function (buffer) {
-    const seq = buffer.readInt32BE();
-    const result = schemas.ColumnRequest.decode(buffer.slice(8))
-    return {
-      seq,
-      result
-    }
+  decodeRequest(buffer) {
+      const seq = buffer.readUInt32BE();
+
+      return {
+          seq: seq,
+          result: schemas.ColumnRequest.decode(buffer.slice(8))
+      }
   },
-  isCompleteRequest: function (buffer) {
-    return 8 + buffer.readInt32BE(4);
+  isCompleteRequest(buffer) {
+      const bodyLength = buffer.readUInt32BE(4);
+
+      return 8 + bodyLength
   },
   encodeResponse(data, seq) {
       const body = schemas.ColumnResponse.encode(data);
 
       const head = Buffer.alloc(8);
-      head.writeInt32BE(seq);
-      head.writeInt32BE(body.length, 4);
+      head.writeUInt32BE(seq);
+      head.writeUInt32BE(body.length, 4);
 
       return Buffer.concat([head, body]);
   }
@@ -77,7 +79,7 @@ const server = new RPC({
 
 server
     .createServer((request, response) => {
-        console.log('server', request);
+        // console.log('server', request);
         response.end(listData);
     })
     .listen(4000);

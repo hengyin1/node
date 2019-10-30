@@ -8,39 +8,39 @@ module.exports = class RPC {
 }
 
   createServer(callback) {
-    let buffur = null;
+    let buffer = null;
 
     const tcpServer = net.createServer((socket) => {
-      socket.on('data', function (data) {
+      socket.on('data', (data) => {
         console.log('data2', data);
         
-        buffer = (buffer && buffur.length) ? Buffer.concat([buffur, data]) : data;
+        buffer = (buffer && buffer.length) ? Buffer.concat([buffer, data]) : data;
 
         let checkLength = null;
-        while (buffur && (checkLength = this.isCompleteRequest(buffer))) {
+        while (buffer && (checkLength = this.isCompleteRequest(buffer))) {
           let requestBuffer = null;
-          if (checkLength == buffur.length) {
-            requestBuffer = buffur;
-            buffur = null;
+          if (checkLength == buffer.length) {
+            requestBuffer = buffer;
+            buffer = null;
           } else {
-            requestBuffer = buffur.slice(0, checkLength);
-            buffer = buffur.slice(checkLength);
+            requestBuffer = buffer.slice(0, checkLength);
+            buffer = buffer.slice(checkLength);
           }
-        }
 
-        const request = this.decodeRequest(requestBuffer);
-        callback(
-          {
-              body: request.result,
-              socket
-          },
-          {
-              end: (data) => {
-                  const buffer = this.encodeResponse(data, request.seq)
-                  socket.write(buffer);
-              }
-          }
-      );
+          const request = this.decodeRequest(requestBuffer);
+          callback(
+            {
+                body: request.result,
+                socket
+            },
+            {
+                end: (data) => {
+                    const buffer = this.encodeResponse(data, request.seq)
+                    socket.write(buffer);
+                }
+            }
+          );
+        }
       })
     })
 
