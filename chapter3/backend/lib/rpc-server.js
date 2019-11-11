@@ -12,8 +12,6 @@ module.exports = class RPC {
 
     const tcpServer = net.createServer((socket) => {
       socket.on('data', (data) => {
-        console.log('data2', data);
-        
         buffer = (buffer && buffer.length) ? Buffer.concat([buffer, data]) : data;
 
         let checkLength = null;
@@ -35,7 +33,7 @@ module.exports = class RPC {
             },
             {
                 end: (data) => {
-                    const buffer = this.encodeResponse(data, request.seq)
+                    const buffer = this.encodeResponse(data, request.seq);
                     socket.write(buffer);
                 }
             }
@@ -46,7 +44,7 @@ module.exports = class RPC {
 
     return {
       listen() {
-          tcpServer.listen.apply(tcpServer, arguments)
+          tcpServer.listen.apply(tcpServer, arguments);
       }
   }
   }
