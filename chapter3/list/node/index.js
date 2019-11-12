@@ -7,8 +7,8 @@ require('@babel/register')({
   presets: ['@babel/preset-react']
 });
 
-const template = require('./template')(__dirname + '/index.html');
 const App = require('./app.jsx');
+const template = require('./template')(__dirname + '/index.html');
 
 const app = new koa();
 

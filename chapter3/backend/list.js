@@ -1,6 +1,6 @@
 const fs = require('fs');
 const protobuf = require('protocol-buffers');
-const schemas = protobuf(fs.readFileSync(__dirname + '../list/node/list.proto'));
+const schemas = protobuf(fs.readFileSync(__dirname + '/../list/node/list.proto'));
 
 const columnData = require('./mockdata/column');
 const server = require(__dirname + '/lib/server.js')(schemas.ListRequest, schemas.ListResponse);
