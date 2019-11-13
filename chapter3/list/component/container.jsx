@@ -1,8 +1,7 @@
 const React = require('react');
-const ColumnItem = require('./column_item.jsx')
+const ColumnItem = require('./column_item.jsx');
 
-module.exports = class Container extends React.Component {
-
+class Container extends React.Component {
     render() {
         return (
             <div className="_2lx4a-CP_0">
@@ -30,17 +29,20 @@ module.exports = class Container extends React.Component {
                             <span className="JfgzzksA_0">{this.props.columns.length}个课程</span>
                         </div>
                         <div>
-                            {this.props.columns.map(column => {
+                            {
+                              this.props.columns.columns.map(column => {
                                 return (
                                     <ColumnItem column={column} key={column.id} />
                                 )
-                            })}
+                              })
+                            }
                         </div>
                         <div className="OjL5wNoM_0"><span>— 没有更多了 —</span></div>
                     </div>
                 </div>
             </div>
-
         )
     }
 }
+
+module.exports = Container

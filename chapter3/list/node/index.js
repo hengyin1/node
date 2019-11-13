@@ -3,8 +3,8 @@ const mount = require('koa-mount');
 const static = require('koa-static');
 const getData = require('./get-data');
 const ReactDOMServer  = require('react-dom/server');
-require('@babel/register')({
-  presets: ['@babel/preset-react']
+require('babel-register')({
+  presets: ['react']
 });
 
 const App = require('./app.jsx');
@@ -20,8 +20,12 @@ app.use(
     const filtType = +(ctx.query.filt || 0);
     const sortType = +(ctx.query.sort || 0);
     const reactData = await getData(sortType, filtType);
+   
     ctx.body = template({
-      reactString: ReactDOMServer.renderToString(App(reactData))
+      reactString: ReactDOMServer.renderToString(App(reactData)),
+      reactData,
+      filtType,
+      sortType
     })
   }
 );
