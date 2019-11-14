@@ -12,7 +12,17 @@ const template = require('./template')(__dirname + '/index.html');
 
 const app = new koa();
 
-app.use(mount('/static', static(__dirname + '/source/static/'))); 
+app.use(mount('/static', static(__dirname + '/source'))); 
+
+app.use(
+  mount('/data', async (ctx) => {
+    ctx.status = 200;
+    const filtType = +(ctx.query.filt || 0);
+    const sortType = +(ctx.query.sort || 0);
+    const reactData = await getData(sortType, filtType);
+    ctx.body = reactData;
+  })
+)
 
 app.use(
   async (ctx) => {

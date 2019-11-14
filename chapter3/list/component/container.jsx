@@ -26,7 +26,7 @@ class Container extends React.Component {
                                     </span>
                                 </a>
                             </div>
-                            <span className="JfgzzksA_0">{this.props.columns.length}个课程</span>
+                            <span className="JfgzzksA_0">{this.props.columns.columns.length}个课程</span>
                         </div>
                         <div>
                             {
