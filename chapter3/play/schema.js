@@ -1,7 +1,7 @@
 const { buildSchema } = require('graphql');
 const fs = require('fs');
-const commentClient = require('./rpc-client/comment-client');
-const praiseClient = require('./rpc-client/praise-client');
+// const commentClient = require('./rpc-client/comment-client');
+// const praiseClient = require('./rpc-client/praise-client');
 
 // const schema = buildSchema(fs.readFileSync(__dirname + '/schema/comment.gql', 'utf-8'));
 const schema = buildSchema(`

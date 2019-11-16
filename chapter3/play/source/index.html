@@ -3057,7 +3057,7 @@
           <ul id="comment_list">
           </ul>
           <script>
-            fetch('./api?query={comment{id,avatar,name,isTop,content,publishDate,commentNum,praiseNum}}')
+            fetch('./play/api?query={comment{id,avatar,name,isTop,content,publishDate,commentNum,praiseNum}}')
               .then(res => res.json())
               .then(res => {
                 document.getElementById('comment_list_num').innerHTML = `(${res.data.comment.length})`;
@@ -3090,7 +3090,7 @@
                   (e.target.parentElement.className.indexOf('_praise') != -1 ? e.target.parentElement : null)
                 
                 if (bindtarget) {
-                  fetch('./api', {
+                  fetch('./play/api', {
                     method: 'POST',
                     headers: {
                       'content-type': 'application/json'

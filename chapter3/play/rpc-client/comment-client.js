@@ -2,7 +2,7 @@ const fs = require('fs');
 const EasySock = require('easy_sock');
 const protobuff = require('protocol-buffers');
 
-const schema = protobuff(fs.readFileSync(__dirname + '/schema/comment.proto'));
+const schema = protobuff(fs.readFileSync(__dirname + '/../schema/comment.proto'));
 
 const easySock = new EasySock({
   ip: '127.0.0.1',

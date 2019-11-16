@@ -1,7 +1,7 @@
 const fs = require('fs');
 const protobuf = require('protocol-buffers');
-const schemas = protobuf(fs.readFileSync(`${__dirname}/../detail-service/proto/detail.proto`));
-const RPC = require('../detail-service/rpc-channel/server');
+const schemas = protobuf(fs.readFileSync(`${__dirname}/../detail/detail-service/proto/detail.proto`));
+const RPC = require('./lib/rpc-server');
 
 const listData = {
   column: {
