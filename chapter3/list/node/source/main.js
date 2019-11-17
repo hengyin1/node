@@ -34467,7 +34467,7 @@ class App extends React.Component {
   }
 
   handleFilt(filtType) {
-    fetch(`./data?sort=${this.state.sortType}&filt=${filtType}`).then(res => res.json()).then(res => {
+    fetch(`./list/data?sort=${this.state.sortType}&filt=${filtType}`).then(res => res.json()).then(res => {
       this.setState({
         columns: res,
         filtType: filtType
@@ -34476,7 +34476,7 @@ class App extends React.Component {
   }
 
   handleSort(sortType) {
-    fetch(`./data?sort=${sortType}&filt=${this.state.filtType}`).then(res => res.json()).then(res => {
+    fetch(`./list/data?sort=${sortType}&filt=${this.state.filtType}`).then(res => res.json()).then(res => {
       this.setState({
         columns: res,
         sortType: sortType
