@@ -6,9 +6,10 @@ const app = new koa();
 
 app.use(mount('/static',  static(__dirname + '/source/')));
 
+const str =fs.readFileSync(__dirname + '/source/index.html', 'utf-8');
 app.use(
   mount('/', (ctx) => {
-    ctx.body = fs.readFileSync(__dirname + '/source/index.html', 'utf-8');
+    ctx.body = str;
   })
 );
 
