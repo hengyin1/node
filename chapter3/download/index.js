@@ -6,10 +6,12 @@ const app = new koa();
 
 app.use(mount('/static',  static(__dirname + '/source/')));
 
-const str =fs.readFileSync(__dirname + '/source/index.html', 'utf-8');
+const buffer = fs.readFileSync(__dirname + '/source/index.html');
 app.use(
   mount('/', (ctx) => {
-    ctx.body = str;
+    ctx.status = 200;
+    ctx.type = 'html';
+    ctx.body = buffer;
   })
 );
 
