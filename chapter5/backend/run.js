@@ -1,6 +1,6 @@
 const koa = new(require('koa'));
 const mount = require('koa-mount');
-const app = require('./app');
+const app = require('../app');
 
 Object.keys(app).forEach(routePath => {
   koa.use(
