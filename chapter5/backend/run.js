@@ -2,6 +2,7 @@ const mount = require('koa-mount');
 const requestFactory = require('../server/request-factory.js');
 requestFactory.registerProtocol('geek-rpc', require('../server/requestors/geek-rpc'));
 requestFactory.registerProtocol('http', require('../server/requestors/http'));
+const compileTemplate = require('../template/create-template');
 
 module.exports = function (app) {
   const koa = new(require('koa'));
@@ -13,6 +14,8 @@ module.exports = function (app) {
       return ret;
     }, {});
 
+    const template = compileTemplate(app[routePath].template);
+
     koa.use(
       mount(routePath, async function (ctx) {
         ctx.status = 200;
@@ -23,6 +26,8 @@ module.exports = function (app) {
             return;
           });
         }));
+
+        ctx.body = template(result);
       })
     );
   });
