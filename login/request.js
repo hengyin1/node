@@ -1,9 +1,7 @@
 const https = require('https');
-const querystring = require('querystring');
 
 const request = function(url) {
   return new Promise((resolve, reject) => {
-  
     const options = {
       method: 'GET',
       // headers: {
