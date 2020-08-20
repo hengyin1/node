@@ -1,5 +1,6 @@
 
-export class Vector2D extends Array {
+// export 
+class Vector2D extends Array {
   constructor(x = 1, y = 0) {
     super(x, y);
   }
