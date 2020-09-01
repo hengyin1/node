@@ -31,6 +31,7 @@
 
       varying vec2 vUv;
       uniform float rows;
+      uniform float u_time;
 
       // Plot a line on Y using a value between 0.0-1.0
       float plot(vec2 st, float pct) {    
@@ -42,7 +43,7 @@
 
         // float y = exp(st.x);
         // float y = smoothstep(0.2,0.5,st.x) - smoothstep(0.5,0.8,st.x);
-        float y = -sin(st.x * PI);
+        float y = sin(st.x * PI + u_time);
 
         vec3 color = vec3(y);
 
@@ -61,6 +62,14 @@
     const program = renderer.compileSync(fragment, vertex);
     renderer.useProgram(program);
     renderer.uniforms.rows = 1;
+
+    const startTime = performance.now();
+    function update() {
+      renderer.uniforms.u_time = (performance.now() - startTime) / 1000;
+      requestAnimationFrame(update);
+    }
+
+    requestAnimationFrame(update);
 
     // const rows = [1, 4, 16, 32, 64];
     // let idx = 0;
