@@ -27,6 +27,8 @@
       precision mediump float;
       #endif
 
+      #define PI 3.14159265359
+
       varying vec2 vUv;
       uniform float rows;
 
@@ -39,7 +41,8 @@
         vec2 st = vUv;
 
         // float y = exp(st.x);
-        float y = smoothstep(0.2,0.5,st.x) - smoothstep(0.5,0.8,st.x);
+        // float y = smoothstep(0.2,0.5,st.x) - smoothstep(0.5,0.8,st.x);
+        float y = -sin(st.x * PI);
 
         vec3 color = vec3(y);
 
@@ -77,10 +80,10 @@
       ],
       attributes: {
         uv: [
-          [0, 0],
-          [0, 1],
+          [-1, -1],
+          [-1, 1],
           [1, 1],
-          [1, 0],
+          [1, -1],
         ],
       },
       cells: [[0, 1, 2], [2, 0, 3]],
