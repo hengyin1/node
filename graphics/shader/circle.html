@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>circle</title>
+</head>
+<body>
+  <canvas width="512" height="512"></canvas>
+  <script src="../common/lib/gl-renderer.js"></script>
+  <script>
+    const vertex = `
+      attribute vec2 a_vertexPosition;
+      attribute vec2 uv;
+
+      varying vec2 vUv;
+
+      void main() {
+        gl_PointSize = 1.0;
+        vUv = uv;
+        gl_Position = vec4(a_vertexPosition, 1, 1);
+      }
+    `;
+
+    const fragment = `
+      #ifdef GL_ES
+      precision mediump float;
+      #endif
+
+      #define PI 3.14159265359
+
+      varying vec2 vUv;
+      uniform float rows;
+      uniform float u_time;
+
+      float circle(in vec2 _st, in float _radius){
+        vec2 dist = _st-vec2(0.5);
+        return 1.-smoothstep(_radius-(_radius*0.01),
+                              _radius+(_radius*0.01),
+                              dot(dist,dist)*4.0);
+      }
+
+      void main() {
+        vec2 st = vUv;
+
+        // float pct = 0.0;
+        // pct = smoothstep(0.3, 0.29, distance(st, vec2(0.5))) - smoothstep(0.25, 0.24, distance(st, vec2(0.5)));
+        
+        // vec3 color = vec3(pct);
+
+        vec3 color = vec3(circle(st,0.9));
+
+        gl_FragColor = vec4(color,1.0);
+      }
+    `;
+
+    const canvas = document.querySelector('canvas');
+    const renderer = new GlRenderer(canvas);
+
+    // load fragment shader and createProgram
+    const program = renderer.compileSync(fragment, vertex);
+    renderer.useProgram(program);
+    // renderer.uniforms.rows = 1;
+
+    // const startTime = performance.now();
+    // function update() {
+    //   renderer.uniforms.u_time = (performance.now() - startTime) / 1000;
+    //   requestAnimationFrame(update);
+    // }
+
+    // requestAnimationFrame(update);
+
+    renderer.setMeshData([{
+      positions: [
+        [-1, -1],
+        [-1, 1],
+        [1, 1],
+        [1, -1],
+      ],
+      attributes: {
+        uv: [
+          [0, 0],
+          [0, 1],
+          [1, 1],
+          [1, 0],
+        ],
+      },
+      cells: [[0, 1, 2], [2, 0, 3]],
+    }]);
+
+    renderer.render();
+  </script>
+</body>
+</html>
