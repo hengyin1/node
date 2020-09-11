@@ -55,6 +55,24 @@ function transferToImageBitmap(imageData) {
   return canvas.transferToImageBitmap();
 }
 
+// function traverse(imageData, pass) {
+//   const {width, height, data} = imageData;
+//   for (let i = 0; i < width * height * 4; i += 4) {
+//     const [r, g, b, a] = pass({
+//       r: data[i] / 255,
+//       g: data[i + 1] / 255,
+//       b: data[i + 2] / 255,
+//       a: data[i + 3] / 255,
+//       index: i,
+//       width: width,
+//       height: height,
+//       x: ((i / 4) % width) / width,
+//       y: Math.floor(i / 4 / width) / height
+//     });
+//     data.set([r, g, b, a].map(v => Math.round(v * 255)), i);
+//   }
+// }
+
 // export 
 function traverse(imageData, pass) {
   const {width, height, data} = imageData;
