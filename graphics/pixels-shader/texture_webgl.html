@@ -36,10 +36,13 @@
       // 将对应的纹理单元写入shader变量
       gl.uniform1i(loc, 0);
 
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.drawElements(gl.TRIANGLES, cells.length, gl.UNSIGNED_SHORT, 0);
+      
       // 解除纹理绑定
       gl.bindTexture(gl.TEXTURE_2D, null);
       
-      return texture;
+      // return texture;
     }
 
     function setTexture(gl, texture, idx) {
@@ -79,8 +82,7 @@
 
       void main() {
           vec4 color = texture2D(tMap, vUv);
-          // gl_FragColor = colorMatrix * vec4(color.rgb, 1.0);
-          gl_FragColor = vec4(color.rgb, 1.0);
+          gl_FragColor = colorMatrix * vec4(color.rgb, 1.0);
           gl_FragColor.a = color.a;
       }
     `;
@@ -110,7 +112,7 @@
       [1.0, -1.0],
     ]
 
-    let uv = [
+    const uvVertices = [
       [0.0, 0.0],
       [0.0, 1.0],
       [1.0, 1.0],
@@ -118,11 +120,11 @@
     ]
 
     const points = vertices.flat();
-    uv = uv.flat();
+    const uvPoints = uvVertices.flat();
     const triangles = earcut(points);
 
     const position = new Float32Array(points);
-    const _uv = new Float32Array(uv);
+    const uv = new Float32Array(uvPoints);
     const cells = new Uint16Array(triangles);
 
     const pointBuffer = gl.createBuffer();
@@ -135,7 +137,7 @@
 
     const uvBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, uvBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, _uv, gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, uv, gl.STATIC_DRAW);
 
     const vUv = gl.getAttribLocation(program, 'uv');
     gl.vertexAttribPointer(vUv, 2, gl.FLOAT, false, 0, 0);
@@ -144,6 +146,20 @@
     const cellsBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cellsBuffer);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, cells, gl.STATIC_DRAW);
+    
+    const r = 0.2126,
+    g = 0.7152,
+    b = 0.0722;
+
+    const colorMatrix = [
+      r, r, r, 0,
+      g, g, g, 0,
+      b, b, b, 0,
+      0, 0, 0, 1,
+    ];
+
+    const colorMatrixLoc = gl.getUniformLocation(program, 'colorMatrix');
+    gl.uniformMatrix4fv(colorMatrixLoc, false, colorMatrix);
 
     const img = new Image();
     img.crossOrigin = 'anonymous';
@@ -154,8 +170,6 @@
     }
     img.src = 'https://p1.ssl.qhimg.com/t01cca5849c98837396.jpg';
 
-    gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.drawElements(gl.TRIANGLES, cells.length, gl.UNSIGNED_SHORT, 0);
   </script>
 </body>
 </html>
