@@ -166,19 +166,19 @@
     renderer.uniforms.axis = 0;
     renderer.render();
 
-    // 第三次，对y轴高斯模糊
-    renderer.useProgram(blurProgram);
-    renderer.bindFBO(fbo1);
-    renderer.uniforms.tMap = fbo2.texture;
-    renderer.uniforms.axis = 1;
-    renderer.render();
+    // // 第三次，对y轴高斯模糊
+    // renderer.useProgram(blurProgram);
+    // renderer.bindFBO(fbo1);
+    // renderer.uniforms.tMap = fbo2.texture;
+    // renderer.uniforms.axis = 1;
+    // renderer.render();
 
-    // 第四次，对x轴高斯模糊
-    renderer.useProgram(blurProgram);
-    renderer.bindFBO(fbo2);
-    renderer.uniforms.tMap = fbo1.texture;
-    renderer.uniforms.axis = 0;
-    renderer.render();
+    // // 第四次，对x轴高斯模糊
+    // renderer.useProgram(blurProgram);
+    // renderer.bindFBO(fbo2);
+    // renderer.uniforms.tMap = fbo1.texture;
+    // renderer.uniforms.axis = 0;
+    // renderer.render();
 
     // 第五次，对y轴高斯模糊
     renderer.useProgram(blurProgram);
