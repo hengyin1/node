@@ -44,6 +44,10 @@
       gl.bindRenderbuffer(gl.RENDERBUFFER, depthBuffer);
       gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, canvas.width, canvas.height);
 
+      gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
+      gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
+      gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, depthBuffer);
+
       // // 获取shader中纹理变量
       // const loc = gl.getUniformLocation(program, 'tMap');
       // // 将对应的纹理单元写入shader变量
@@ -52,10 +56,12 @@
       // gl.clear(gl.COLOR_BUFFER_BIT);
       // gl.drawElements(gl.TRIANGLES, cells.length, gl.UNSIGNED_SHORT, 0);
       
-      // // 解除纹理绑定
-      // gl.bindTexture(gl.TEXTURE_2D, null);
+      // 解除纹理绑定
+      gl.bindTexture(gl.TEXTURE_2D, null);
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      gl.bindRenderbuffer(gl.RENDERBUFFER, null);
       
-      // return texture;
+      return framebuffer;
     }
 
     function setTexture(gl, texture, idx) {
