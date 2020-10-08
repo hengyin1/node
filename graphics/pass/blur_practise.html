@@ -26,7 +26,11 @@
       gl.bindTexture(gl.TEXTURE_2D, texture);
       
       // 指定纹理图像
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+      if (img) {
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+      } else {
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, canvas.width, canvas.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+      }
       
       // 设置纹理的一些参数
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
@@ -62,9 +66,9 @@
       return framebuffer;
     }
 
-    function setTexture(gl, texture, idx) {
+    function setTexture(gl, program, texture, idx) {
       // 激活纹理单元
-      gl.activeTexture(gl.TEXTURE0 + idx);
+      // gl.activeTexture(gl.TEXTURE0 + idx);
       // 绑定纹理
       gl.bindTexture(gl.TEXTURE_2D, texture);
       // 获取shader中纹理变量
@@ -232,9 +236,13 @@
     const img = new Image();
     img.crossOrigin = 'anonymous';
     img.onload = () => {
-      const texture = createTexture(gl, img);
-      const fbo = createFBO(texture);
-      setTexture(gl, fbo.texture, 0);
+      const texture1 = createTexture(gl, img);
+      const fbo1 = createFBO(texture1);
+
+      const texture2 = createTexture(gl);
+      const fbo2 = createFBO(texture2);
+
+      setTexture(gl, program, fbo1.texture, 0);
     }
     img.src = 'https://p1.ssl.qhimg.com/t01cca5849c98837396.jpg';
   </script>
