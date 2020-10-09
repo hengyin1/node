@@ -242,7 +242,20 @@
       const texture2 = createTexture(gl);
       const fbo2 = createFBO(texture2);
 
-      setTexture(gl, program, fbo1.texture, 0);
+      gl.bindFramebuffer(gl.FRAMEBUFFER, fbo1);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.drawElements(gl.TRIANGLES, cells.length, gl.UNSIGNED_SHORT, 0);
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+      gl.useProgram(blurProgram);
+      const loc = gl.getUniformLocation(blurProgram, 'tMap');
+      // 将对应的纹理单元写入shader变量
+      gl.uniform1i(loc, fbo1.texture);
+      const axisloc = gl.getUniformLocation(blurProgram, 'axis');
+      // 将对应的纹理单元写入shader变量
+      gl.uniform1i(axisloc, 0);
+
+      // setTexture(gl, program, fbo1.texture, 0);
     }
     img.src = 'https://p1.ssl.qhimg.com/t01cca5849c98837396.jpg';
   </script>
