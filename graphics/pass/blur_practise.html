@@ -249,15 +249,14 @@
     const img = new Image();
     img.crossOrigin = 'anonymous';
     img.onload = () => {
-      const texture1 = createTexture(gl, img);
+      const texture1 = createTexture(gl);
       const fbo1 = createFBO(texture1);
 
-      // const texture2 = createTexture(gl);
+      const texture2 = createTexture(gl, img);
       // const fbo2 = createFBO(texture2);
 
       gl.bindFramebuffer(gl.FRAMEBUFFER, fbo1);
-      gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.drawElements(gl.TRIANGLES, cells.length, gl.UNSIGNED_SHORT, 0);
+      setTexture(gl, program, texture2, 0);
       gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
       gl.useProgram(blurProgram);
