@@ -107,63 +107,63 @@
 
       void main() {
           vec4 color = texture2D(tMap, vUv);
-          gl_FragColor = colorMatrix * vec4(color.rgb, 1.0);
+          gl_FragColor = vec4(color.rgb, 1.0);
           gl_FragColor.a = color.a;
       }
     `;
 
     const blurFragment = `
-      // #ifdef GL_ES
-      // precision highp float;
-      // #endif
-
-      // varying vec2 vUv;
-      // uniform sampler2D tMap;
-      // uniform int axis;
-
-      // void main() {
-      //   vec4 color = texture2D(tMap, vUv);
-
-      //   // 高斯矩阵的权重值
-      //   float weight[5];
-      //   weight[0] = 0.227027;
-      //   weight[1] = 0.1945946;
-      //   weight[2] = 0.1216216;
-      //   weight[3] = 0.054054;
-      //   weight[4] = 0.016216;
-
-      //   // 每一个相邻像素的坐标间隔，这里的512可以用实际的Canvas像素宽代替
-      //   float tex_offset = 1.0 / 512.0;
-
-      //   vec3 result = color.rgb;
-      //   result *= weight[0];
-      //   for(int i = 1; i < 5; ++i) {
-      //     float f = float(i);
-      //     if(axis == 0) { // x轴的高斯模糊
-      //       result += texture2D(tMap, vUv + vec2(tex_offset * f, 0.0)).rgb * weight[i];
-      //       result += texture2D(tMap, vUv - vec2(tex_offset * f, 0.0)).rgb * weight[i];
-      //     } else { // y轴的高斯模糊
-      //       result += texture2D(tMap, vUv + vec2(0.0, tex_offset * f)).rgb * weight[i];
-      //       result += texture2D(tMap, vUv - vec2(0.0, tex_offset * f)).rgb * weight[i];
-      //     }
-      //   }
-
-      //   gl_FragColor.rgb = result.rgb;
-      //   gl_FragColor.a = color.a;
-      // }
-
       #ifdef GL_ES
       precision highp float;
       #endif
 
       varying vec2 vUv;
       uniform sampler2D tMap;
+      uniform int axis;
 
       void main() {
         vec4 color = texture2D(tMap, vUv);
-        gl_FragColor.rgb = color.rgb;
+
+        // 高斯矩阵的权重值
+        float weight[5];
+        weight[0] = 0.227027;
+        weight[1] = 0.1945946;
+        weight[2] = 0.1216216;
+        weight[3] = 0.054054;
+        weight[4] = 0.016216;
+
+        // 每一个相邻像素的坐标间隔，这里的512可以用实际的Canvas像素宽代替
+        float tex_offset = 1.0 / 512.0;
+
+        vec3 result = color.rgb;
+        result *= weight[0];
+        for(int i = 1; i < 5; ++i) {
+          float f = float(i);
+          if(axis == 0) { // x轴的高斯模糊
+            result += texture2D(tMap, vUv + vec2(tex_offset * f, 0.0)).rgb * weight[i];
+            result += texture2D(tMap, vUv - vec2(tex_offset * f, 0.0)).rgb * weight[i];
+          } else { // y轴的高斯模糊
+            result += texture2D(tMap, vUv + vec2(0.0, tex_offset * f)).rgb * weight[i];
+            result += texture2D(tMap, vUv - vec2(0.0, tex_offset * f)).rgb * weight[i];
+          }
+        }
+
+        gl_FragColor.rgb = result.rgb;
         gl_FragColor.a = color.a;
       }
+
+      // #ifdef GL_ES
+      // precision highp float;
+      // #endif
+
+      // varying vec2 vUv;
+      // uniform sampler2D tMap;
+
+      // void main() {
+      //   vec4 color = texture2D(tMap, vUv);
+      //   gl_FragColor.rgb = color.rgb;
+      //   gl_FragColor.a = color.a;
+      // }
     `;
 
     const vertexShader = gl.createShader(gl.VERTEX_SHADER);
@@ -252,15 +252,23 @@
       const texture1 = createTexture(gl);
       const fbo1 = createFBO(texture1);
 
-      const texture2 = createTexture(gl, img);
-      // const fbo2 = createFBO(texture2);
+      const texture2 = createTexture(gl);
+      const fbo2 = createFBO(texture2);
+
+      const texture = createTexture(gl, img);
 
       gl.bindFramebuffer(gl.FRAMEBUFFER, fbo1);
-      setTexture(gl, program, texture2, 0);
-      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      setTexture(gl, program, texture, 0);
 
       gl.useProgram(blurProgram);
+      gl.bindFramebuffer(gl.FRAMEBUFFER, fbo2);
+      const loc = gl.getUniformLocation(blurProgram, 'axis');
+      // 将对应的纹理单元写入shader变量
+      gl.uniform1i(loc, 0);
       setTexture(gl, blurProgram, fbo1.texture, 0);
+      
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      setTexture(gl, blurProgram, fbo2.texture, 0);
     }
     img.src = 'https://p1.ssl.qhimg.com/t01cca5849c98837396.jpg';
   </script>
