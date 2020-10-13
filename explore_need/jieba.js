@@ -14,13 +14,15 @@ fs.readFile(__dirname + '/data/data4.csv', 'utf-8', (err, res) => {
       console.log(err);
       return;
     }
-
+    
     output = output.map(item => {
-      const words = nodejieba.tag(item).filter(item => item.tag == 'n' || item.tag == 'eng');
-      const word = words.reduce((pre, cur) => pre + cur.word, '');
-      return word;
-    });
+      // const words = nodejieba.tag(item[0]).filter(item => item.tag == 'n' || item.tag == 'eng' || item.tag == 'nr' || item.tag == 'nz' || item.tag == 'x');
+      // const word = words.reduce((pre, cur) => pre + cur.word, '');
+      // return word;
 
+      return  nodejieba.tag(item[0]);
+    });
+ 
     console.log(output);
   })
 })
