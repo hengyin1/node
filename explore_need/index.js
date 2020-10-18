@@ -1,9 +1,6 @@
 const fs = require('fs');
-const iconv = require('iconv-lite');
 const parse = require("csv-parse");
 const nodejieba = require("nodejieba");
-
-// fs.createReadStream(__dirname + '/data/data1.csv').pipe(iconv.decodeStream('gbk')).pipe(iconv.encodeStream('utf8')).pipe(fs.createWriteStream(__dirname + '/data/data4.csv'));
 
 fs.readFile(__dirname + '/data/input1.csv', 'utf-8', (err, res) => {
   // console.log(res);
