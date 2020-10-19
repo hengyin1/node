@@ -19,10 +19,10 @@ fs.readFile(__dirname + '/data/zenme_pdf.csv', 'utf-8', (err, res) => {
         word: item[0],
         cut: Array.from(new Set(nodejieba.tag(item[0]).filter(item => !tags.includes(item.tag)).map(item => item.word)))
       }
-    })
+    }).filter(item => item.cut.length > 1)
     // console.log(output);
 
-    let counter = 0;
+    // let counter = 0;
     const classify_loop = () => {
       // counter++;
       // if (counter > 3) return;
@@ -49,7 +49,7 @@ fs.readFile(__dirname + '/data/zenme_pdf.csv', 'utf-8', (err, res) => {
         const refer_vec = vec_index.map(item => refer_cut.includes(item) ? 1 : 0);
         const vec = vec_index.map(item => cut.includes(item) ? 1 : 0);
         const dot_res = dot(normalize(refer_vec), normalize(vec));
-        if (dot_res >= 0.7) {
+        if (dot_res >= 0.65) {
           output[i] = null;
           classify.push(word);
         }
