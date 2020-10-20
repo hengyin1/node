@@ -2,7 +2,7 @@ const fs = require('fs');
 const parse = require("csv-parse");
 const nodejieba = require("nodejieba");
 
-fs.readFile(__dirname + '/data/zenme_pdf.csv', 'utf-8', (err, res) => {
+fs.readFile(__dirname + '/data/zhizuo_ruanjian_input.csv', 'utf-8', (err, res) => {
   // console.log(res);
   parse(res, {
     from_line: 3,
@@ -17,7 +17,7 @@ fs.readFile(__dirname + '/data/zenme_pdf.csv', 'utf-8', (err, res) => {
       const tags =['r', 'i', 'p', 'uj', 'x', 'f', 'b', 'm', 'a', 'd', 'l', 'c'];
       return {
         word: item[0],
-        cut: Array.from(new Set(nodejieba.tag(item[0]).filter(item => !tags.includes(item.tag)).map(item => item.word)))
+        cut: Array.from(new Set(nodejieba.tag(item[0]).filter(item => !tags.includes(item.tag) && item.word != '软件' && item.word != '制作').map(item => item.word)))
       }
     }).filter(item => item.cut.length > 1)
     // console.log(output);
@@ -55,19 +55,22 @@ fs.readFile(__dirname + '/data/zenme_pdf.csv', 'utf-8', (err, res) => {
         }
       }
       // console.log(classify);
-  
-      let outputStr = '\ufeff' + `${classify.length}\n`;
-      classify.forEach(item => {
-        outputStr += `${item}\n`;
-      })
-      // console.log(outputStr);
-  
-      const file_name = refer_cut.join('_');
-      fs.writeFile(__dirname + `/data/classify/${file_name}.csv`, outputStr, {encoding: 'utf8'}, (err) => {
-        if (err) throw err;
-        console.log('The file has been saved!');
+      if (classify.length > 700) {
+        let outputStr = '\ufeff' + `${classify.length}\n`;
+        classify.forEach(item => {
+          outputStr += `${item}\n`;
+        })
+        // console.log(outputStr);
+    
+        const file_name = refer_cut.join('_');
+        fs.writeFile(__dirname + `/data/classify_zhizuo_ruanjian/${file_name}.csv`, outputStr, {encoding: 'utf8'}, (err) => {
+          if (err) throw err;
+          console.log('The file has been saved!');
+          classify_loop();
+        })
+      } else {
         classify_loop();
-      })
+      }
     }
 
     classify_loop();
