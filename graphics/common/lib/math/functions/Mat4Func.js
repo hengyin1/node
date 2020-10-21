@@ -7,7 +7,8 @@ const EPSILON = 0.000001;
  * @param {mat4} a the source matrix
  * @returns {mat4} out
  */
-export function copy(out, a) {
+// export 
+function copy(out, a) {
     out[0] = a[0];
     out[1] = a[1];
     out[2] = a[2];
@@ -33,7 +34,8 @@ export function copy(out, a) {
  * @param {mat4} out the receiving matrix
  * @returns {mat4} out
  */
-export function set(out, m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33) {
+// export 
+function set(out, m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33) {
     out[0] = m00;
     out[1] = m01;
     out[2] = m02;
@@ -59,7 +61,8 @@ export function set(out, m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, 
  * @param {mat4} out the receiving matrix
  * @returns {mat4} out
  */
-export function identity(out) {
+// export 
+function identity(out) {
     out[0] = 1;
     out[1] = 0;
     out[2] = 0;
@@ -86,7 +89,8 @@ export function identity(out) {
  * @param {mat4} a the source matrix
  * @returns {mat4} out
  */
-export function transpose(out, a) {
+// export 
+function transpose(out, a) {
     // If we are transposing ourselves we can skip a few steps but have to cache some values
     if (out === a) {
         let a01 = a[1], a02 = a[2], a03 = a[3];
@@ -134,7 +138,8 @@ export function transpose(out, a) {
  * @param {mat4} a the source matrix
  * @returns {mat4} out
  */
-export function invert(out, a) {
+// export 
+function invert(out, a) {
     let a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3];
     let a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7];
     let a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11];
@@ -187,7 +192,8 @@ export function invert(out, a) {
  * @param {mat4} a the source matrix
  * @returns {Number} determinant of a
  */
-export function determinant(a) {
+// export 
+function determinant(a) {
     let a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3];
     let a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7];
     let a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11];
@@ -218,7 +224,8 @@ export function determinant(a) {
  * @param {mat4} b the second operand
  * @returns {mat4} out
  */
-export function multiply(out, a, b) {
+// export 
+function multiply(out, a, b) {
     let a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3];
     let a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7];
     let a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11];
@@ -259,7 +266,8 @@ export function multiply(out, a, b) {
  * @param {vec3} v vector to translate by
  * @returns {mat4} out
  */
-export function translate(out, a, v) {
+// export 
+function translate(out, a, v) {
     let x = v[0], y = v[1], z = v[2];
     let a00, a01, a02, a03;
     let a10, a11, a12, a13;
@@ -314,7 +322,8 @@ export function translate(out, a, v) {
  * @param {vec3} v the vec3 to scale the matrix by
  * @returns {mat4} out
  **/
-export function scale(out, a, v) {
+// export 
+function scale(out, a, v) {
     let x = v[0], y = v[1], z = v[2];
 
     out[0] = a[0] * x;
@@ -345,7 +354,8 @@ export function scale(out, a, v) {
  * @param {vec3} axis the axis to rotate around
  * @returns {mat4} out
  */
-export function rotate(out, a, rad, axis) {
+// export 
+function rotate(out, a, rad, axis) {
     let x = axis[0], y = axis[1], z = axis[2];
     let len = Math.hypot(x,y,z);
     let s, c, t;
@@ -425,7 +435,8 @@ export function rotate(out, a, rad, axis) {
  * @param  {mat4} mat Matrix to be decomposed (input)
  * @return {vec3} out
  */
-export function getTranslation(out, mat) {
+// export 
+function getTranslation(out, mat) {
     out[0] = mat[12];
     out[1] = mat[13];
     out[2] = mat[14];
@@ -443,7 +454,8 @@ export function getTranslation(out, mat) {
  * @param  {mat4} mat Matrix to be decomposed (input)
  * @return {vec3} out
  */
-export function getScaling(out, mat) {
+// export 
+function getScaling(out, mat) {
     let m11 = mat[0];
     let m12 = mat[1];
     let m13 = mat[2];
@@ -461,7 +473,8 @@ export function getScaling(out, mat) {
     return out;
 }
 
-export function getMaxScaleOnAxis(mat) {
+// export 
+function getMaxScaleOnAxis(mat) {
     let m11 = mat[0];
     let m12 = mat[1];
     let m13 = mat[2];
@@ -488,7 +501,8 @@ export function getMaxScaleOnAxis(mat) {
  * @param {mat4} mat Matrix to be decomposed (input)
  * @return {quat} out
  */
-export const getRotation = (function() {
+// export 
+const getRotation = (function() {
     const temp = [0, 0, 0];
 
     return function(out, mat) {
@@ -559,7 +573,8 @@ export const getRotation = (function() {
  * @param {vec3} s Scaling vector
  * @returns {mat4} out
  */
-export function fromRotationTranslationScale(out, q, v, s) {
+// export 
+function fromRotationTranslationScale(out, q, v, s) {
     // Quaternion math
     let x = q[0], y = q[1], z = q[2], w = q[3];
     let x2 = x + x;
@@ -607,7 +622,8 @@ export function fromRotationTranslationScale(out, q, v, s) {
  *
  * @returns {mat4} out
  */
-export function fromQuat(out, q) {
+// export 
+function fromQuat(out, q) {
     let x = q[0], y = q[1], z = q[2], w = q[3];
     let x2 = x + x;
     let y2 = y + y;
@@ -656,7 +672,8 @@ export function fromQuat(out, q) {
  * @param {number} far Far bound of the frustum
  * @returns {mat4} out
  */
-export function perspective(out, fovy, aspect, near, far) {
+// export 
+function perspective(out, fovy, aspect, near, far) {
     let f = 1.0 / Math.tan(fovy / 2);
     let nf = 1 / (near - far);
     out[0] = f / aspect;
@@ -690,7 +707,8 @@ export function perspective(out, fovy, aspect, near, far) {
  * @param {number} far Far bound of the frustum
  * @returns {mat4} out
  */
-export function ortho(out, left, right, bottom, top, near, far) {
+// export 
+function ortho(out, left, right, bottom, top, near, far) {
     let lr = 1 / (left - right);
     let bt = 1 / (bottom - top);
     let nf = 1 / (near - far);
@@ -722,7 +740,8 @@ export function ortho(out, left, right, bottom, top, near, far) {
  * @param {vec3} up vec3 pointing up
  * @returns {mat4} out
  */
-export function targetTo(out, eye, target, up) {
+// export 
+function targetTo(out, eye, target, up) {
     let eyex = eye[0],
         eyey = eye[1],
         eyez = eye[2],
@@ -799,7 +818,8 @@ export function targetTo(out, eye, target, up) {
  * @param {mat4} b the second operand
  * @returns {mat4} out
  */
-export function add(out, a, b) {
+// export 
+function add(out, a, b) {
     out[0] = a[0] + b[0];
     out[1] = a[1] + b[1];
     out[2] = a[2] + b[2];
@@ -827,7 +847,8 @@ export function add(out, a, b) {
  * @param {mat4} b the second operand
  * @returns {mat4} out
  */
-export function subtract(out, a, b) {
+// export 
+function subtract(out, a, b) {
     out[0] = a[0] - b[0];
     out[1] = a[1] - b[1];
     out[2] = a[2] - b[2];
@@ -855,7 +876,8 @@ export function subtract(out, a, b) {
  * @param {Number} b amount to scale the matrix's elements by
  * @returns {mat4} out
  */
-export function multiplyScalar(out, a, b) {
+// export 
+function multiplyScalar(out, a, b) {
     out[0] = a[0] * b;
     out[1] = a[1] * b;
     out[2] = a[2] * b;
