@@ -87,12 +87,12 @@ function subtract(out, a, b) {
  * @returns {vec3} out
  */
 // export 
-function multiply(out, a, b) {
-    out[0] = a[0] * b[0];
-    out[1] = a[1] * b[1];
-    out[2] = a[2] * b[2];
-    return out;
-}
+// function multiply(out, a, b) {
+//     out[0] = a[0] * b[0];
+//     out[1] = a[1] * b[1];
+//     out[2] = a[2] * b[2];
+//     return out;
+// }
 
 /**
  * Divides two vec3's
