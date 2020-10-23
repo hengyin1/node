@@ -2,7 +2,7 @@ const fs = require('fs');
 const parse = require("csv-parse");
 const nodejieba = require("nodejieba");
 
-fs.readFile(__dirname + '/data/zhizuo_ruanjian_input.csv', 'utf-8', (err, res) => {
+fs.readFile(__dirname + '/data/zenme_wechat_input.csv', 'utf-8', (err, res) => {
   // console.log(res);
   parse(res, {
     from_line: 3,
@@ -17,9 +17,9 @@ fs.readFile(__dirname + '/data/zhizuo_ruanjian_input.csv', 'utf-8', (err, res) =
       const tags =['r', 'i', 'p', 'uj', 'x', 'f', 'b', 'm', 'a', 'd', 'l', 'c'];
       return {
         word: item[0],
-        cut: Array.from(new Set(nodejieba.tag(item[0]).filter(item => !tags.includes(item.tag) && item.word != '软件' && item.word != '制作').map(item => item.word)))
+        cut: Array.from(new Set(nodejieba.tag(item[0]).filter(item => !tags.includes(item.tag) && item.word != '怎么' && item.word != '微信').map(item => item.word)))
       }
-    }).filter(item => item.cut.length > 1)
+    }).filter(item => item.cut.length > 0)
     // console.log(output);
 
     // let counter = 0;
@@ -55,7 +55,7 @@ fs.readFile(__dirname + '/data/zhizuo_ruanjian_input.csv', 'utf-8', (err, res) =
         }
       }
       // console.log(classify);
-      if (classify.length > 700) {
+      if (classify.length > 500) {
         let outputStr = '\ufeff' + `${classify.length}\n`;
         classify.forEach(item => {
           outputStr += `${item}\n`;
@@ -63,7 +63,7 @@ fs.readFile(__dirname + '/data/zhizuo_ruanjian_input.csv', 'utf-8', (err, res) =
         // console.log(outputStr);
     
         const file_name = refer_cut.join('_');
-        fs.writeFile(__dirname + `/data/classify_zhizuo_ruanjian/${file_name}.csv`, outputStr, {encoding: 'utf8'}, (err) => {
+        fs.writeFile(__dirname + `/data/classify_zenme_wechat/${file_name}.csv`, outputStr, {encoding: 'utf8'}, (err) => {
           if (err) throw err;
           console.log('The file has been saved!');
           classify_loop();
