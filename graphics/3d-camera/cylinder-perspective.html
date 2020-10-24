@@ -126,11 +126,11 @@
 
     renderer.uniforms.lightColor = [1, 0, 0, 0.8];
 
-    function projection(left, right, bottom, top, near, far) {
-      return Mat4Func.ortho([], left, right, bottom, top, near, far);
+    function projection(near = 0.1, far = 100, fov = 45, aspect = 1) {
+      return Mat4Func.perspective([], fov * Math.PI / 180, aspect, near, far);
     }
 
-    const projectionMatrix = projection(-2, 2, -2, 2, -2, 2);
+    const projectionMatrix = projection();
     renderer.uniforms.projectionMatrix = projectionMatrix;
 
     function updateCamera(eye, target = [0, 0, 0]) {
@@ -146,7 +146,7 @@
       renderer.uniforms.viewMatrix = m;
     }
 
-    updateCamera([0.5, 0, 0.5]); // 设置相机位置
+    updateCamera([2, 2, 3]); // 设置相机位置
 
     renderer.setMeshData([{
       positions: geometry.positions,
