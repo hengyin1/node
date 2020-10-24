@@ -896,3 +896,28 @@ function multiplyScalar(out, a, b) {
     out[15] = a[15] * b;
     return out;
 }
+
+
+const Mat4Func = {
+    copy: copy,
+    set: set,
+    identity: identity,
+    transpose: transpose,
+    invert: invert,
+    determinant: determinant,
+    multiply: multiply,
+    translate: translate,
+    scale: scale,
+    rotate: rotate,
+    getTranslation: getTranslation,
+    getScaling: getScaling,
+    getMaxScaleOnAxis: getMaxScaleOnAxis,
+    getRotation: getRotation,
+    fromRotationTranslationScale: fromRotationTranslationScale,
+    fromQuat: fromQuat,
+    perspective: perspective,
+    ortho: ortho,
+    targetTo: targetTo,
+    add: add,
+    multiplyScalar: multiplyScalar
+}
