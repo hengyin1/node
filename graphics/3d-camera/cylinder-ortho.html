@@ -29,7 +29,7 @@
       uniform mat4 viewMatrix;
       uniform mat3 normalMatrix;
       
-      const vec3 lightPosition = vec3(1, 0, 0);
+      const vec3 lightPosition = vec3(10, 0, 0);
 
       void main() {
         gl_PointSize = 1.0;
@@ -124,14 +124,14 @@
 
     const geometry = cylinder(0.5, 1.0, 30, [0, 0, 1, 1], [0.5, 0.5, 0.5, 1]);
 
-    renderer.uniforms.projectionMatrix = [
-      1, 0, 0, 0,
-      0, 1, 0, 0,
-      0, 0, -1, 0,
-      0, 0, 0, 1,
-    ];
-
     renderer.uniforms.lightColor = [1, 0, 0, 0.8];
+
+    function projection(left, right, bottom, top, near, far) {
+      return Mat4Func.ortho([], left, right, bottom, top, near, far);
+    }
+
+    const projectionMatrix = projection(-2, 2, -2, 2, -2, 2);
+    renderer.uniforms.projectionMatrix = projectionMatrix;
 
     function updateCamera(eye, target = [0, 0, 0]) {
       const [x, y, z] = eye;
