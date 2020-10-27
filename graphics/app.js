@@ -4,6 +4,8 @@ const fs = require('fs');
 
 http.createServer(function (request, response) {
   const parsedUrl = url.parse(request.url);
+  console.log(parsedUrl);
+  
   if (parsedUrl.pathname == '/favicon.ico') {
     response.writeHead(200);
     response.end();
@@ -12,7 +14,22 @@ http.createServer(function (request, response) {
   
   if (parsedUrl.pathname == '/') {
     response.writeHead(200);
-    fs.createReadStream(__dirname + '/3d-camera/ogl-basic.html').pipe(response);
+    fs.createReadStream(__dirname + '/3d-model/axis-angle.html').pipe(response);
+  }
+
+  if (parsedUrl.pathname == '/dist/bundle.js') {
+    response.writeHead(200);
+    fs.createReadStream(__dirname + '/3d-model/dist/bundle.js').pipe(response);
+  }
+
+  if (parsedUrl.pathname == '/assets/airplane.jpg') {
+    response.writeHead(200);
+    fs.createReadStream(__dirname + '/assets/airplane.jpg').pipe(response);
+  }
+
+  if (parsedUrl.pathname == '/assets/airplane.json') {
+    response.writeHead(200);
+    fs.createReadStream(__dirname + '/assets/airplane.json').pipe(response);
   }
 }).listen(3000, () => {
   console.log('listening 3000');
