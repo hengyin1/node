@@ -1,0 +1,45 @@
+.custom-button::after {
+    border: none;
+}
+
+.custom-button {
+    background-color: transparent;
+    background-repeat: repeat;
+    background-position: center;
+}
+
+.size-normal {
+    width: 322rpx;
+    height: 176rpx;
+    background-size: 322rpx 176rpx;
+}
+
+.size-big {
+    width: 442rpx;
+    height: 176rpx;
+    background-size: 442rpx 176rpx;
+}
+
+.open-camera {
+    background-image: url(https://static.yximgs.com/udata/pkg/phenix/button_cartoon_photograph@3x.1005350d.png);
+}
+
+.open-album {
+    background-image: url(https://static.yximgs.com/udata/pkg/phenix/button_cartoon_photoalbum3x.414c2590.png);
+}
+
+.open-save {
+    background-image: url(https://static.yximgs.com/udata/pkg/phenix/button_cartoon_save@3x.235799ea.png);
+}
+
+.open-share {
+    background-image: url(https://static.yximgs.com/udata/pkg/phenix/button_cartoon_share@3x.1157c44d.png);
+}
+
+.enter-immediately {
+    background-image: url(https://static.yximgs.com/udata/pkg/phenix/button_cartoon_go3x.d19077eb.png);
+}
+
+.play {
+    background-image: url(https://static.yximgs.com/udata/pkg/phenix/button_cartoon_play@3x.fe37bcbb.png);
+}

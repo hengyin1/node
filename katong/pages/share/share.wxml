@@ -1,0 +1,20 @@
+<view class="container">
+    <view class="result-img">
+        <image class="img" mode="widthFix" src="{{result_image}}"></image>
+    </view>
+    <view class="share box">
+        <button class="share-but1 flex1 s-but" data-image="{{result_image}}" openType="share">
+            <image class="dp-b img" mode="widthFix" src="../../images/share01.png"></image>
+            <text class="dp-b t1">分享给好友</text>
+        </button>
+    </view>
+</view>
+<view class="create-poster tc" style="display:{{poster}}">
+    <view class="poster-bg pr">
+        <image class="img" mode="widthFix" src="{{posterImg}}"></image>
+        <view class="poster-text">
+      图片已自动帮您保存到手机相册发给好友一起参与吧
+    </view>
+        <button bindtap="hiddenPoster" class="s-p-but">好的，收下了</button>
+    </view>
+</view>

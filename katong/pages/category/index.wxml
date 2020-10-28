@@ -1,0 +1,53 @@
+<view class="container">
+    <view class="index-search-box">
+        <navigator class="index-search" hoverClass="none" openType="navigate" url="../search/index">
+            <view class="index-cont-search t-c">
+                <icon class="text-center" color="{{searchColor}}" size="{{searchSize}}" type="search"></icon>
+                <text>{{searchName}}</text>
+            </view>
+        </navigator>
+    </view>
+    <view class="cate-content dis-flex">
+        <scroll-view class="cate-left f-28" scrollY="{{true}}" style="height: {{scrollHeight}}px; ">
+            <text catchtap="onSelectNav" class="type-nav {{curIndex==-1?'selected':''}}" data-index="-1">全部</text>
+            <text catchtap="onSelectNav" class="type-nav {{curIndex==index?'selected':''}} onelist-hidden" data-index="{{index}}" wx:for="{{categoryList}}" wx:key="cateLeft">{{item.name}}</text>
+        </scroll-view>
+        <scroll-view bindscrolltolower="onDownLoad" class="cate-right b-f" scrollTop="{{scrollTop}}" scrollY="true" style="height: {{scrollHeight}}px; ">
+            <view class="goods-item" wx:for="{{goodsList.data}}" wx:key="this">
+                <form bindsubmit="onTargetGoods" reportSubmit="true">
+                    <button class="btn-normal" data-id="{{item.goods_id}}" formType="submit">
+                        <view class="goods-item_detail dis-flex">
+                            <view class="goods-item_left">
+                                <image src="{{item.goods_image}}"></image>
+                            </view>
+                            <view class="goods-item_right">
+                                <view class="goods-item_title twolist-hidden">
+                                    <text>{{item.goods_name}}</text>
+                                </view>
+                                <view class="goods-item_desc">
+                                    <view class="desc-selling_point dis-flex">
+                                        <text class="onelist-hidden">{{item.selling_point}}</text>
+                                    </view>
+                                    <view class="desc-goods_sales onelist-hidden dis-flex">
+                                        <text>已售{{item.goods_sales}}件</text>
+                                    </view>
+                                    <view class="desc_footer">
+                                        <text class="price_x">¥{{item.goods_sku.goods_price}}</text>
+                                        <text class="price_y col-9">¥{{item.goods_sku.line_price}}</text>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </button>
+                </form>
+            </view>
+            <view class="no-more f-30" wx:if="{{noMore}}">亲, 没有更多了</view>
+            <view wx:if="{{!isLoading&&!goodsList.data.length}}">
+                <view class="yoshop-notcont">
+                    <text class="iconfont icon-ziyuan"></text>
+                    <text class="cont">亲，此处暂无商品哦</text>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>

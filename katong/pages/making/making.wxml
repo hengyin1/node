@@ -1,0 +1,85 @@
+<view bindtap="" class="container">
+    <view class="making-box pr">
+         <button bindtap="changeImage" class="replace-img text-img pa">更换美照</button>
+         <button bindtap="saveImage" class="save-img text-img pa">保存图片</button>
+         <view class="makimg-img">
+            <view class="make-result">
+                <view class="result-img-box dp-i-b">
+                    <image class="img" mode="widthFix" src="{{uploadImage}}"></image>
+                </view>
+            </view>
+        </view>
+
+        <!-- <button bindtap="changeImage" class="replace-img text-img pa" data-type="1" wx:if="{{none=='none'}}">更换美照</button>
+        <button bindtap="changeImage" class="replace-img text-img pa" data-type="2" wx:if="{{none==''}}">更换美照</button>
+        <button bindtap="saveImage" class="save-img text-img pa" data-id="{{result_id}}" data-image="{{userImage}}" wx:if="{{none=='none'}}">保存图片</button>
+        <button bindtap="saveImage1" class="save-img text-img pa" wx:if="{{none==''}}">保存图片</button>
+        <button bindtouchend="result02" bindtouchstart="result01" class="change-img pa">
+            <image class="dp-b s-img" mode="widthFix" src="../../images/change.png"></image>
+        </button>
+        <view class="{{result02?'makimg-img':'touchcur'}}">
+            <view class="make-result">
+                <view class="result-img-box dp-i-b">
+                    <image class="img" mode="widthFix" src="{{uploadImage}}"></image>
+                </view>
+            </view>
+        </view>
+        <view class="{{result01?'makimg-img':'touchcur'}}">
+            <view class="make-result pr">
+                <view class="result-img-box dp-i-b">
+                    <image class="img {{img_filter}}" mode="widthFix" src="{{userImage}}"></image>
+                </view>
+            </view>
+        </view>
+        <view class="text1 pa">{{title}}</view> -->
+    </view>
+    <view class="make-taber-list">
+        <view class="make-text-list">
+            <scroll-view class="nav" scrollLeft="{{navScrollLeft}}" scrollWithAnimation="{{true}}" scrollX="true">
+                <view class="nav-list">
+                    <view bindtap="switchNav" class="nav-item {{currentTab==idx?'active':''}}" data-current="{{idx}}" wx:for="{{navData}}" wx:for-index="idx" wx:for-item="navItem" wx:key="idx">{{navItem.text}}</view>
+                </view>
+            </scroll-view>
+        </view>
+        <view class="make-img-list">
+            <scroll-view scrollX class="scroll-list" style="width: auto;">
+                <view bindtap="choose" class="sub-imglist pr" data-id="{{item.id}}" data-key="{{index}}" wx:for="{{list}}" wx:key="{{index}}">
+                    <view class="vip-img fl">
+                        <image class="img" mode="widthFix" src="{{item.imageUrl}}"></image>
+                    </view>
+                    <view class="imgtext fl tc">{{item.title}}</view>
+                    <view class="sub-cur pa " wx:if="{{index==key}}">
+                        <image class="img" mode="widthFix" src="../../images/cur-img.png"></image>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+        <!-- <view class="save-share tc">
+            <button class="save-but s-but dp-i-b" openType="share">分享给好友</button>
+            <button class="share-but s-but dp-i-b" openType="share">生成分享海报</button>
+        </view> -->
+    </view>
+</view>
+<!-- <view class="choose-vip pf tc" style="display: {{none}};">
+    <view class="vip-pay1 clearfix">
+        <view bindtap="dayVipPay" class="but-pay1 fr tc">1天{{dayPrice}}元/月</view>
+    </view>
+    <view class="vip-pay2 pr clearfix">
+        <view class="text2 fl pa">
+            <text class="t2 dp-b">升级VIP立即获取你的高清漫画照片
+          解锁50款漫画脸素材原价698元/年
+          现特惠价{{dayPrice}}元/天 {{price}}元/月 {{year}}元/年</text>
+        </view>
+        <view bindtap="vipPay" class="but-pay2 fr tc">包月{{price}}元/月</view>
+    </view>
+    <view class="vip-pay1 clearfix">
+        <view bindtap="yearVipPay" class="but-pay1 fr tc">包年{{year}}元/年</view>
+    </view>
+</view> -->
+<!-- <view class="login tc" style="display:{{display}}">
+    <view class="loginbox0">
+        <view class="loginbox1 tc">
+            <image class="user-img" mode="widthFix" src="../../images/21.gif" style="height:500rpx;width:500rpx;margin-bottom:200px"></image>
+        </view>
+    </view>
+</view> -->

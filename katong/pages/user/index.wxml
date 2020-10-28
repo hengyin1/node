@@ -1,0 +1,45 @@
+<view class="container">
+    <view class="user">
+        <view class="user-header" style="background-image: url('/images/user-bg.png');">
+            <view class="userBox" wx:if="{{isLogin}}">
+                <image class="userImage" src="{{userInfo.avatarUrl}}"></image>
+                <text style="font-size:36rpx">{{userInfo.nickName}}</text>
+                <text wx:if="{{!userInfo.vip}}">会员ID：{{userInfo.user_id}}  |  普通会员</text>
+                <text wx:else>会员ID：{{userInfo.user_id}}  |  VIP会员</text>
+                <text wx:if="{{userInfo.vip&&userInfo.vip_time}}">会员有效期至：{{userInfo.vip_time}}</text>
+            </view>
+            <view catchtap="onLogin" class="userBox" wx:else>
+                <image class="userImage" src="/images/default-avatar.jpg"></image>
+                <text style="font-size:36rpx">点击登录</text>
+            </view>
+        </view>
+    </view>
+    <view class="menus-list m-top20">
+        <form bindsubmit="onTargetMenus" data-url="pages/user/help">
+            <button class="btn-normal" formType="submit">
+                <view class="menus-item dis-flex b-f">
+                    <view class="menus-item__left flex-box dis-flex flex-y-center">
+                        <text class="iconfont icon-help f-34"></text>
+                        <text class="menus-item__name f-30">我的帮助</text>
+                    </view>
+                    <view class="menus-item__right flex-box dis-flex flex-x-end flex-y-center">
+                        <text class="iconfont icon-xiangyoujiantou f-26 col-7"></text>
+                    </view>
+                </view>
+            </button>
+        </form>
+        <form>
+            <button class="btn-normal" openType="contact">
+                <view class="menus-item dis-flex b-f">
+                    <view class="menus-item__left flex-box dis-flex flex-y-center">
+                        <text class="iconfont icon-icon_service f-34"></text>
+                        <text class="menus-item__name f-30">联系客服</text>
+                    </view>
+                    <view class="menus-item__right flex-box dis-flex flex-x-end flex-y-center">
+                        <text class="iconfont icon-xiangyoujiantou f-26 col-7"></text>
+                    </view>
+                </view>
+            </button>
+        </form>
+    </view>
+</view>

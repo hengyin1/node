@@ -1,0 +1,150 @@
+page {
+    background: url(https://static.yximgs.com/udata/pkg/phenix/346843435436456@2x.png) repeat center;
+    background-size: 100%;
+}
+
+.result-img {
+    font-size: 0;
+    height: 1000rpx;
+    overflow: hidden;
+}
+
+.result-img .img {
+}
+
+.share {
+    height: 206rpx;
+    background: url(https://static.yximgs.com/udata/pkg/phenix/346843435436456@2x.png) repeat center;
+    background-size: 100%;
+}
+
+.share .s-but {
+    padding-top: 31rpx;
+}
+
+.share .s-but .img {
+    width: 104rpx;
+    height: 104rpx;
+    margin: 0 auto;
+}
+
+.share .share-but1 {
+}
+
+.share .share-but2 {
+}
+
+.share .s-but .t1 {
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    color: #FFFFFF;
+    letter-spacing: -0.3px;
+    text-align: center;
+}
+
+.create-poster {
+    font-size: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    background: rgba(0,0,0,0.9);
+    z-index: 9999;
+}
+
+.create-poster .poster-bg {
+    width: 600rpx;
+    margin-top: 104rpx;
+    display: inline-block;
+}
+
+.poster-bg .img {
+    width: 600rpx;
+    height: 890rpx;
+}
+
+.save-poster-img {
+    top: 24rpx;
+    left: 30rpx;
+    width: 540rpx;
+    height: 720rpx;
+    border-radius: 8rpx;
+    overflow: hidden;
+}
+
+.save-poster-img .img1 {
+}
+
+.poster-text {
+    margin: 24rpx auto 20rpx;
+    width: 280rpx;
+    height: 56rpx;
+    line-height: 28rpx;
+    font-size: 20rpx;
+    color: #D3D3D3;
+}
+
+.s-p-but {
+    width: 282rpx;
+    height: 72rpx;
+    line-height: 72rpx;
+    background-color: #F41E6C;
+    font-size: 28rpx;
+    color: #fff;
+    border-radius: 36rpx;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+image,.img,.img1 {
+    width: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+
+.box {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.flex1 {
+    box-flex: 1;
+    flex: 1;
+    overflow: hidden;
+    display: block;
+}
+
+button,.button-hover {
+    border-radius: 0;
+    background-color: rgba(0,0,0,0);
+    padding: 0;
+}
+
+button::after {
+    border: none;
+}
+
+.dp-b {
+    display: block;
+}
+
+.tc {
+    text-align: center;
+}
+
+.pr {
+    position: relative;
+}
