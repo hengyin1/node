@@ -1,13 +1,5 @@
 page {
-    height: 100%;
-    background: url(https://static.yximgs.com/udata/pkg/phenix/346843435436456@2x.png) repeat center;
-    background-size: 100%;
-    font-size: 14px;
-    color: #666;
-    line-height: 1.5;
-    position: relative;
-    min-height: 100%;
-    box-sizing: border-box;
+    background-color: #f2f2f2;
 }
 
 .container {
@@ -19,100 +11,10 @@ page {
     box-sizing: border-box;
 }
 
-.change-img {
-    width: 36rpx;
-    height: 36rpx;
-    right: 36rpx;
-    bottom: 52rpx;
-    z-index: 999;
-}
-
-.replace-img {
-    top: 36rpx;
-    left: 40rpx;
-}
-
-.save-img {
-    top: 36rpx;
-    right: 26rpx;
-}
-
-.text-img {
-    font-size: 36rpx;
-    font-family: PingFangSC-Regular,PingFangSC;
-    font-weight: 400;
-    color: #32C5FF;
-    z-index: 999;
-}
-
-.making-box {
-    height: 66.66vh;
-}
-
-.making-box .text1 {
+.make-result-img {
+    display: block;
     width: 100%;
-    font-family: STBaoliTC-Regular;
-    font-size: 24rpx;
-    color: rgb(0,0,0);
-    text-align: center;
-    bottom: 16rpx;
-}
-
-.making-box .makimg-img {
-    width: 100%;
-    display: table;
-    text-align: center;
-}
-
-.makimg-img .make-result {
-    height: 66.66vh;
-    vertical-align: middle;
-    display: table-cell;
-}
-
-.result-img-box {
-    font-size: 0;
-    width: 460rpx;
-    height: 612rpx;
-    overflow: hidden;
-    border-radius: 8rpx;
-    background-color: #f0f0f0;
-    margin-top: 46rpx;
-}
-
-/* .img-filter {
-    filter: blur(10px);
-} */
-
-.make-result .img {
-    width: 460rpx;
-    height: 612rpx;
-    border-radius: 8rpx;
-}
-
-.touchcur {
-    display: none;
-}
-
-.make-taber-list {
-    width: 100%;
-    height: 33.333vh;
-    background: url(https://static.yximgs.com/udata/pkg/phenix/346843435436456@2x.png) repeat center;
-    background-size: 100%;
-}
-
-.tab-list {
-    padding-top: 10rpx;
-}
-
-page {
-    width: 100%;
-    height: 100%;
-}
-
-.container {
-    width: 100%;
-    height: 100%;
+    height: 60vh;
 }
 
 .nav {
@@ -213,177 +115,6 @@ page {
     letter-spacing: -0.25px;
 }
 
-.save-share {
-    height: 126rpx;
-}
-
-.save-share .s-but,.save-share .s-but {
-    width: 240rpx;
-    height: 80rpx;
-    line-height: 80rpx;
-    background: #F41E6C;
-    border-radius: 40rpx;
-    font-family: PingFangSC-Medium;
-    font-size: 28rpx;
-    color: #FFFFFF;
-    margin-top: 24rpx;
-}
-
-.save-share .save-but {
-    margin-right: 55rpx;
-}
-
-.save-share .share-but {
-    margin-left: 55rpx;
-}
-
-.choose-vip {
-    z-index: 999;
-    width: 100%;
-    height: 23vh;
-    background: rgba(0,0,0,0.95);
-    bottom: 0;
-    left: 0;
-}
-
-.choose-vip .vip-pay1,.choose-vip .vip-pay2 {
-    padding: 10rpx 24rpx 0;
-}
-
-.vip-pay1 .text1 {
-    font-size: 36rpx;
-    color: #FFFFFF;
-    height: 80rpx;
-    line-height: 80rpx;
-}
-
-.vip-pay2 .text2 {
-    text-align: left;
-    width: 400rpx;
-    top: -10rpx;
-    left: 30rpx;
-}
-
-.vip-pay2 .text2 .t1 {
-    height: 50rpx;
-    line-height: 60rpx;
-    font-size: 36rpx;
-    color: #FFFFFF;
-}
-
-.vip-pay2 .text2 .t2 {
-    height: auto;
-    line-height: 40rpx;
-    font-size: 23rpx;
-    color: #DDDDDD;
-}
-
-.vip-pay1 .but-pay1,.vip-pay2 .but-pay2 {
-    width: 260rpx;
-    height: 80rpx;
-    line-height: 80rpx;
-    background-image: linear-gradient(90deg,#FFB515 0%,#FFD809 62%);
-    box-shadow: 0 5px 20px 0px rgba(251,255,3,0.5);
-    border-radius: 50rpx;
-    color: #292929;
-    font-size: 28rpx;
-    font-weight: bold;
-}
-
-.receive-vip {
-    top: 652rpx;
-    right: 24rpx;
-    z-index: 9;
-}
-
-.login {
-    font-size: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    background: rgba(0,0,0,0.65);
-    z-index: 999;
-}
-
-.loginbox0 {
-    display: table;
-    width: 100%;
-    height: 100VH;
-}
-
-.loginbox1 {
-    display: table-cell;
-    vertical-align: middle;
-}
-
-.loginbox1 .but1 {
-    position: fixed;
-    margin-left: 175rpx;
-    width: 400rpx;
-    height: 80rpx;
-    background-color: #FFD809;
-    line-height: 80rpx;
-    border-radius: 40rpx;
-}
-
-.create-poster {
-    font-size: 0;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    background: rgba(0,0,0,0.9);
-    z-index: 9999;
-}
-
-.create-poster .poster-bg {
-    width: 600rpx;
-    margin-top: 104rpx;
-    display: inline-block;
-}
-
-.poster-bg .img {
-    width: 600rpx;
-    height: 890rpx;
-}
-
-.save-poster-img {
-    top: 24rpx;
-    left: 30rpx;
-    width: 540rpx;
-    height: 720rpx;
-    border-radius: 8rpx;
-    overflow: hidden;
-}
-
-.save-poster-img .img1 {
-}
-
-.poster-text {
-    margin: 24rpx auto 20rpx;
-    width: 280rpx;
-    height: 56rpx;
-    line-height: 28rpx;
-    font-size: 20rpx;
-    color: #D3D3D3;
-}
-
-.s-p-but {
-    width: 282rpx;
-    height: 72rpx;
-    line-height: 72rpx;
-    background-color: #F41E6C;
-    font-size: 28rpx;
-    color: #fff;
-    border-radius: 36rpx;
-}
-
-.text2 .detail {
-    color: #FFB515;
-    font-size: 16rpx;
-}
-
 .pr {
     position: relative;
 }
@@ -392,9 +123,6 @@ page {
     position: absolute;
 }
 
-.pf {
-    position: fixed;
-}
 
 button,.button-hover {
     border-radius: 0;
@@ -412,13 +140,6 @@ button::after {
     color: transparent;
 }
 
-.dp-i-b {
-    display: inline-block;
-}
-
-.dp-b {
-    display: block;
-}
 
 image,.img,.img1 {
     width: 100%;
@@ -436,73 +157,6 @@ image,.img,.img1 {
     text-align: center;
 }
 
-.clearfix:after {
-    content: '';
-    clear: both;
-    display: block;
-    height: 1px;
-}
 
-.custom-button::after {
-    border: none;
-}
 
-.custom-button {
-    background-color: transparent;
-    background-repeat: repeat;
-    background-position: center;
-}
 
-.footer-wrap {
-    flex: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.btn-wrap,.btn-wrap-center {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0 40rpx;
-}
-
-.size-normal {
-    width: 322rpx;
-    height: 176rpx;
-    background-size: 322rpx 176rpx;
-}
-
-.size-big {
-    width: 442rpx;
-    height: 176rpx;
-    background-size: 442rpx 176rpx;
-}
-
-.open-camera {
-    background-image: url(https://static.yximgs.com/udata/pkg/phenix/button_cartoon_photograph@3x.1005350d.png);
-}
-
-.open-album {
-    background-image: url(https://static.yximgs.com/udata/pkg/phenix/button_cartoon_photoalbum3x.414c2590.png);
-}
-
-.open-save {
-    background-image: url(https://static.yximgs.com/udata/pkg/phenix/button_cartoon_save@3x.235799ea.png);
-}
-
-.open-share {
-    background-image: url(https://static.yximgs.com/udata/pkg/phenix/button_cartoon_share@3x.1157c44d.png);
-}
-
-.enter-immediately {
-    background-image: url(https://static.yximgs.com/udata/pkg/phenix/button_cartoon_go3x.d19077eb.png);
-}
-
-.play {
-    background-image: url(https://static.yximgs.com/udata/pkg/phenix/button_cartoon_play@3x.fe37bcbb.png);
-}

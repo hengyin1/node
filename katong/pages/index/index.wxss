@@ -14,7 +14,6 @@ page {
 
 .content-wrap {
     width: 100%;
-    flex: auto;
     display: flex;
     justify-content: center;
     align-items: center;

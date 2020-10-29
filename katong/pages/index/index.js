@@ -2,19 +2,13 @@ var t = getApp(), e = require("../../utils/config");
 
 Page({
     data: {
-        is_login: !1
+        
     },
     onLoad: function() {
-        t.setTitle(), t.setNavigationBar(), this.getIndexData();
-        var e = this;
-        e.setData({
-            is_login: t.checkIsLogin()
-        }), console.log(e.data.is_login);
+        
     },
     onShow: function() {
-        this.setData({
-            is_login: t.checkIsLogin()
-        });
+       
     },
     uploadImage: function(t) {
         var a = this;
@@ -108,46 +102,6 @@ Page({
             key: "image_id",
             data: 8
         }), this.uploadImage(8);
-    },
-    getUserInfo: function(t) {
-        wx.navigateTo({
-            url: "../login/login"
-        });
-    },
-    getIndexData: function() {
-        var e = this;
-        t._get("index/page", {}, function(t) {
-            e.setData(t.data);
-        });
-    },
-    imagesHeight: function(t) {
-        var e = t.target.dataset.id, a = t.target.dataset.itemKey, i = 750 / (t.detail.width / t.detail.height), o = this.data.imgHeights;
-        void 0 === o[a] && (o[a] = {}), o[a][e] = i;
-        var n = this.data.imgCurrent;
-        void 0 === n[a] && (n[a] = Object.keys(this.data.items[a].data)[0]), this.setData({
-            imgHeights: o,
-            imgCurrent: n
-        });
-    },
-    bindChange: function(t) {
-        var e = t.target.dataset.itemKey, a = this.data.imgCurrent;
-        a[e] = t.detail.currentItemId, this.setData({
-            imgCurrent: a
-        });
-    },
-    goTop: function(t) {
-        this.setData({
-            scrollTop: 0
-        });
-    },
-    scroll: function(t) {
-        this.setData({
-            indexSearch: t.detail.scrollTop
-        }), t.detail.scrollTop > 300 ? this.setData({
-            floorstatus: !0
-        }) : this.setData({
-            floorstatus: !1
-        });
     },
     onShareAppMessage: function() {
         return {

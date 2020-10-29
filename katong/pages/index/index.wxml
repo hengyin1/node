@@ -1,16 +1,13 @@
 <view class="wrap">
     <view class="content-wrap">
         <video autoplay="{{true}}" class="index-video" controls="{{false}}" enableProgressGesture="{{false}}" loop="{{true}}" muted="{{true}}" objectFit="cover" src="https://static.yximgs.com/udata/pkg/phenix/gif.cdb6acf2.mp4"></video>
-        <image class="image-step" mode="aspectFill" src="https://static.yximgs.com/udata/pkg/phenix/cartoon_photograph_tips3x.7a1b17d7.png"></image>
+        <!-- <image class="image-step" mode="aspectFill" src="https://static.yximgs.com/udata/pkg/phenix/cartoon_photograph_tips3x.7a1b17d7.png"></image> -->
     </view>
     <view class="footer-wrap">
         <image class="image-title" mode="aspectFill" src="https://static.yximgs.com/udata/pkg/phenix/tips_title3x.png"></image>
         <view class="btn-wrap-center" style="padding-bottom: 0px">
             <custom-button bind:clickbutton="upload" pageClass="play" size="big"></custom-button>
         </view>
-        <!-- <view class="btn-wrap-center" style="padding-bottom: 0px" wx:if="{{is_login==0}}">
-            <custom-button bind:clickbutton="getUserInfo" pageClass="play" size="big"></custom-button>
-        </view> -->
         <view class="adContainer"></view>
     </view>
 </view>

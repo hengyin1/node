@@ -34,7 +34,6 @@ Page({
             }
         });
         var n = this;
-        // n.getVipPrice();
         var i = e.result_image;
         wx.setStorage({
             key: "result_image",
@@ -88,72 +87,6 @@ Page({
             currentTab: 3
         }), 3 == e && this.setData({
             currentTab: 4
-        });
-    },
-    saveImage1: function() {
-        wx.showToast({
-            title: "该功能需要开通VIP，请购买VIP",
-            icon: "none",
-            duration: 2e3
-        });
-    },
-    makePoster: function(e) {
-        var a = this, n = e.currentTarget.dataset.image;
-        wx.showLoading({
-            title: "海报生成中..."
-        }), wx.request({
-            url: t.API_HOST + "/huihua/image/make-new-poster",
-            data: {
-                image: n
-            },
-            method: "POST",
-            header: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            success: function(e) {
-                if (console.log(e.data), 101 == e.data.code) {
-                    var t = e.data.poster;
-                    a.setData({
-                        posterImg: t,
-                        poster: ""
-                    }), a.savePoster(t), wx.hideLoading();
-                } else wx.showToast({
-                    title: "海报生成失败",
-                    icon: "none",
-                    duration: 1e3
-                });
-            }
-        });
-    },
-    hiddenPoster: function() {
-        this.setData({
-            poster: "none"
-        });
-    },
-    savePoster: function(e) {
-        wx.getImageInfo({
-            src: e,
-            success: function(e) {
-                var t = e.path;
-                wx.saveImageToPhotosAlbum({
-                    filePath: t,
-                    success: function(e) {},
-                    fail: function(e) {}
-                });
-            }
-        });
-    },
-    getVipPrice: function() {
-        var t = this;
-        e._get("wxapp/base", {}, function(e) {
-            var a = e.data.wxapp;
-            wx.setStorageSync("wxapp", a);
-            var n = a.month_price, i = a.year_price, o = a.day_price;
-            t.setData({
-                dayPrice: o,
-                price: n,
-                year: i
-            });
         });
     },
     switchNav: function(e) {
@@ -297,22 +230,6 @@ Page({
             }
         });
     },
-    dayVipPay: function() {
-        var e = this, t = void 0;
-        (t = wx.getStorageSync("wxapp")) ? e.buyVip(2, t.day_price) : wx.showToast({
-            title: "支付错误，稍后重试",
-            icon: "none",
-            duration: 1e3
-        });
-    },
-    vipPay: function() {
-        var e = this, t = void 0;
-        (t = wx.getStorageSync("wxapp")) ? e.buyVip(1, t.month_price) : wx.showToast({
-            title: "支付错误，稍后重试",
-            icon: "none",
-            duration: 1e3
-        });
-    },
     push: function(e, a, n) {
         wx.requestSubscribeMessage({
             tmplIds: [ "hcuXy6j4SMiP_pE05rFcdY7fM3m4s0-AmQ6P5-DHME4" ],
@@ -337,53 +254,6 @@ Page({
                     duration: 2e3
                 });
             }
-        });
-    },
-    yearVipPay: function() {
-        var e = this, t = void 0;
-        (t = wx.getStorageSync("wxapp")) ? e.buyVip(12, t.year_price) : wx.showToast({
-            title: "支付错误，稍后重试",
-            icon: "none",
-            duration: 1e3
-        });
-    },
-    buyVip: function(t, a) {
-        var n = this, i = function(t) {
-            if (-10 === t.code) return e.showError(t.msg), !1;
-            wx.requestPayment({
-                timeStamp: t.data.payment.timeStamp,
-                nonceStr: t.data.payment.nonceStr,
-                package: "prepay_id=" + t.data.payment.prepay_id,
-                signType: "MD5",
-                paySign: t.data.payment.paySign,
-                success: function(e) {
-                    n.setData({
-                        none: "none",
-                        display: "none",
-                        img_filter: ""
-                    });
-                },
-                fail: function() {
-                    e.showError("支付失败");
-                }
-            });
-        };
-        wx.showLoading({
-            title: "正在处理..."
-        }), e._post_form("vip/buyVip", {
-            vip_type: t,
-            total_price: a
-        }, function(e) {
-            console.log("success"), i(e);
-        }, function(e) {
-            console.log("fail");
-        }, function() {
-            console.log("complete");
-        });
-    },
-    hiddenPay: function() {
-        this.setData({
-            none: "none"
         });
     },
     saveImage: function(e) {
