@@ -1,49 +1,13 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/making/making",
-    "pages/share/share",
-    "pages/category/index",
-    "pages/category/list",
-    "pages/goods/index",
-    "pages/search/index",
-    "pages/flow/index",
-    "pages/flow/checkout",
-    "pages/user/index",
-    "pages/user/help",
-    "pages/order/index",
-    "pages/order/detail",
-    "pages/address/index",
-    "pages/address/create",
-    "pages/address/detail",
-    "pages/login/login"
+    "pages/making/making"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTitleText": "卡通头像制作器",
     "navigationBarTextStyle": "black",
     "backgroundTextStyle": "dark"
-  },
-  "tabBar": {
-    "color": "#6e6d6b",
-    "selectedColor": "#ff9966",
-    "borderStyle": "black",
-    "backgroundColor": "#ffffff",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "images/tabBar/home.png",
-        "selectedIconPath": "images/tabBar/home_on.png"
-      },
-      {
-        "pagePath": "pages/user/index",
-        "text": "我的",
-        "iconPath": "images/tabBar/user.png",
-        "selectedIconPath": "images/tabBar/user_on.png"
-      }
-    ],
-    "position": "bottom"
   },
   "debug": false,
   "sitemapLocation": "sitemap.json"

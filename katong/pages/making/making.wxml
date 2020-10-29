@@ -13,8 +13,7 @@
                     <view class="vip-img fl">
                         <image class="img" mode="widthFix" src="{{item.imageUrl}}"></image>
                     </view>
-                    <view class="imgtext fl tc">{{item.title}}</view>
-                    <view class="sub-cur pa " wx:if="{{index==key}}">
+                    <view class="sub-cur pa flex-row-center" wx:if="{{index==key}}">
                         <image class="img" mode="widthFix" src="../../images/cur-img.png"></image>
                     </view>
                 </view>
@@ -22,8 +21,8 @@
         </view>
     </view>
 
-    <view>
-        <button bindtap="changeImage" class="">更换美照</button>
-        <button bindtap="saveImage" type="primary" class="">保存图片</button>
+    <view class="flex-row-center" style="margin: 34rpx 0;">
+        <button bindtap="changeImage" class="button ch-button">更换正面照</button>
+        <button bindtap="saveImage" type="primary" class="button">保存头像</button>
     </view>
 </view>

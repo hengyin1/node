@@ -50,32 +50,6 @@ Page({
             adUnitId: "adunit-1a9a95904a8343c6"
         }));
     },
-    // checkPay: function() {
-    //     var t = this, a = wx.getStorageSync("user_id");
-    //     console.log(a), "" != a && void 0 != a ? wx.getSystemInfo({
-    //         success: function(a) {
-    //             "ios" == a.platform ? t.setData({
-    //                 display: "none",
-    //                 none: "none",
-    //                 img_filter: ""
-    //             }) : e._get("user.index/detail", {}, function(e) {
-    //                 1 == e.data.userInfo.vip ? t.setData({
-    //                     display: "none",
-    //                     img_filter: "",
-    //                     none: "none"
-    //                 }) : t.setData({
-    //                     none: ""
-    //                 });
-    //             });
-    //         }
-    //     }) : (wx.showToast({
-    //         title: "小程序系统错误",
-    //         icon: "none",
-    //         duration: 1e3
-    //     }), wx.navigateTo({
-    //         url: "/pages/index/index"
-    //     }));
-    // },
     getNav: function(e) {
         13 == e && this.setData({
             currentTab: 0
@@ -169,31 +143,33 @@ Page({
                     success: function(e) {
                         var n = e.data, r = JSON.parse(n);
                         if (101 == r.code) {
-                            wx.hideLoading();
-                            var c = r.data[0];
-                            wx.showLoading({
-                                title: "图片检测中..."
-                            }), wx.request({
-                                url: t.API_HOST + "/huihua/index/tencent-check",
-                                data: {
-                                    image: c
-                                },
-                                method: "POST",
-                                header: {
-                                    "Content-Type": "application/x-www-form-urlencoded"
-                                },
-                                success: function(t) {
-                                    wx.hideLoading(), "检测成功" == e.data.msg ? (wx.setStorageSync("userImage", c), a.setData({
-                                        display: "",
-                                        none: s,
-                                        uploadImage: "https://image.faxingwu.com/" + c
-                                    }), a.makeInfo(o, i)) : wx.showToast({
-                                        title: t.data.msg,
-                                        icon: "none",
-                                        duration: 1e3
-                                    });
-                                }
-                            });
+                            a.makeInfo(o, i)
+
+                            // wx.hideLoading();
+                            // var c = r.data[0];
+                            // wx.showLoading({
+                            //     title: "图片检测中..."
+                            // }), wx.request({
+                            //     url: t.API_HOST + "/huihua/index/tencent-check",
+                            //     data: {
+                            //         image: c
+                            //     },
+                            //     method: "POST",
+                            //     header: {
+                            //         "Content-Type": "application/x-www-form-urlencoded"
+                            //     },
+                            //     success: function(t) {
+                            //         wx.hideLoading(), "检测成功" == e.data.msg ? (wx.setStorageSync("userImage", c), a.setData({
+                            //             display: "",
+                            //             none: s,
+                            //             uploadImage: "https://image.faxingwu.com/" + c
+                            //         }), a.makeInfo(o, i)) : wx.showToast({
+                            //             title: t.data.msg,
+                            //             icon: "none",
+                            //             duration: 1e3
+                            //         });
+                            //     }
+                            // });
                         } else wx.showToast({
                             title: "图片上传失败",
                             icon: "none",
@@ -226,32 +202,6 @@ Page({
                     }), a.setData({
                         none: ""
                     }));
-                });
-            }
-        });
-    },
-    push: function(e, a, n) {
-        wx.requestSubscribeMessage({
-            tmplIds: [ "hcuXy6j4SMiP_pE05rFcdY7fM3m4s0-AmQ6P5-DHME4" ],
-            success: function(i) {
-                wx.request({
-                    url: t.API_HOST + "/huihua/push/push",
-                    data: {
-                        openid: e,
-                        uid: a,
-                        order_id: n
-                    },
-                    method: "GET",
-                    success: function(e) {
-                        console.log(e.data);
-                    }
-                }), console.log(i);
-            },
-            fail: function(e) {
-                console.log(e), wx.showToast({
-                    title: "你取消了订阅,将不再接受此小程序的任何订阅消息",
-                    icon: "none",
-                    duration: 2e3
                 });
             }
         });
@@ -371,20 +321,10 @@ Page({
         });
     },
     onShareAppMessage: function(e) {
-        if ("button" === e.from) {
-            if (console.log(e.target.dataset.image), "" == (t = e.target.dataset.image)) var t = "../../images/share.jpg";
-            return {
-                title: "火爆全网的变脸神器，你的脸在漫画中是什么样子？一键制作漫画头像",
-                path: "/pages/index/index",
-                imageUrl: t,
-                success: function(e) {},
-                fail: function(e) {}
-            };
-        }
         return {
             title: "火爆全网的变脸神器，你的脸在漫画中是什么样子？一键制作漫画头像",
             path: "/pages/index/index",
-            imageUrl: "../../images/share.jpg",
+            imageUrl: t,
             success: function(e) {},
             fail: function(e) {}
         };
