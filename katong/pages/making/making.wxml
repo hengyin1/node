@@ -16,6 +16,9 @@
                     <view class="sub-cur pa flex-row-center" wx:if="{{index==key}}">
                         <image class="img" mode="widthFix" src="../../images/cur-img.png"></image>
                     </view>
+                    <view wx:if="{{!item.needRewardedVideoAd}}" style="position: absolute;top: 0;right: 0;width: 90rpx;height: 90rpx;background-color: rgb(233, 52, 113);transform: translateX(50%) translateY(-50%) rotate(45deg);">
+                        <image src="/images/suo.png" style="width: 30rpx; height: 30rpx;margin-left: 30rpx;margin-top: 55rpx;transform: rotate(-45deg)"></image>
+                    </view>
                 </view>
             </scroll-view>
         </view>
@@ -25,4 +28,6 @@
         <button bindtap="changeImage" class="button ch-button">更换正面照</button>
         <button bindtap="saveImage" type="primary" class="button">保存头像</button>
     </view>
+
+    <video-dialog isShowVideoDialog="{{isShowVideoDialog}}" content="{{videoContent}}" confirmText="{{confirmText}}" bind:viewVideo="viewRewardedVideoAd"></video-dialog>
 </view>

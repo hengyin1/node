@@ -1,4 +1,5 @@
-var e = getApp(), t = require("../../utils/config"), a = null;
+const t = require("../../utils/config");
+const util = require("../../utils/util");
 
 Page({
     data: {
@@ -15,7 +16,6 @@ Page({
         } ],
         currentTab: 0,
         navScrollLeft: 0,
-        none: "none",
         title: "温柔浪漫夏日祭",
         name: "盛夏光年"
     },
@@ -40,6 +40,9 @@ Page({
             uploadImage: "https://image.faxingwu.com/" + userImage,
             key: key
         })
+    },
+    onShow: function () {
+        util.createInterstitialAd();
     },
     getNav: function(e) {
         13 == e && this.setData({
@@ -135,35 +138,28 @@ Page({
                         if (101 == r.code) {
                             wx.hideLoading();
                             var c = r.data[0];
-                            wx.setStorageSync("userImage", c);
-                            a.makeInfo(o, i);
-
-                            a.setData({
-                                display: "",
-                                uploadImage: "https://image.faxingwu.com/" + c
-                            })
-
-                            // wx.showLoading({
-                            //     title: "图片检测中..."
-                            // }), wx.request({
-                            //     url: t.API_HOST + "/huihua/index/tencent-check",
-                            //     data: {
-                            //         image: c
-                            //     },
-                            //     method: "POST",
-                            //     header: {
-                            //         "Content-Type": "application/x-www-form-urlencoded"
-                            //     },
-                            //     success: function(t) {
-                            //         wx.hideLoading(), "检测成功" == e.data.msg ? (wx.setStorageSync("userImage", c), a.setData({
-                            //             uploadImage: "https://image.faxingwu.com/" + c
-                            //         }), a.makeInfo(o, i)) : wx.showToast({
-                            //             title: t.data.msg,
-                            //             icon: "none",
-                            //             duration: 1e3
-                            //         });
-                            //     }
-                            // });
+                    
+                            wx.showLoading({
+                                title: "图片检测中..."
+                            }), wx.request({
+                                url: t.API_HOST + "/huihua/index/tencent-check",
+                                data: {
+                                    image: c
+                                },
+                                method: "POST",
+                                header: {
+                                    "Content-Type": "application/x-www-form-urlencoded"
+                                },
+                                success: function(t) {
+                                    wx.hideLoading(), "检测成功" == e.data.msg ? (wx.setStorageSync("userImage", c), a.setData({
+                                        uploadImage: "https://image.faxingwu.com/" + c
+                                    }), a.makeInfo(o, i)) : wx.showToast({
+                                        title: t.data.msg,
+                                        icon: "none",
+                                        duration: 1e3
+                                    });
+                                }
+                            });
                         } else wx.showToast({
                             title: "图片上传失败",
                             icon: "none",
@@ -174,29 +170,41 @@ Page({
             }
         });
     },
-    choose: function(t) {
+    choose: function(e) {
+        if (wx.createRewardedVideoAd && !this.isVideoAdError) {
+            this.choose_event = e;
+            this.viewRewardedVideoAd();
+        } else {
+            this._choose(e);
+        }
+    },
+    _choose: function(t) {
         var a = this, n = t.currentTarget.dataset.id, i = t.currentTarget.dataset.key, o = wx.getStorageSync("user_id");
         a.setData({
             key: i
         }), wx.setStorage({
             key: "image_id",
             data: n
-        }), a.makeInfo(n, o), a.setData({
-            display: ""
-        })
+        }), a.makeInfo(n, o)
     },
-    saveImage: function(e) {
-        this.saveImageDow(e)
+    saveImage: function() {
+        if (wx.createRewardedVideoAd && !this.isVideoAdError) {
+            this.setData({
+                isShowVideoDialog: true,
+                videoContent: '观看视频广告，才能保存头像哦',
+                confirmText: '确定',
+                videoType: 'save'
+            })
+        } else {
+            this.saveResult()
+        }
     },
-    saveImageDow: function(e) {
+    saveResult: function() {
         wx.showLoading({
             title: "图片保存中..."
         });
-        this.saveResult(this.data.userImage)
-    },
-    saveResult: function(e) {
         wx.getImageInfo({
-            src: e,
+            src: this.data.userImage,
             success: function(e) {
                 var t = e.path;
                 wx.saveImageToPhotosAlbum({
@@ -207,6 +215,9 @@ Page({
                             icon: "success",
                             duration: 2e3
                         })
+                        setTimeout(() => {
+                            util.createInterstitialAd();
+                        }, 1500)
                     },
                     complete: function(e) {
                         wx.hideLoading();
@@ -237,33 +248,85 @@ Page({
                 if (101 == e.data.code) {
                     var t = e.data.result_img;
                     wx.hideLoading(), n.setData({
-                        userImage: t,
-                        display: "none"
+                        userImage: t
                     });
                 } else wx.showToast({
                     title: "图片识别失败,请重新上传",
                     icon: "none",
                     duration: 1e3
-                }), n.setData({
-                    display: "none"
                 });
             }
         });
     },
-    switchTab: function(e) {
-        var t = e.detail.current, a = this.data.windowWidth / 6;
-        this.setData({
-            currentTab: t,
-            navScrollLeft: (t - 3) * a
+    createRewardedVideoAd: function (adUnitId) {
+        if (wx.createRewardedVideoAd) {
+          if (this.videoAd) {
+            this.videoAd.offLoad();
+            this.videoAd.offError();
+            this.videoAd.offClose();
+            this.videoAd.destroy();
+            this.videoAd = null;
+          }
+          if (!this.videoAd) this.isVideoAdError = true;
+
+          this.videoAd = wx.createRewardedVideoAd({
+            adUnitId: adUnitId
+          });
+          this.videoAd.load();
+    
+          this.videoAd.onLoad(() => {
+            console.log('videoAd_onLoad');
+          });
+    
+          this.videoAd.onError(res => {
+            console.log('videoAd_erro', res);
+            this.isVideoAdError = true;
+          });
+    
+          this.videoAd.onClose(status => {
+            console.log('videoAd_status', status);
+            if (status && status.isEnded || status === undefined) {
+                if (this.data.videoType == 'save') {
+                    this.saveResult();
+                } else {
+                    this._choose(this.choose_event);
+                }
+            } else {
+                if (this.data.videoType == 'save') {
+                    this.setData({
+                      isShowVideoDialog: true,
+                      videoContent: '观看完整视频广告，才能保存头像哦',
+                      confirmText: '继续观看'
+                    });
+                } else {
+                    this.setData({
+                      isShowVideoDialog: true,
+                      videoContent: '观看完整视频广告，才能使用该风格哦',
+                      confirmText: '继续观看'
+                    });
+                }
+            }
+          });
+        }
+    },
+    viewRewardedVideoAd: function () {
+        wx.showToast({
+          title: '加载中...',
+          icon: 'loading',
+          duration: 3000
+        });
+        this.videoAd.show().then(() => wx.hideToast()).catch(err => {
+          this.videoAd.load().then(() => this.videoAd.show().then(() => wx.hideToast())).catch(err => {
+            wx.hideToast();
+            this.saveResult();
+          });
         });
     },
     onShareAppMessage: function(e) {
         return {
-            title: "火爆全网的变脸神器，你的脸在漫画中是什么样子？一键制作漫画头像",
+            title: "一键制作卡通头像",
             path: "/pages/index/index",
-            imageUrl: t,
-            success: function(e) {},
-            fail: function(e) {}
+            imageUrl: this.dat.userImage
         };
     }
 });

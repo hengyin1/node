@@ -2,7 +2,7 @@ const fs = require('fs');
 const parse = require("csv-parse");
 const nodejieba = require("nodejieba");
 
-fs.readFile(__dirname + '/data/zenme_wechat_input.csv', 'utf-8', (err, res) => {
+fs.readFile(__dirname + '/data/zhizuo_shipin_input.csv', 'utf-8', (err, res) => {
   // console.log(res);
   parse(res, {
     from_line: 3,
@@ -17,7 +17,7 @@ fs.readFile(__dirname + '/data/zenme_wechat_input.csv', 'utf-8', (err, res) => {
       const tags =['r', 'i', 'p', 'uj', 'x', 'f', 'b', 'm', 'a', 'd', 'l', 'c'];
       return {
         word: item[0],
-        cut: Array.from(new Set(nodejieba.tag(item[0]).filter(item => !tags.includes(item.tag) && item.word != '怎么' && item.word != '微信').map(item => item.word)))
+        cut: Array.from(new Set(nodejieba.tag(item[0]).filter(item => !tags.includes(item.tag) && item.word != '制作' && item.word != '视频').map(item => item.word)))
       }
     }).filter(item => item.cut.length > 0)
     // console.log(output);
@@ -32,6 +32,7 @@ fs.readFile(__dirname + '/data/zenme_wechat_input.csv', 'utf-8', (err, res) => {
       let start_index = 0;
       for (let i = 0; i < output.length; i++) {
         if (output[i]) {
+          console.log(i);
           classify.push(output[i].word);
           refer_cut = output[i].cut;
           start_index = i + 1;
@@ -40,7 +41,10 @@ fs.readFile(__dirname + '/data/zenme_wechat_input.csv', 'utf-8', (err, res) => {
         }
       }
   
-      if (!refer_cut) return;
+      if (!refer_cut) {
+        console.log('---end---');
+        return;
+      }
   
       for (let i = start_index; i < output.length; i++) {
         if (!output[i]) continue;
@@ -63,7 +67,7 @@ fs.readFile(__dirname + '/data/zenme_wechat_input.csv', 'utf-8', (err, res) => {
         // console.log(outputStr);
     
         const file_name = refer_cut.join('_');
-        fs.writeFile(__dirname + `/data/classify_zenme_wechat/${file_name}.csv`, outputStr, {encoding: 'utf8'}, (err) => {
+        fs.writeFile(__dirname + `/data/classify_zhizuo_shipin/${file_name}.csv`, outputStr, {encoding: 'utf8'}, (err) => {
           if (err) throw err;
           console.log('The file has been saved!');
           classify_loop();

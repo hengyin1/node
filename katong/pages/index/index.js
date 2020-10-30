@@ -1,4 +1,5 @@
 var t = getApp(), e = require("../../utils/config");
+const util = require("../../utils/util");
 
 Page({
     data: {
@@ -8,7 +9,7 @@ Page({
         
     },
     onShow: function() {
-       
+        util.createInterstitialAd();
     },
     uploadImage: function(t) {
         var a = this;
@@ -37,27 +38,25 @@ Page({
                         var o = i.data, n = JSON.parse(o);
                         if (101 == n.code) {
                             var s = n.data[0];
-
-                            wx.setStorageSync("userImage", s), a.makeInfo(s, t)
-                            // console.log(s), wx.showLoading({
-                            //     title: "图片检测中..."
-                            // }), wx.request({
-                            //     url: e.API_HOST + "/huihua/index/tencent-check",
-                            //     data: {
-                            //         image: s
-                            //     },
-                            //     method: "POST",
-                            //     header: {
-                            //         "Content-Type": "application/x-www-form-urlencoded"
-                            //     },
-                            //     success: function(e) {
-                            //         wx.hideLoading(), "检测成功" == e.data.msg ? (wx.setStorageSync("userImage", s), a.makeInfo(s, t)) : wx.showToast({
-                            //             title: e.data.msg,
-                            //             icon: "none",
-                            //             duration: 1e3
-                            //         });
-                            //     }
-                            // });
+                            console.log(s), wx.showLoading({
+                                title: "图片检测中..."
+                            }), wx.request({
+                                url: e.API_HOST + "/huihua/index/tencent-check",
+                                data: {
+                                    image: s
+                                },
+                                method: "POST",
+                                header: {
+                                    "Content-Type": "application/x-www-form-urlencoded"
+                                },
+                                success: function(e) {
+                                    wx.hideLoading(), "检测成功" == e.data.msg ? (wx.setStorageSync("userImage", s), a.makeInfo(s, t)) : wx.showToast({
+                                        title: e.data.msg,
+                                        icon: "none",
+                                        duration: 1e3
+                                    });
+                                }
+                            });
                         } else wx.showToast({
                             title: "图片上传失败",
                             icon: "none",
@@ -105,9 +104,9 @@ Page({
     },
     onShareAppMessage: function() {
         return {
-            title: "小程序首页",
-            desc: "",
-            path: "/pages/index/index"
+            title: "一键制作卡通头像",
+            path: "/pages/index/index",
+            imageUrl: ""
         };
     }
 });
