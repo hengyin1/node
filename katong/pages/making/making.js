@@ -1,3 +1,4 @@
+import { stylelist } from '../../utils/localdata'
 const t = require("../../utils/config");
 const util = require("../../utils/util");
 
@@ -89,27 +90,32 @@ Page({
         this.getList(i);
     },
     getList: function(e) {
-        var a = this, n = wx.getStorageSync("uid");
-        wx.request({
-            url: t.API_HOST + "/huihua/index/get-image",
-            data: {
-                cate: e,
-                uid: n
-            },
-            method: "POST",
-            header: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            success: function(e) {
-                101 == e.data.code ? a.setData({
-                    list: e.data.list
-                }) : wx.showToast({
-                    title: e.data.msg,
-                    icon: "none",
-                    duration: 1e3
-                });
-            }
-        });
+        const key = 'cat_' + e;
+        const list = stylelist[key];
+        this.setData({
+            list: list
+        })
+        // var a = this, n = wx.getStorageSync("uid");
+        // wx.request({
+        //     url: t.API_HOST + "/huihua/index/get-image",
+        //     data: {
+        //         cate: e,
+        //         uid: n
+        //     },
+        //     method: "POST",
+        //     header: {
+        //         "Content-Type": "application/x-www-form-urlencoded"
+        //     },
+        //     success: function(e) {
+        //         101 == e.data.code ? a.setData({
+        //             list: e.data.list
+        //         }) : wx.showToast({
+        //             title: e.data.msg,
+        //             icon: "none",
+        //             duration: 1e3
+        //         });
+        //     }
+        // });
     },
     changeImage: function() {
         var a = this, i = wx.getStorageSync("uid"), o = wx.getStorageSync("image_id");
@@ -151,7 +157,7 @@ Page({
                                     "Content-Type": "application/x-www-form-urlencoded"
                                 },
                                 success: function(t) {
-                                    wx.hideLoading(), "检测成功" == e.data.msg ? (wx.setStorageSync("userImage", c), a.setData({
+                                    wx.hideLoading(), "检测成功" == t.data.msg ? (wx.setStorageSync("userImage", c), a.setData({
                                         uploadImage: "https://image.faxingwu.com/" + c
                                     }), a.makeInfo(o, i)) : wx.showToast({
                                         title: t.data.msg,
@@ -171,12 +177,13 @@ Page({
         });
     },
     choose: function(e) {
-        if (wx.createRewardedVideoAd && !this.isVideoAdError) {
-            this.choose_event = e;
-            this.viewRewardedVideoAd();
-        } else {
-            this._choose(e);
-        }
+        this._choose(e);
+        // if (wx.createRewardedVideoAd && !this.isVideoAdError) {
+        //     this.choose_event = e;
+        //     this.viewRewardedVideoAd();
+        // } else {
+        //     this._choose(e);
+        // }
     },
     _choose: function(t) {
         var a = this, n = t.currentTarget.dataset.id, i = t.currentTarget.dataset.key, o = wx.getStorageSync("user_id");
@@ -188,16 +195,17 @@ Page({
         }), a.makeInfo(n, o)
     },
     saveImage: function() {
-        if (wx.createRewardedVideoAd && !this.isVideoAdError) {
-            this.setData({
-                isShowVideoDialog: true,
-                videoContent: '观看视频广告，才能保存头像哦',
-                confirmText: '确定',
-                videoType: 'save'
-            })
-        } else {
-            this.saveResult()
-        }
+        this.saveResult()
+        // if (wx.createRewardedVideoAd && !this.isVideoAdError) {
+        //     this.setData({
+        //         isShowVideoDialog: true,
+        //         videoContent: '观看视频广告，才能保存头像哦',
+        //         confirmText: '确定',
+        //         videoType: 'save'
+        //     })
+        // } else {
+        //     this.saveResult()
+        // }
     },
     saveResult: function() {
         wx.showLoading({
@@ -290,6 +298,10 @@ Page({
                     this.saveResult();
                 } else {
                     this._choose(this.choose_event);
+                    const index = this.choose_event.currentTarget.dataset.key
+                    this.setData({
+                        [`list[${index}].vip`]: 0
+                    })
                 }
             } else {
                 if (this.data.videoType == 'save') {
