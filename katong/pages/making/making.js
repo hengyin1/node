@@ -16,39 +16,30 @@ Page({
         currentTab: 0,
         navScrollLeft: 0,
         none: "none",
-        display: "",
         title: "温柔浪漫夏日祭",
-        name: "盛夏光年",
-        img_filter: "img-filter",
-        poster: "none"
+        name: "盛夏光年"
     },
-    onLoad: function(e) {
-        var t = this;
+    onLoad: function(options) {
         wx.getSystemInfo({
-            success: function(e) {
-                t.setData({
-                    pixelRatio: e.pixelRatio,
-                    windowHeight: e.windowHeight,
-                    windowWidth: e.windowWidth
-                });
+            success: res => {
+                this.setData({
+                    pixelRatio: res.pixelRatio,
+                    windowHeight: res.windowHeight,
+                    windowWidth: res.windowWidth
+                })
             }
-        });
-        var n = this;
-        var i = e.result_image;
-        wx.setStorage({
-            key: "result_image",
-            data: i
-        });
-        var o = wx.getStorageSync("userImage"), s = wx.getStorageSync("key");
-        if ("" == (r = wx.getStorageSync("cate"))) var r = 13;
-        n.getNav(r), n.getList(r), n.setData({
-            userImage: i,
-            uploadImage: "https://image.faxingwu.com/" + o,
-            key: s,
-            display: "none"
-        }), wx.createRewardedVideoAd && (a = wx.createRewardedVideoAd({
-            adUnitId: "adunit-1a9a95904a8343c6"
-        }));
+        })
+       
+        const userImage = wx.getStorageSync("userImage");
+        const key =  wx.getStorageSync("key");
+        const cate =  wx.getStorageSync("cate") || 13;
+        this.getNav(cate);
+        this.getList(cate);
+        this.setData({
+            userImage: options.result_image,
+            uploadImage: "https://image.faxingwu.com/" + userImage,
+            key: key
+        })
     },
     getNav: function(e) {
         13 == e && this.setData({
@@ -117,9 +108,8 @@ Page({
             }
         });
     },
-    changeImage: function(e) {
-        var a = this, n = e.currentTarget.dataset.type, i = wx.getStorageSync("uid"), o = wx.getStorageSync("image_id");
-        if (1 == n) s = "none"; else var s = "";
+    changeImage: function() {
+        var a = this, i = wx.getStorageSync("uid"), o = wx.getStorageSync("image_id");
         wx.chooseImage({
             count: 1,
             sizeType: [ "original", "compressed" ],
@@ -143,10 +133,16 @@ Page({
                     success: function(e) {
                         var n = e.data, r = JSON.parse(n);
                         if (101 == r.code) {
-                            a.makeInfo(o, i)
+                            wx.hideLoading();
+                            var c = r.data[0];
+                            wx.setStorageSync("userImage", c);
+                            a.makeInfo(o, i);
 
-                            // wx.hideLoading();
-                            // var c = r.data[0];
+                            a.setData({
+                                display: "",
+                                uploadImage: "https://image.faxingwu.com/" + c
+                            })
+
                             // wx.showLoading({
                             //     title: "图片检测中..."
                             // }), wx.request({
@@ -160,8 +156,6 @@ Page({
                             //     },
                             //     success: function(t) {
                             //         wx.hideLoading(), "检测成功" == e.data.msg ? (wx.setStorageSync("userImage", c), a.setData({
-                            //             display: "",
-                            //             none: s,
                             //             uploadImage: "https://image.faxingwu.com/" + c
                             //         }), a.makeInfo(o, i)) : wx.showToast({
                             //             title: t.data.msg,
@@ -187,73 +181,18 @@ Page({
         }), wx.setStorage({
             key: "image_id",
             data: n
-        }), wx.getSystemInfo({
-            success: function(t) {
-                console.log(t.platform), "ios" == t.platform ? (a.makeInfo(n, o), a.setData({
-                    display: "",
-                    none: "none"
-                })) : e._get("user.index/detail", {}, function(e) {
-                    1 == e.data.userInfo.vip ? (a.makeInfo(n, o), a.setData({
-                        display: ""
-                    })) : (wx.showToast({
-                        title: "素材需要开通VIP解锁",
-                        icon: "none",
-                        duration: 1e3
-                    }), a.setData({
-                        none: ""
-                    }));
-                });
-            }
-        });
+        }), a.makeInfo(n, o), a.setData({
+            display: ""
+        })
     },
     saveImage: function(e) {
-        var t = this;
-        wx.getSystemInfo({
-            success: function(n) {
-                "ios" == n.platform && a ? (a.show().catch(function() {
-                    a.load().then(function() {
-                        return a.show();
-                    }).catch(function(e) {
-                        console.log("视频广告显示失败");
-                    });
-                }), a.onClose(function(a) {
-                    a && a.isEnded ? t.saveImageDow(e) : wx.showToast({
-                        title: "视频未播放完毕，不可保存",
-                        icon: "none",
-                        duration: 2e3
-                    });
-                })) : t.saveImageDow(e);
-            }
-        });
+        this.saveImageDow(e)
     },
     saveImageDow: function(e) {
         wx.showLoading({
             title: "图片保存中..."
         });
-        var a = this, n = e.currentTarget.dataset.image;
-        console.log(112), console.log(n);
-        var i = wx.getStorageSync("user_id");
-        console.log(i), "" != n ? wx.request({
-            url: t.API_HOST + "/huihua/image/check-is-water",
-            data: {
-                uid: i,
-                result_image: n
-            },
-            method: "POST",
-            header: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            success: function(e) {
-                if (console.log(e.data), 101 == e.data.code) t = e.data.saveImage, a.saveResult(t); else {
-                    var t = n;
-                    a.saveResult(t);
-                }
-            }
-        }) : wx.showToast({
-            title: "图片绘制失败，不可保存",
-            icon: "none",
-            duration: 2e3
-        });
+        this.saveResult(this.data.userImage)
     },
     saveResult: function(e) {
         wx.getImageInfo({
@@ -267,9 +206,7 @@ Page({
                             title: "图片保存成功",
                             icon: "success",
                             duration: 2e3
-                        }), wx.navigateTo({
-                            url: "/pages/share/share"
-                        });
+                        })
                     },
                     complete: function(e) {
                         wx.hideLoading();
@@ -279,6 +216,9 @@ Page({
         });
     },
     makeInfo: function(e, a) {
+        wx.showLoading({
+            title: "图片绘制中..."
+        })
         var n = this;
         if ("" == a) var a = 0;
         var i = wx.getStorageSync("userImage");
@@ -296,10 +236,7 @@ Page({
             success: function(e) {
                 if (101 == e.data.code) {
                     var t = e.data.result_img;
-                    wx.setStorage({
-                        key: "result_image",
-                        data: t
-                    }), wx.hideLoading(), n.setData({
+                    wx.hideLoading(), n.setData({
                         userImage: t,
                         display: "none"
                     });

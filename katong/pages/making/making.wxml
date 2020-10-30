@@ -1,5 +1,5 @@
 <view class="container">
-    <image class="make-result-img" mode="aspectFit" src="{{uploadImage}}"></image>
+    <image class="make-result-img" mode="aspectFit" src="{{userImage}}"></image>
 
     <view>
         <scroll-view class="nav" scrollLeft="{{navScrollLeft}}" scrollWithAnimation="{{true}}" scrollX="true">
