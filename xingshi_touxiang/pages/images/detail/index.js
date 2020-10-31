@@ -240,7 +240,7 @@ Page({
     onShareAppMessage: function() {
         return {
             title: "[@你]这个姓氏头像制作工具很棒,推荐给你",
-            imageUrl: "https://touxiang.pptmb360.cn/uploads/touxiang/1597905602.jpg",
+            imageUrl: "/images/share.jpeg",
             path: "/pages/images/list/index"
         };
     },
