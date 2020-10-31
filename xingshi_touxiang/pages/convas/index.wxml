@@ -1,0 +1,25 @@
+<!-- <view class="navigationBarMain" style="height: {{44+statusBarHeight}}px">
+    <view bindtap="back" class="nav-back" style="padding-top:{{statusBarHeight}}px;height: {{44+statusBarHeight}}px">
+        <image class="nav-icon" src="/images/navigationBar/nav_icon_white.png"></image>
+    </view>
+    <view style="height: {{44+statusBarHeight}}px"></view>
+</view> -->
+<view class="showimg">
+    <image mode="widthFix" src="{{imgurl}}"></image>
+</view>
+<view class="btn">
+    <!-- <view bindtap="back" class="back">重新编辑</view>
+    <view bindtap="save" class="save">保存到相册</view> -->
+    <button class="back" open-type="share">邀请朋友玩</button>
+    <button class="save" type="primary" bindtap="save">保存到相册</button>
+</view>
+<!-- <view class="adcontainer" wx:if="{{globalAdunit}}">
+    <ad adTheme="white" adType="video" unitId="{{globalAdunit}}"></ad>
+</view> -->
+<view class="toast-content-wrap" wx:if="{{isShowToast}}">
+    <view class="bg"></view>
+    <view class="toast-content">
+        <view class="content-text">{{textToast}}</view>
+        <button bindopensetting="handleSetting" openType="openSetting">去授权</button>
+    </view>
+</view>

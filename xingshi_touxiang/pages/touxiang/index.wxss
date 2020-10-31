@@ -1,0 +1,117 @@
+page {
+    background-color: #fff;
+}
+
+.navigationBarMain {
+    margin-bottom: 18rpx;
+}
+
+.nav-back {
+    background-color: rgb(228,191,147);
+    width: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    text-align: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    z-index: 9999;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 44px;
+}
+
+.navigationBarMain image {
+    width: 18rpx;
+    height: 34rpx;
+    padding: 0 25rpx;
+}
+
+.banner image {
+    display: block;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.nav {
+    margin-top: 10px;
+}
+
+i-badge,.i-badge {
+    width: 100%;
+}
+
+.nav .i-tabs-tab-bar {
+    height: 0;
+}
+
+.tabs i-tabs i-tab {
+    width: 33.3%;
+}
+
+.list {
+}
+
+.box {
+    position: relative;
+    width: 31%;
+    height: 0;
+    padding-bottom: 31%;
+    margin-left: 1.75%;
+    display: inline-block;
+}
+
+.list .box image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 5px;
+}
+
+.nodata {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #d3d3d3;
+}
+
+.adContainer {
+    width: 100%;
+    margin-bottom: 10rpx;
+}
+
+.cates {
+    width: 96.5%;
+    margin: 0 auto;
+}
+
+.cate {
+    float: left;
+    margin: 5rpx;
+    border-radius: 16rpx;
+    background-size: 100% 100%;
+}
+
+.first {
+    width: calc(34% - 10rpx);
+    height: 400rpx;
+    background-color: blue;
+}
+
+.second,.five {
+    width: calc(26% - 10rpx);
+    height: 195rpx;
+    background-color: yellow;
+}
+
+.three,.four {
+    width: calc(40% - 10rpx);
+    height: 195rpx;
+    background-color: gray;
+}

@@ -1,0 +1,21 @@
+<!-- <view class="navigationBarMain" style="height: {{44+statusBarHeight}}px">
+    <view bindtap="back" class="nav-back" style="padding-top:{{statusBarHeight}}px;height: {{44+statusBarHeight}}px">
+        <image class="nav-icon" src="/images/navigationBar/nav_icon_white.png"></image>
+    </view>
+    <view style="height: {{44+statusBarHeight}}px"></view>
+</view> -->
+<view class="navlsit">
+    <sol-scoll-nav bindchange="onTabsChange" current="{{index}}" tabs="{{list}}"></sol-scoll-nav>
+</view>
+<swiper bindchange="onSwitchTab" class="container" current="{{index}}" duration="300">
+    <swiper-item wx:for="{{list}}">
+        <scroll-view bindscrolltolower="bindscrolltolower" scrollX="false" scrollY="true" style="height:100%;">
+            <block wx:for="{{lists}}" wx:key="key">
+                <view class="box headerhehe" style="height:{{boxheight}}px">
+                    <image bindtap="goto" data-demoimage="{{rooturl}}{{item.demoimage}}" data-id="{{item.did}}" src="{{rooturl}}{{item.demoimage}}"></image>
+                </view>
+            </block>
+        </scroll-view>
+    </swiper-item>
+</swiper>
+<wxs module="filters" src="../../utils/filters.wxs" />

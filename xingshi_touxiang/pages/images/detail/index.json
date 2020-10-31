@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "i-input": "/dist/input/index",
+        "color-picker": "/dist/color-picker/color-picker"
+    }
+}

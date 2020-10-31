@@ -1,0 +1,161 @@
+page {
+    background-color: #fff;
+}
+
+.navigationBarMain {
+    margin-bottom: 18rpx;
+}
+
+.nav-back {
+    background-color: rgb(228,191,147);
+    width: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    text-align: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    z-index: 9999;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 44px;
+}
+
+.navigationBarMain image {
+    width: 18rpx;
+    height: 34rpx;
+    padding: 0 25rpx;
+}
+
+.list {
+    position: relative;
+}
+
+.images {
+    width: 60%;
+    margin: 20px auto;
+}
+
+.images image {
+    display: block;
+    margin-top: 20px;
+    width: 60%;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+color-picker {
+    position: absolute;
+    z-index: 100;
+    background-color: #e3e3e3;
+}
+
+.colorpicker {
+    position: relative;
+}
+
+.fontType {
+    padding-left: 15px;
+    min-height: 34px;
+    color: #495060;
+    margin: 10px 0px;
+}
+
+.fontType .left {
+    max-width: 10%;
+    line-height: 18px;
+    padding: 4px 0;
+    min-height: 18px;
+    font-size: 14px;
+    color: #495060;
+    float: left;
+}
+
+.fontFileType {
+    padding: 7px 0 13px 15px;
+    min-height: 20px;
+    color: #495060;
+    margin-bottom: 10px;
+}
+
+.fontFileType .left {
+    margin-top: 6px;
+    max-width: 10%;
+    line-height: 20px;
+    min-height: 20px;
+    font-size: 14px;
+    color: #495060;
+    float: left;
+}
+
+.list scroll-view {
+    width: 87%;
+    float: left;
+    height: 34px;
+    margin-left: 2%;
+}
+
+.list .color {
+    display: inline-block;
+    width: 28px;
+    margin-top: 6px;
+    height: 18px;
+    margin-left: 12px;
+    text-align: center;
+    box-shadow: 0px 0px 3px rgba(0,0,0,.8);
+}
+
+.list .font {
+    display: inline-block;
+    width: 48px;
+    height: 18px;
+    margin-left: 13px;
+    margin-top: 6px;
+    text-align: center;
+    box-shadow: 0px 0px 3px rgba(0,0,0,.8);
+}
+
+.font image {
+    width: 48px;
+    height: 18px;
+    left: 0px;
+}
+
+.fontborder {
+    border: 1px solid rgb(32,17,236);
+}
+
+.go {
+    width: 100%;
+}
+
+.go .text {
+    margin: 0 auto;
+    background-color: rgb(228,191,147);
+    color: #fff;
+    width: 30%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    box-shadow: 1px 1px 5px rgba(0,0,0,.8);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+
+.adcontainer {
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    margin-top: 5px;
+    margin-bottom: 170rpx;
+    z-index: 10;
+    position: relative;
+}

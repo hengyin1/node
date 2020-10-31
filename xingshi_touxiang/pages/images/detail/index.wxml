@@ -1,0 +1,56 @@
+<!-- <view class="navigationBarMain">
+    <view bindtap="back" class="nav-back" style="padding-top:{{statusBarHeight}}px;height: {{44+statusBarHeight}}px">
+        <image class="nav-icon" src="/images/navigationBar/nav_icon_white.png"></image>
+    </view>
+    <view style="height: {{44+statusBarHeight}}px"></view>
+</view> -->
+<view id="page">
+    <view bindtap="closetab" style="width:100%;">
+        <view class="images">
+            <image mode="widthFix" src="{{demoimage}}"></image>
+        </view>
+    </view>
+    <view class="list">
+        <i-input autofocus bind:blur="handleInputBlur" bind:change="myInput" bindtap="closetab" class="text" maxlength="{{defaultlenth+5}}" mode="normal" placeholder="{{fonttishi}}" title="姓氏" value="{{font}}"></i-input>
+        <view class="fontType" style="white-space: nowrap; ">
+            <view bindtap="colorTab" class="left colorpicker" style="border-bottom: 4px solid {{colorData.pickerData.hex}};">颜色</view>
+            <scroll-view scrollAnchoring="true" scrollIntoView="{{toView_color}}" scrollLeft="{{scrollLeft_color}}" scrollX="true" style="display: flex; flex-direction:row; background-color:#f8f8f9;" wx:if="{{scroll}}">
+                <view bindtap="colornameTab" class="color" data-color="{{item.color}}" data-id="{{index}}" id="colorid_{{index}}" style="background-color:{{item.color}};border: 1px solid {{colorcousedis==index?defaultbgcolor:item.color}};" wx:for="{{colorList}}" wx:key="key"></view>
+            </scroll-view>
+        </view>
+        <color-picker bindchangecolor="onChangeColor" class="color-picker" colorData="{{colorData}}" rpxRatio="{{rpxRatio}}" wx:if="{{hidden}}"></color-picker>
+        <view bindtap="closetab" class="fontFileType" style="white-space: nowrap; ">
+            <view class="left">字体</view>
+            <scroll-view scrollAnchoring="true" scrollIntoView="{{toView}}" scrollLeft="{{scrollLeft}}" scrollX="true" wx:if="{{scroll}}">
+                <view bindtap="fontTab" class="font" data-fontid="{{item.id}}" data-id="{{index}}" id="fontid_{{index}}" style="border: 1px solid {{cousedis==index?defaultbgcolor:'#fff'}};" wx:for="{{fontList}}" wx:key="key">
+                    <image bindtap="fontTab" data-fontid="{{item.fileid}}" data-id="{{index}}" src="{{rooturl}}/uploads/{{item.path}}"></image>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+</view>
+<view bindtap="closetab" style="padding-top:25px;">
+    <button type="primary" bindtap="goTab" style="width: 80%;">生成头像</button>
+    <!-- <view class="go">
+        <view bindtap="goTab" class="text">生成图片</view>
+    </view> -->
+</view>
+<!-- <view class="adcontainer" wx:if="{{globalAdunit!==null}}">
+    <ad adIntervals="1000" adTheme="white" adType="video" unitId="{{globalAdunit}}"></ad>
+</view> -->
+<!-- <view class="logoBottom">
+    <view bindtap="backHome" class="item">
+        <image class="icon" src="/images/logo_shouye.png"></image>
+        <view class="text">首页</view>
+    </view>
+    <view class="item">
+        <button bindtap="toCategroy" type="default"></button>
+        <image class="icon" src="/images/logo_paixu.png"></image>
+        <view class="text">分类</view>
+    </view>
+    <view class="item">
+        <button openType="share" type="default"></button>
+        <image class="icon" src="/images/logo_fenxiang.png"></image>
+        <view class="text">分享</view>
+    </view>
+</view> -->

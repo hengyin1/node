@@ -1,0 +1,121 @@
+.toast-content-wrap {
+    display: flex;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    top: 0;
+}
+
+.toast-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: DarkGray;
+    background: #fff;
+    border-radius: 8px;
+    position: absolute;
+    padding: 30rpx 30rpx 0;
+}
+
+.toast-content-wrap .bg {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.2;
+}
+
+.toast-content .content-text {
+    padding: 30rpx;
+    font-size: 18px;
+    border-bottom: 1px solid DarkGray;
+}
+
+.toast-content button {
+    padding: 40rpx 0 40rpx;
+    font-size: 18px;
+    line-height: 18px;
+    width: 100%;
+    color: RoyalBlue;
+}
+
+page {
+    background-color: #fff;
+}
+
+.navigationBarMain {
+    margin-bottom: 100rpx;
+}
+
+.nav-back {
+    background-color: rgb(228,191,147);
+    width: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    text-align: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    z-index: 9999;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 44px;
+}
+
+.navigationBarMain image {
+    width: 18rpx;
+    height: 34rpx;
+    padding: 0 25rpx;
+}
+
+.showimg {
+    width: 100%;
+    height: auto;
+}
+
+.showimg image {
+    width: 420rpx;
+    margin: 60px auto 20px;
+    display: block;
+}
+
+.btn {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+}
+
+.btn .back,.btn .save {
+    width: 300rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+    font-size: 34rpx;
+    color: #f1f1f1;
+    text-align: center;
+}
+
+.btn .back {
+    background-color: #5FB878;
+}
+
+/* .btn .save {
+    background-color: #1E9FFF;
+} */
+
+.adcontainer {
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    margin-top: 5px;
+    margin-bottom: 50rpx;
+}

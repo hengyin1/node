@@ -1,0 +1,25 @@
+{
+  "pages": [
+    "pages/category/index",
+    "pages/images/detail/index",
+    "pages/convas/index",
+    "pages/touxiang/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#101013",
+    "navigationBarTitleText": "姓氏头像制作",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#36265A",
+    "enablePullDownRefresh": false,
+    "onReachBottomDistance": 50
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "navigateToMiniProgramAppIdList": [
+    
+  ],
+  "sitemapLocation": "sitemap.json"
+}

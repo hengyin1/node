@@ -1,0 +1,5 @@
+{
+    "usingComponents": {
+        "sol-scoll-nav": "/dist/scoll-nav/index"
+    }
+}
