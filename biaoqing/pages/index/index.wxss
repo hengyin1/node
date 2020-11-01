@@ -1,0 +1,50 @@
+/**index.wxss**/
+.canvas {
+  width: 710rpx;
+  height: 710rpx;
+  margin: 20rpx;
+  background-color: #f2f2f2;
+}
+
+.body {
+  height: calc(100vh - 750rpx);
+}
+
+.up-tab {
+  margin-bottom: 10rpx;
+}
+
+.up-tab-item {
+  flex: 1;
+  line-height: 1.6;
+  font-size: 32rpx;
+  text-align: center;
+}
+
+.up-tab-item-active {
+  display: inline-block;
+  color: #07c160;
+  border-bottom: 2px solid #07c160;
+}
+
+.down-tab {
+  width: 715rpx;
+  margin: 0 auto;
+  padding: 15rpx 0;
+  font-size: 28rpx;
+  border-top: 1px solid #f2f2f2;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.down-tab-item {
+  width: 130rpx;
+  text-align: center;
+}
+
+.down-tab-item-active {
+  height: 56rpx;
+  line-height: 56rpx;
+  color: #ffffff;
+  border-radius: 6rpx;
+  background-color: #07c160;
+}

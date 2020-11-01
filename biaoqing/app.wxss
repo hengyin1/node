@@ -1,0 +1,25 @@
+/**app.wxss**/
+/* page {
+  background-color: #ffffff;
+} */
+
+.container {
+  box-sizing: border-box;
+} 
+
+button::after {
+  border: none;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-align-items {
+  align-items: center;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
