@@ -1,5 +1,5 @@
 export const tabs = {
-  tab_0: [
+  tem: [
     {
         "value":0,
         "name":"热门"
@@ -29,7 +29,7 @@ export const tabs = {
         "name":"其他"
     }
   ],
-  tab_1: [
+  face: [
     {
       "value":0,
       "name":"热门"

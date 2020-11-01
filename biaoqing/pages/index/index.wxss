@@ -1,13 +1,9 @@
 /**index.wxss**/
 .canvas {
   width: 710rpx;
-  height: 710rpx;
+  height: 600rpx;
   margin: 20rpx;
   background-color: #f2f2f2;
-}
-
-.body {
-  height: calc(100vh - 750rpx);
 }
 
 .up-tab {
@@ -25,6 +21,7 @@
   display: inline-block;
   color: #07c160;
   border-bottom: 2px solid #07c160;
+  box-sizing: border-box;
 }
 
 .down-tab {
@@ -34,6 +31,7 @@
   font-size: 28rpx;
   border-top: 1px solid #f2f2f2;
   border-bottom: 1px solid #f2f2f2;
+  box-sizing: border-box;
 }
 
 .down-tab-item {
@@ -47,4 +45,27 @@
   color: #ffffff;
   border-radius: 6rpx;
   background-color: #07c160;
+}
+
+.lists-box {
+  height: calc(100vh - 787.2rpx);
+}
+
+.lists {
+  margin: 0 20rpx;
+  margin-top: 10rpx;
+}
+
+.list-item-image {
+  display: block;
+  width: 122rpx;
+  height: 122rpx;
+  margin: 10rpx;
+}
+
+.to-bottom {
+  padding: 30rpx;
+  font-size: 28rpx;
+  color: #999999;
+  text-align: center;
 }

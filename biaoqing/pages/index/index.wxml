@@ -3,7 +3,7 @@
   <canvas class="canvas" canvas-id="drawer" bindtouchstart="" bindtouchmove="" bindtouchend="" 
     bindtouchcancel=""></canvas>
 
-  <view class="body">
+  <view>
     <view class="up-tab flex-row">
       <view class="up-tab-item" wx:for="{{upTabs}}" wx:key="index" data-index="{{item.value}}" bind:tap="tapUpTab">
         <view class="{{selectedUpTab == item.value ? 'up-tab-item-active' : ''}}">{{item.name}}</view>
@@ -13,13 +13,18 @@
     <scroll-view class="down-tab" scroll-x="{{true}}" scroll-into-view="">
       <view class="flex-row flex-align-items" style="width: {{downTabs.length * 110}}rpx;">
         <view class="down-tab-item" wx:for="{{downTabs}}" wx:key="index" data-index="{{item.value}}" bind:tap="tapDownTab">
-          <view class="{{selectedDownTab == item.value ? 'down-tab-item-active' : ''}}">{{item.name}}</view>
+          <view class="{{(selectedUpTab == 'tem' && temTabIndex == item.value || selectedUpTab == 'face' && faceTabIndex == item.value) ? 'down-tab-item-active' : ''}}">{{item.name}}</view>
         </view>
       </view>
     </scroll-view>
 
-    <!-- <view class="flex-row flex-wrap">
-      <view class="content-item" wx:for="{{}}" wx:key=""></view>
-    </view> -->
+    <scroll-view class="lists-box" scroll-y="{{true}}">
+      <view class="lists flex-row flex-wrap">
+        <view wx:for="{{list}}" wx:key="index" bind:tap="">
+          <image class="list-item-image" src="{{item.url}}" mode="aspectFit" lazy-load="{{true}}" />
+        </view>
+      </view>
+      <view class="to-bottom">...到底啦...</view>
+    </scroll-view>
   </view>
 </view>

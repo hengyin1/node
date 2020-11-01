@@ -8,37 +8,47 @@ Page({
   data: {
     upTabs: [
       {
-        value: 0,
+        value: 'tem',
         name: '选择形象'
       },
       {
-        value: 1,
+        value: 'face',
         name: '选择表情'
       }
     ],
-    selectedUpTab: 0,
-    downTabs: tabs.tab_0,
-    selectedDownTab: 0,
-    selectedTemTab: 0,
-    selectedFaceTab: 0
+    selectedUpTab: 'tem',
+    downTabs: tabs.tem,
+    temTabIndex: 0,
+    faceTabIndex: 0,
+    list: []
   },
   onLoad: function () {
-    
+    this.getList();
   },
   tapUpTab: function (e) {
     const { index } = e.currentTarget.dataset;
     this.setData({
       selectedUpTab: index,
-      downTabs: tabs[`tab_${index}`]
+      downTabs: tabs[index]
     })
+    this.getList();
   },
   tapDownTab: function (e) {
     const { index } = e.currentTarget.dataset;
     this.setData({
-      selectedDownTab: index
+      [`${this.data.selectedUpTab}TabIndex`]: index
     })
+    this.getList();
   },
   getList: function () {
-    
+    let list = [];
+    if (this.data.selectedUpTab == 'tem') {
+      list = templates[`tem_${this.data.temTabIndex}`];
+    } else if (this.data.selectedUpTab == 'face') {
+      list = faces[`face_${this.data.faceTabIndex}`];
+    }
+    this.setData({
+      list: list
+    })
   }
 })
