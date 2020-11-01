@@ -15,10 +15,10 @@ const config = {
 
   // context: path.join(__dirname, 'src'),
 
-  entry: "./graphics/lights/specular/specular.js",
+  entry: "./graphics/lights/phong/phong.js",
 
   output: {
-    path: path.resolve(__dirname, 'graphics/lights/specular/dist'),
+    path: path.resolve(__dirname, 'graphics/lights/phong/dist'),
     filename: 'bundle.js'
   },
 
