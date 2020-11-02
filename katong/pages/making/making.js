@@ -218,7 +218,7 @@ Page({
                 wx.saveImageToPhotosAlbum({
                     filePath: t,
                     success: function(e) {
-                        wx.hideLoading(), wx.showToast({
+                        wx.showToast({
                             title: "图片保存成功",
                             icon: "success",
                             duration: 2e3
