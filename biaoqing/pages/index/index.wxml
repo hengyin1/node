@@ -20,7 +20,7 @@
 
     <scroll-view class="lists-box" scroll-y="{{true}}">
       <view class="lists flex-row flex-wrap">
-        <view wx:for="{{list}}" wx:key="index" bind:tap="">
+        <view wx:for="{{list}}" wx:key="index" data-index="{{index}}" bind:tap="chooseItem">
           <image class="list-item-image" src="{{item.url}}" mode="aspectFit" lazy-load="{{true}}" />
         </view>
       </view>

@@ -50,5 +50,31 @@ Page({
     this.setData({
       list: list
     })
+  },
+  chooseItem: function (e) {
+    const { index } = e.currentTarget.dataset;
+    const item = this.data.list[index];
+    this.getImageInfo(item.url).then(res => {
+      if (this.data.selectedUpTab == 'tem') {
+        this.setTemSize();
+      } else {
+        this.setFaceSize();
+      }
+    }, () => {
+
+    })
+  },
+  getImageInfo: function (src) {
+    return new Promise((resolve, reject) => {
+      wx.getImageInfo({
+        src: src,
+        success: res => {
+          resolve(res);
+        },
+        fail: () => {
+          reject();
+        }
+      })
+    })
   }
 })
