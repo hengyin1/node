@@ -96,8 +96,8 @@ Page({
     upload: function() {
         wx.setStorage({
             key: "image_id",
-            data: 39
-        }), this.uploadImage(39);
+            data: 25
+        }), this.uploadImage(25);
     },
     onShareAppMessage: function() {
         return {

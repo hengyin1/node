@@ -5,9 +5,9 @@ const util = require("../../utils/util");
 Page({
     data: {
         navData: [ {
-            text: "清新风"
-        }, {
             text: "梦幻风"
+        }, {
+            text: "清新风"
         }, {
             text: "水墨风"
         }, {
@@ -16,9 +16,7 @@ Page({
             text: "夏季风"
         }],
         currentTab: 0,
-        navScrollLeft: 0,
-        title: "温柔浪漫夏日祭",
-        name: "盛夏光年"
+        navScrollLeft: 0
     },
     onLoad: function(options) {
         wx.getSystemInfo({
@@ -33,7 +31,7 @@ Page({
        
         const userImage = wx.getStorageSync("userImage");
         const key =  wx.getStorageSync("key");
-        const cate =  wx.getStorageSync("cate") || 5;
+        const cate =  wx.getStorageSync("cate") || 11;
         this.getNav(cate);
         this.getList(cate);
         this.setData({
@@ -49,11 +47,11 @@ Page({
         13 == e && this.setData({
             currentTab: 4
         }), 11 == e && this.setData({
-            currentTab: 1
+            currentTab: 0
         }), 7 == e && this.setData({
             currentTab: 2
         }), 5 == e && this.setData({
-            currentTab: 0
+            currentTab: 1
         }), 3 == e && this.setData({
             currentTab: 3
         });
@@ -68,10 +66,10 @@ Page({
             key: 1e4
         });
         var n = e.currentTarget.dataset.current;
-        if (0 == n && (i = 5, this.setData({
+        if (0 == n && (i = 11, this.setData({
             title: "温柔浪漫夏日祭",
             name: "盛夏光年"
-        })), 1 == n && (i = 11, this.setData({
+        })), 1 == n && (i = 5, this.setData({
             title: "虚幻缥缈的世界",
             name: "秘密花园"
         })), 2 == n && (i = 7, this.setData({
