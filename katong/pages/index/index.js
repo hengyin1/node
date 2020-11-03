@@ -34,13 +34,10 @@ Page({
                         "Content-Type": "application/x-www-form-urlencoded"
                     },
                     success: function(i) {
-                        wx.hideLoading();
                         var o = i.data, n = JSON.parse(o);
                         if (101 == n.code) {
                             var s = n.data[0];
-                            console.log(s), wx.showLoading({
-                                title: "图片检测中..."
-                            }), wx.request({
+                            wx.request({
                                 url: e.API_HOST + "/huihua/index/tencent-check",
                                 data: {
                                     image: s
@@ -70,7 +67,7 @@ Page({
     makeInfo: function(t, a) {
         if ("" == (i = wx.getStorageSync("uid"))) var i = 0;
         wx.showLoading({
-            title: "图片绘制中..."
+            title: "生成中..."
         }), wx.request({
             url: e.API_HOST + "/huihua/result/new-create-image",
             data: {
@@ -99,8 +96,8 @@ Page({
     upload: function() {
         wx.setStorage({
             key: "image_id",
-            data: 8
-        }), this.uploadImage(8);
+            data: 39
+        }), this.uploadImage(39);
     },
     onShareAppMessage: function() {
         return {

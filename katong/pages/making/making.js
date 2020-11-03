@@ -5,16 +5,16 @@ const util = require("../../utils/util");
 Page({
     data: {
         navData: [ {
-            text: "盛夏光年"
+            text: "清新风"
         }, {
-            text: "秘密花园"
+            text: "梦幻风"
         }, {
-            text: "国风雅韵"
+            text: "水墨风"
         }, {
-            text: "白皙无暇"
-        }, {
-            text: "梦幻迷离"
-        } ],
+            text: "朋克风"
+        } , {
+            text: "夏季风"
+        }],
         currentTab: 0,
         navScrollLeft: 0,
         title: "温柔浪漫夏日祭",
@@ -33,7 +33,7 @@ Page({
        
         const userImage = wx.getStorageSync("userImage");
         const key =  wx.getStorageSync("key");
-        const cate =  wx.getStorageSync("cate") || 13;
+        const cate =  wx.getStorageSync("cate") || 5;
         this.getNav(cate);
         this.getList(cate);
         this.setData({
@@ -47,15 +47,15 @@ Page({
     },
     getNav: function(e) {
         13 == e && this.setData({
-            currentTab: 0
+            currentTab: 4
         }), 11 == e && this.setData({
             currentTab: 1
         }), 7 == e && this.setData({
             currentTab: 2
         }), 5 == e && this.setData({
-            currentTab: 3
+            currentTab: 0
         }), 3 == e && this.setData({
-            currentTab: 4
+            currentTab: 3
         });
     },
     switchNav: function(e) {
@@ -68,7 +68,7 @@ Page({
             key: 1e4
         });
         var n = e.currentTarget.dataset.current;
-        if (0 == n && (i = 13, this.setData({
+        if (0 == n && (i = 5, this.setData({
             title: "温柔浪漫夏日祭",
             name: "盛夏光年"
         })), 1 == n && (i = 11, this.setData({
@@ -77,11 +77,11 @@ Page({
         })), 2 == n && (i = 7, this.setData({
             title: "水墨丹青中国风",
             name: "国风韵雅"
-        })), 3 == n && (i = 5, this.setData({
+        })), 3 == n && (i = 3, this.setData({
             title: "清新唯美牛奶肌",
             name: "白皙无暇  "
         })), 4 == n) {
-            var i = 3;
+            var i = 13;
             this.setData({
                 title: "镜花水月琉璃梦",
                 name: "梦幻迷离"
@@ -142,12 +142,9 @@ Page({
                     success: function(e) {
                         var n = e.data, r = JSON.parse(n);
                         if (101 == r.code) {
-                            wx.hideLoading();
                             var c = r.data[0];
                     
-                            wx.showLoading({
-                                title: "图片检测中..."
-                            }), wx.request({
+                            wx.request({
                                 url: t.API_HOST + "/huihua/index/tencent-check",
                                 data: {
                                     image: c
@@ -236,7 +233,7 @@ Page({
     },
     makeInfo: function(e, a) {
         wx.showLoading({
-            title: "图片绘制中..."
+            title: "生成中..."
         })
         var n = this;
         if ("" == a) var a = 0;

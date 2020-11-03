@@ -1,46 +1,39 @@
 export const stylelist = {
-  cat_13: [
+  cat_5: [
     {
-        "id":"8",
-        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id8.jpg",
-        "vip":0,
+        "id":"39",
+        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id39.jpg",
+        "vip": 0,
         "hot":"1",
-        "title":"Summer 1"
+        "title":"Milk 1"
     },
     {
-        "id":"6",
-        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id6.jpg",
+        "id":"38",
+        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id38.jpg",
         "vip":"1",
         "hot":"0",
-        "title":"Summer 2"
+        "title":"Milk 2"
     },
     {
-        "id":"5",
-        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id5.jpg",
+        "id":"37",
+        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id37.jpg",
         "vip":"1",
         "hot":"1",
-        "title":"Summer 3"
+        "title":"Milk 3"
     },
     {
-        "id":"4",
-        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id4.jpg",
+        "id":"36",
+        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id36.jpg",
         "vip":"1",
         "hot":"1",
-        "title":"Summer 4"
+        "title":"Milk 4"
     },
     {
-        "id":"3",
-        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id3.jpg",
+        "id":"35",
+        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id35.jpg",
         "vip":"1",
         "hot":"1",
-        "title":"Summer 5"
-    },
-    {
-        "id":"2",
-        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id2.jpg",
-        "vip":"1",
-        "hot":"1",
-        "title":"Summer 6"
+        "title":"Milk 5"
     }
   ],
   cat_11: [
@@ -201,43 +194,6 @@ export const stylelist = {
         "title":"Ink 7"
     }
   ],
-  cat_5: [
-    {
-        "id":"39",
-        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id39.jpg",
-        "vip": 0,
-        "hot":"1",
-        "title":"Milk 1"
-    },
-    {
-        "id":"38",
-        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id38.jpg",
-        "vip":"1",
-        "hot":"0",
-        "title":"Milk 2"
-    },
-    {
-        "id":"37",
-        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id37.jpg",
-        "vip":"1",
-        "hot":"1",
-        "title":"Milk 3"
-    },
-    {
-        "id":"36",
-        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id36.jpg",
-        "vip":"1",
-        "hot":"1",
-        "title":"Milk 4"
-    },
-    {
-        "id":"35",
-        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id35.jpg",
-        "vip":"1",
-        "hot":"1",
-        "title":"Milk 5"
-    }
-  ],
   cat_3: [
     {
         "id":"55",
@@ -343,6 +299,50 @@ export const stylelist = {
         "vip":"1",
         "hot":"1",
         "title":"Dream 15"
+    }
+  ],
+  cat_13: [
+    {
+        "id":"8",
+        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id8.jpg",
+        "vip":0,
+        "hot":"1",
+        "title":"Summer 1"
+    },
+    {
+        "id":"6",
+        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id6.jpg",
+        "vip":"1",
+        "hot":"0",
+        "title":"Summer 2"
+    },
+    {
+        "id":"5",
+        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id5.jpg",
+        "vip":"1",
+        "hot":"1",
+        "title":"Summer 3"
+    },
+    {
+        "id":"4",
+        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id4.jpg",
+        "vip":"1",
+        "hot":"1",
+        "title":"Summer 4"
+    },
+    {
+        "id":"3",
+        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id3.jpg",
+        "vip":"1",
+        "hot":"1",
+        "title":"Summer 5"
+    },
+    {
+        "id":"2",
+        "imageUrl":"https://weapp.faxingwu.com//uploads/huihua/id2.jpg",
+        "vip":"1",
+        "hot":"1",
+        "title":"Summer 6"
     }
   ]
 }
