@@ -1,4 +1,4 @@
 <view class="container">
     <image class="image" src="/images/index.gif"></image>
-    <button class="button" type="primary" bind:tap="upload">点击制作卡通头像</button>
+    <button class="button" type="primary" bind:tap="upload">点击制作卡通人物</button>
 </view>
