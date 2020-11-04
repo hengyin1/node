@@ -1,7 +1,12 @@
 <!--index.wxml-->
 <view class="container">
-  <canvas class="canvas" canvas-id="drawer" bindtouchstart="" bindtouchmove="" bindtouchend="" 
-    bindtouchcancel=""></canvas>
+
+  <view class="pic-box flex-row-center">
+    <view style="position: relative;">
+      <image wx:if="{{temInfo.path}}" src="{{temInfo.path}}" style="display: block;width: {{temInfo.width}}px;height: {{temInfo.height}}px;" />
+      <image wx:if="{{faceInfo.path}}" src="{{faceInfo.path}}" style="display: block;position: absolute;left: {{faceInfo.left}}px;top: {{faceInfo.top}}px;width: {{faceInfo.width}}px;height: {{faceInfo.height}}px;" />
+    </view>
+  </view>
 
   <view>
     <view class="up-tab flex-row">
@@ -26,5 +31,13 @@
       </view>
       <view class="to-bottom">...到底啦...</view>
     </scroll-view>
+
+    <view class="flex-row-center" style="padding: 30rpx 0;">
+      <button class="button ch-button" bindtap="changeImage">加文字</button>
+      <button class="button" type="primary" bindtap="saveImage" style="background-color: #07c160;">保存</button>
+    </view>
   </view>
+<!-- 
+   <canvas class="canvas" canvas-id="drawer" bindtouchstart="" bindtouchmove="" bindtouchend="" 
+    bindtouchcancel=""></canvas> -->
 </view>

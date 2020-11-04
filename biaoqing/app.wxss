@@ -16,6 +16,13 @@ button::after {
   flex-direction: row;
 }
 
+.flex-row-center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .flex-align-items {
   align-items: center;
 }
