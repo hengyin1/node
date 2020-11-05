@@ -1,0 +1,12 @@
+<!--pages/addtext/addtext.wxml-->
+<view class="container">
+  <view class="flex-row-center">
+    <view style="position: relative;">
+      <image src="{{src}}" style="display: block;width: {{width}}px;height: {{height}}px;" />
+    </view>
+  </view>
+
+  <view>
+    <text-editor></text-editor>
+  </view>
+</view>

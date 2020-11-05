@@ -1,0 +1,49 @@
+.item {
+	width: 100%;
+	height: 60rpx;
+	margin: 8rpx 20rpx;
+}
+
+.icon {
+	width: 60rpx;
+	height: 32rpx;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.box1 {
+	width: 570rpx;
+}
+
+.box1,.box2 {
+	position: relative;
+	height: 60rpx;
+	display: inline-block;
+	line-height: 55rpx;
+}
+
+.box2 {
+	width: 60rpx;
+	margin-left: 10rpx;
+}
+
+.input {
+	box-sizing: border-box;
+	font-size: 28rpx;
+	display: inline-block;
+	vertical-align: middle;
+	width: 100%;
+	padding: 0 10rpx;
+}
+
+.border:before {
+	content: "";
+	position: absolute;
+	width: 200%;
+	height: 200%;
+	border: 1px solid #c8c7cc;
+	border-radius: 5px;
+	transform-origin: 0 0;
+	transform: scale(.5);
+	box-sizing: border-box;
+}

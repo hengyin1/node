@@ -3,7 +3,7 @@
 import { tabs, templates, faces } from '../../utils/localdata.js'
 
 const app = getApp()
-const { windowWidth, windowHeight } = wx.getSystemInfoSync();
+const { windowWidth, windowHeight } = wx.getSystemInfoSync()
 
 Page({
   data: {
@@ -25,6 +25,33 @@ Page({
   },
   onLoad: function () {
     this.getList();
+    this.getSetting();
+  },
+  onReady: function () {
+
+  },
+  onShow: function () {
+
+  },
+  getSetting: function () {
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.writePhotosAlbum'] === false) {
+          this.setData({
+            authWritePhotosAlbum: true
+          })
+        }
+      }
+    })
+  },
+  openSetting: function (res) {
+    if (res.detail.authSetting['scope.writePhotosAlbum']) {
+      this.setData({
+        authWritePhotosAlbum: false
+      })
+
+      this.saveImage();
+    }
   },
   tapUpTab: function (e) {
     const { index } = e.currentTarget.dataset;
@@ -55,16 +82,25 @@ Page({
   chooseItem: function (e) {
     const { index } = e.currentTarget.dataset;
     const item = this.data.list[index];
-    this.getImageInfo(item.url).then(res => {
-      const { width, height, path } = res;
-      if (this.data.selectedUpTab == 'tem') {
+    if (this.data.selectedUpTab == 'tem') {
+      this.getImageInfo(item.url).then(res => {
+        const { width, height, path } = res;
         this.setTemSize({width, height, path}, item);
-      } else {
-        this.setFaceSize({width, height, path});
+      }, () => {})
+    } else {
+      if (!this.data.temInfo || !this.data.temInfo.path) {
+        wx.showToast({
+          title: '请先选择形象',
+          icon: 'none',
+          duration: 1500
+        })
+        return;
       }
-    }, () => {
-
-    })
+      this.getImageInfo(item.url).then(res => {
+        const { width, height, path } = res;
+        this.setFaceSize({width, height, path});
+      }, () => {})
+    }
   },
   setTemSize: function (pic, item) {
     const { width, height } = pic;
@@ -118,9 +154,77 @@ Page({
     })
   },
   saveImage: function () {
-    
+    if (!this.checkHasValue()) return;
+    this.renderCanvas(res => {
+      this.saveImageToPhotosAlbum(res);
+    })
   },
   changeImage: function () {
-    
+    if (!this.checkHasValue()) return;
+    this.renderCanvas(res => {
+      wx.navigateTo({
+        url: `/pages/addtext/addtext?src=${res}&width=${this.data.temInfo.width}&height=${this.data.temInfo.height}`
+      })
+    })
+  },
+  checkHasValue: function () {
+    if (!this.data.temInfo || !this.data.temInfo.path) {
+      wx.showToast({
+        title: '请先选择形象',
+        icon: 'none',
+        duration: 1500
+      })
+      return false;
+    }
+    if (!this.data.faceInfo || !this.data.faceInfo.path) {
+      wx.showToast({
+        title: '还没选择表情',
+        icon: 'none',
+        duration: 1500
+      })
+      return false;
+    }
+    return true;
+  },
+  renderCanvas: function (callBack) {
+    const context = wx.createCanvasContext('drawer');
+    const { path: tem_path, width: tem_width, height: tem_height, face_center_x, face_center_y } = this.data.temInfo;
+    context.drawImage(tem_path, 0, 0, tem_width, tem_height);
+
+    const { path, width, height } = this.data.faceInfo;
+    context.drawImage(path, face_center_x - 0.5 * width, face_center_y - 0.5 * height, width, height);
+
+    context.draw(false, () => {
+      wx.canvasToTempFilePath({
+        canvasId: 'drawer',
+        fileType: 'jpg',
+        success: res => {
+          callBack(res.tempFilePath);
+        }
+      }, this)
+    })
+  },
+  saveImageToPhotosAlbum: function (pic) {
+    wx.showLoading({
+      title: '保存中...'
+    })
+    wx.saveImageToPhotosAlbum({
+      filePath: pic,
+      success: () => {
+        wx.hideLoading();
+        wx.showToast({
+          title: '保存到相册啦',
+          icon: 'success',
+          duration: 1500
+        })
+      },
+      fail: () => {
+        wx.hideLoading();
+        this.getSetting();
+      }
+    })
+  },
+  onShareAppMessage: function () {
+
   }
 })

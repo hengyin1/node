@@ -1,0 +1,17 @@
+<view>
+	<view class="item">
+		<view class="box1 border">
+			<input class="input" placeholder="这里输入文字" value="{{value}}" bindblur="blur" bindfocus="focus" bindinput="changeVal"></input>
+		</view>
+		<view class="box2 border">
+			<image class="icon" mode="aspectFit" src="./static/5.png" bindtap="toggle"></image>
+		</view>
+		<view class="box2 border">
+			<image wx:if="{{index==0}}" class="icon" mode="aspectFit" src="./static/4.png" bindtap="add"></image>
+			<image  wx:else class="icon" mode="aspectFit" src="./static/3.png" bindtap="del"></image>
+		</view>
+	</view>
+
+	<!-- "color-picker": "/components/color-picker/color-picker" -->
+	<!-- <color-picker bind:__l="__l" bind:touch="__e" bind:touchend="__e" data-event-opts="{{[ [ '^touch',[ ['touch'] ] ],[ '^touchend',[ ['touchend'] ] ] ]}}" hidden="{{hidden}}" vueId="156c8fa4-1"></color-picker> -->
+</view>

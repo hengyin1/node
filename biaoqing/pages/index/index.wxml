@@ -1,6 +1,5 @@
 <!--index.wxml-->
 <view class="container">
-
   <view class="pic-box flex-row-center">
     <view style="position: relative;">
       <image wx:if="{{temInfo.path}}" src="{{temInfo.path}}" style="display: block;width: {{temInfo.width}}px;height: {{temInfo.height}}px;" />
@@ -35,10 +34,11 @@
     </scroll-view>
 
     <view class="flex-row-center" style="padding: 30rpx 0;">
-      <button class="button ch-button" bindtap="saveImage">保存</button>
+      <button wx:if="{{!authWritePhotosAlbum}}" class="button ch-button" bindtap="saveImage">保存</button>
+      <button wx:else class="button ch-button" open-type="openSetting" bindopensetting="openSetting">保存</button>
       <button class="button" type="primary" bindtap="changeImage" style="background-color: #07c160;">加文字</button>
     </view>
   </view>
 
-   <canvas class="canvas" canvas-id="drawer"  style="width: {{temInfo.width}}px;height: {{temInfo.height}}px;"></canvas>
+   <canvas class="canvas" canvas-id="drawer" style="width: {{temInfo.width}}px;height: {{temInfo.height}}px;"></canvas>
 </view>
