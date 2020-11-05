@@ -5,6 +5,11 @@
   background-color: #f2f2f2;
 }
 
+.face-box {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
 .up-tab {
   margin: 10rpx auto;
 }
@@ -85,4 +90,10 @@ button::after {
   color: #07c160;
   border: 1px solid #07c160;
   background-color: transparent;
+}
+
+.canvas {
+  position: fixed;
+  left: 800rpx;
+  top: 0;
 }

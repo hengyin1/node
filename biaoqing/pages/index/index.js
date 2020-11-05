@@ -58,8 +58,7 @@ Page({
     this.getImageInfo(item.url).then(res => {
       const { width, height, path } = res;
       if (this.data.selectedUpTab == 'tem') {
-        this.tem_item = item;
-        this.setTemSize({width, height, path});
+        this.setTemSize({width, height, path}, item);
       } else {
         this.setFaceSize({width, height, path});
       }
@@ -67,8 +66,9 @@ Page({
 
     })
   },
-  setTemSize: function (pic) {
-    const ratio = pic.width / pic.height;
+  setTemSize: function (pic, item) {
+    const { width, height } = pic;
+    const ratio = width / height;
     if (ratio > windowWidth / 200) {
       pic.width = 0.9 * windowWidth;
       pic.height = pic.width / ratio;
@@ -76,14 +76,21 @@ Page({
       pic.height = 200;
       pic.width = pic.height * ratio;
     }
+
+    const scale = pic.width / width;
+    pic.face_center_x = item.face_x * scale + pic.width * 0.5;
+    pic.face_center_y = item.face_y * scale + pic.height * 0.5;
+    pic.face_width = item.face_width * scale;
+    pic.face_height = item.face_height * scale;
     this.setData({
       temInfo: pic
     })
+
+    if (this.data.faceInfo) this.setFaceSize(this.data.faceInfo);
   },
   setFaceSize: function (pic) {
     const ratio = pic.width / pic.height;
-    const { face_x, face_y, face_width, face_height } = this.tem_item;
-    console.log(face_x, face_y, face_width, face_height);
+    const { face_width, face_height } = this.data.temInfo;
     
     if (ratio > face_width / face_height) {
       pic.width = face_width;
@@ -92,8 +99,6 @@ Page({
       pic.height = face_height;
       pic.width = pic.height * ratio;
     }
-    pic.left = face_x;
-    pic.top = face_y;
     
     this.setData({
       faceInfo: pic
@@ -111,5 +116,11 @@ Page({
         }
       })
     })
+  },
+  saveImage: function () {
+    
+  },
+  changeImage: function () {
+    
   }
 })
