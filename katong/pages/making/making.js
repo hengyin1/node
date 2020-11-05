@@ -155,7 +155,7 @@ Page({
                                     wx.hideLoading(), "检测成功" == t.data.msg ? (wx.setStorageSync("userImage", c), a.setData({
                                         uploadImage: "https://image.faxingwu.com/" + c
                                     }), a.makeInfo(o, i)) : wx.showToast({
-                                        title: t.data.msg,
+                                        title: "请选择正脸照",
                                         icon: "none",
                                         duration: 1e3
                                     });
