@@ -3,10 +3,15 @@
   <view class="flex-row-center">
     <view style="position: relative;">
       <image src="{{src}}" style="display: block;width: {{width}}px;height: {{height}}px;" />
+      <block wx:for="{{texts}}" wx:key="index">
+        <view wx:if="{{item.value}}" class="text" style="left: {{item.left}}px;top: {{item.top}}px;width: {{item.width}}px;height: {{item.height}}px;color: {{item.color}};font-size: {{item.fontSize}}px;">
+          <text>{{item.value}}</text>
+        </view>
+      </block>
     </view>
   </view>
 
-  <view>
-    <text-editor></text-editor>
+  <view class="input-box">
+    <text-editor wx:for="{{texts}}" wx:key="index" value="{{item.value}}" index="{{index}}" data-index="{{index}}" bind:add="add" bind:del="del" bind:changeVal="changeVal"></text-editor>
   </view>
 </view>

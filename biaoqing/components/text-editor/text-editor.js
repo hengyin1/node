@@ -1,12 +1,12 @@
 Component({
-	props: {
+	properties: {
 		value: {
 			type: String,
-			default: ""
+			value: ""
 		},
 		index: {
 			type: Number,
-			default: 0
+			value: 0
 		}
 	},
 	data: {
@@ -14,7 +14,7 @@ Component({
 	},
 	methods: {
 		changeVal: function(e) {
-			this.triggerEvent("change-val", {value: e.detail.value});
+			this.triggerEvent("changeVal", {value: e.detail.value});
 		},
 		toggle: function() {
 			this.setData({
@@ -26,7 +26,7 @@ Component({
 		},
 		touchend: function() {
 		},
-		add: function() {
+		addtex: function() {
 			this.triggerEvent("add", {});
 		},
 		del: function() {

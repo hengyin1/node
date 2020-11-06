@@ -1,1 +1,12 @@
 /* pages/addtext/addtext.wxss */
+.text {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  line-height: 1.6;
+  padding: 0 5px;
+  border: 1px solid #ea7a99;
+}
+
+.input-box {
+  margin-top: 40rpx;
+}
