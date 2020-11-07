@@ -28,7 +28,7 @@ const saveImageToPhotosAlbum = ({pic, successCB, failCB}) => {
     },
     fail: () => {
       wx.hideLoading();
-      if (failCB) failCB;
+      if (failCB) failCB();
     }
   })
 }

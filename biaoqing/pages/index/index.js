@@ -2,6 +2,8 @@
 //获取应用实例
 import { tabs, templates, faces } from '../../utils/localdata.js'
 
+const util = require('../../utils/util.js')
+
 const app = getApp()
 const { windowWidth, windowHeight } = wx.getSystemInfoSync()
 
