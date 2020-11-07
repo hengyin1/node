@@ -13,7 +13,4 @@
 			<image class="icon" mode="aspectFit" src="./static/3.png"></image>
 		</view>
 	</view>
-
-	<!-- "color-picker": "/components/color-picker/color-picker" -->
-	<!-- <color-picker bind:__l="__l" bind:touch="__e" bind:touchend="__e" data-event-opts="{{[ [ '^touch',[ ['touch'] ] ],[ '^touchend',[ ['touchend'] ] ] ]}}" hidden="{{hidden}}" vueId="156c8fa4-1"></color-picker> -->
 </view>

@@ -12,6 +12,9 @@
   </view>
 
   <view class="input-box">
-    <text-editor wx:for="{{texts}}" wx:key="index" value="{{item.value}}" index="{{index}}" data-index="{{index}}" bind:add="add" bind:del="del" bind:changeVal="changeVal"></text-editor>
+    <text-editor wx:for="{{texts}}" wx:key="index" value="{{item.value}}" index="{{index}}" data-index="{{index}}" bind:changeVal="changeVal" bind:add="add" bind:del="del" bind:toggle="toggle"></text-editor>
+  </view>
+  <view wx:if="{{isShow}}">
+    <color-picker bind:touchmove="touchmove" bind:touchend="touchend"></color-picker>
   </view>
 </view>

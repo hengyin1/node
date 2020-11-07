@@ -10,21 +10,14 @@ Component({
 		}
 	},
 	data: {
-		hidden: !0
+		
 	},
 	methods: {
 		changeVal: function(e) {
 			this.triggerEvent("changeVal", {value: e.detail.value});
 		},
 		toggle: function() {
-			this.setData({
-				hidden: !this.data.hidden
-			})
-		},
-		touch: function(e) {
-			this.triggerEvent("change-color", {value: e});
-		},
-		touchend: function() {
+			this.triggerEvent("toggle", {});
 		},
 		addtex: function() {
 			this.triggerEvent("add", {});

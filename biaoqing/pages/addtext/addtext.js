@@ -1,14 +1,15 @@
 // pages/addtext/addtext.js
 Page({
   data: {
-    texts: []
+    texts: [],
+    isShow: !1
   },
   onLoad: function (options) {
     const { src, width, height } = options;
     this.textItem = {
       left: 0.5 * width,
       top: 0.5 * height,
-      fontSize: 14,
+      fontSize: 16,
       color: '#000000',
       value: ''
     }
@@ -16,7 +17,7 @@ Page({
       src: src,
       width: width,
       height: height,
-      texts: [this.textItem]
+      texts: [JSON.parse(JSON.stringify(this.textItem))]
     })
   },
   onReady: function () {
@@ -27,7 +28,7 @@ Page({
   },
   add: function () {
     const texts = this.data.texts;
-    texts.push(this.textItem);
+    texts.push(JSON.parse(JSON.stringify(this.textItem)));
     this.setData({
       texts: texts
     })
@@ -44,6 +45,11 @@ Page({
     const { index } = e.currentTarget.dataset;
     this.setData({
       [`texts[${index}].value`]: e.detail.value
+    })
+  },
+  toggle: function () {
+    this.setData({
+      isShow: !this.data.isShow
     })
   },
   onShareAppMessage: function () {

@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "text-editor": "/components/text-editor/text-editor"
+    "text-editor": "/components/text-editor/text-editor",
+    "color-picker": "/components/color-picker/color-picker"
   }
 }
