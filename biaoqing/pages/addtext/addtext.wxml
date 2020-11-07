@@ -14,7 +14,9 @@
   <view class="input-box">
     <text-editor wx:for="{{texts}}" wx:key="index" value="{{item.value}}" index="{{index}}" data-index="{{index}}" bind:changeVal="changeVal" bind:add="add" bind:del="del" bind:toggle="toggle"></text-editor>
   </view>
+
   <view wx:if="{{isShow}}">
-    <color-picker bind:touchmove="touchmove" bind:touchend="touchend"></color-picker>
+    <color-picker bind:touch="touchColor"></color-picker>
+    <slider min="8" max="64" value="{{texts[toggleIndex].fontSize}}" bindchange="changeFontSize" show-value/>
   </view>
 </view>

@@ -37,7 +37,7 @@
     "minifyWXSS": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.14.0",
+  "libVersion": "2.13.2",
   "appid": "wxf240d1adab432956",
   "projectname": "biaoqin",
   "debugOptions": {

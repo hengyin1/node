@@ -1,10 +1,6 @@
 .colorpicker {
 	display: block;
-	position: relative;
+	width: 720rpx;
+	height: 72rpx;
 	margin: 0 auto;
-}
-
-.hide {
-	position: absolute;
-	top: -1000px;
 }
