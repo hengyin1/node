@@ -220,6 +220,10 @@ Page({
     })
   },
   onShareAppMessage: function () {
-
+    return {
+      title: '斗图必备神器！',
+      imageUrl: '/images/share.jpg',
+      path: '/pages/index/index'
+    }
   }
 })
