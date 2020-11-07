@@ -160,6 +160,53 @@ Page({
       })
     })
   },
+  touchstart: function (e) {
+    let pageX, pageY;
+    this.startPoint = { pageX, pageY } = e.touches[0];
+
+    if(e.touches.length > 1) {
+      const [touch0, touch1] = e.touches;
+      const xMove = touch1.pageX - touch0.pageX;
+      const yMove = touch1.pageY - touch0.pageY;
+      this.oldDistance = Math.sqrt(xMove * xMove + yMove * yMove);
+    }
+  },
+  touchmove: function (e) {
+    if (e.touches.length > 1) {
+      const [touch0, touch1] = e.touches;
+      const xMove = touch1.pageX - touch0.pageX;
+      const yMove = touch1.pageY - touch0.pageY;
+      const newDistance = Math.sqrt(xMove * xMove + yMove * yMove);
+      this.scaleImage(newDistance / this.oldDistance);
+      this.oldDistance = newDistance;
+    } else {
+      let { pageX, pageY } = e.touches[0];
+      let { face_center_x, face_center_y } = this.data.temInfo;
+      face_center_x += pageX - this.startPoint.pageX;
+      face_center_y += pageY - this.startPoint.pageY;
+      this.setData({
+        [`temInfo.face_center_x`]: face_center_x,
+        [`temInfo.face_center_y`]: face_center_y
+      })
+      this.startPoint = { pageX, pageY };
+    }
+  },
+  scaleImage: function (scale) {
+    const faceInfo = this.data.faceInfo;
+    const { width, height } = faceInfo;
+    faceInfo.width *= scale;
+    faceInfo.height *= scale;
+
+    const temInfo = this.data.temInfo;
+    const ratio = (scale - 1) * 0.5;
+    temInfo.face_center_x -= ratio * width;
+    temInfo.face_center_y -= ratio * height;
+
+    this.setData({
+      temInfo: temInfo,
+      faceInfo: faceInfo
+    })
+  },
   saveImage: function () {
     if (!this.checkHasValue()) return;
     wx.showLoading({
@@ -174,7 +221,7 @@ Page({
       })
     })
   },
-  changeImage: function () {
+  addText: function () {
     if (!this.checkHasValue()) return;
     this.renderCanvas(res => {
       wx.navigateTo({

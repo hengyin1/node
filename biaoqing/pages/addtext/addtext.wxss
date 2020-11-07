@@ -15,7 +15,7 @@ page {
 }
 
 .text-active {
-  border: 1px solid #ea7a99;
+  border: 1px solid #d81e06;
 }
 
 .input-box {

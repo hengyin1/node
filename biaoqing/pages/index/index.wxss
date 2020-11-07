@@ -8,7 +8,17 @@
 .face-box {
   position: absolute;
   transform: translate(-50%, -50%);
+  border: 1px solid #d81e06;
 }
+
+/* .scale-icon {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 40rpx;
+  height: 40rpx;
+  transform: translate(50%, 50%);
+} */
 
 .up-tab {
   margin: 10rpx auto;

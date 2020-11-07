@@ -1,7 +1,7 @@
 <!--pages/addtext/addtext.wxml-->
 <view class="container">
-  <view class="flex-row-center" style="background-color: #ffffff;">
-    <view style="position: relative;" bind:touchstart="touchstart" bind:touchmove="touchmove">
+  <view class="flex-row-center" style="background-color: #ffffff;" bind:touchstart="touchstart" bind:touchmove="touchmove">
+    <view style="position: relative;">
       <image src="{{src}}" style="display: block;width: {{width}}px;height: {{height}}px;" />
       <block wx:for="{{texts}}" wx:key="index">
         <view wx:if="{{item.value}}" class="text {{tapIndex == index ? 'text-active' : ''}}" style="left: {{item.left}}px;top: {{item.top}}px;width: {{item.width}}px;height: {{item.height}}px;color: {{item.color}};font-size: {{item.fontSize}}px;" data-index="{{index}}" bind:tap="tapText">
