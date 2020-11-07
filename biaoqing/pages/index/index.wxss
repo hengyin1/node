@@ -74,9 +74,3 @@
   color: #999999;
   text-align: center;
 }
-
-.canvas {
-  position: fixed;
-  left: 800rpx;
-  top: 0;
-}

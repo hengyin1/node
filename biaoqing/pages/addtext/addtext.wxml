@@ -1,10 +1,10 @@
 <!--pages/addtext/addtext.wxml-->
 <view class="container">
   <view class="flex-row-center" style="background-color: #ffffff;">
-    <view style="position: relative;">
+    <view style="position: relative;" bind:touchstart="touchstart" bind:touchmove="touchmove">
       <image src="{{src}}" style="display: block;width: {{width}}px;height: {{height}}px;" />
       <block wx:for="{{texts}}" wx:key="index">
-        <view wx:if="{{item.value}}" class="text" style="left: {{item.left}}px;top: {{item.top}}px;width: {{item.width}}px;height: {{item.height}}px;color: {{item.color}};font-size: {{item.fontSize}}px;">
+        <view wx:if="{{item.value}}" class="text {{tapIndex == index ? 'text-active' : ''}}" style="left: {{item.left}}px;top: {{item.top}}px;width: {{item.width}}px;height: {{item.height}}px;color: {{item.color}};font-size: {{item.fontSize}}px;" data-index="{{index}}" bind:tap="tapText">
           <text>{{item.value}}</text>
         </view>
       </block>
@@ -16,7 +16,7 @@
   </view>
 
   <view class="buttons flex-row-center">
-    <button class="button ch-button" open-type="share">分享给朋友</button>
+    <button class="button ch-button" open-type="share">邀请朋友玩</button>
     <button wx:if="{{!authWritePhotosAlbum}}" type="primary" class="button" style="background-color: #07c160;" bindtap="saveImage">保存</button>
     <button wx:else class="button" type="primary" open-type="openSetting" style="background-color: #07c160;" bindopensetting="openSetting">保存</button>
   </view>
@@ -30,4 +30,6 @@
       <slider min="8" max="64" block-size="22" value="{{texts[toggleIndex].fontSize}}" bindchange="changeFontSize" show-value/>
     </view>
   </view>
+
+  <canvas class="canvas" canvas-id="drawer" style="width: {{width}}px;height: {{height}}px;"></canvas>
 </view>

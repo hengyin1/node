@@ -24,6 +24,12 @@ button::after {
   background-color: transparent;
 }
 
+.canvas {
+  position: fixed;
+  left: 800rpx;
+  top: 0;
+}
+
 .flex-row {
   display: flex;
   flex-direction: row;

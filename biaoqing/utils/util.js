@@ -14,6 +14,26 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const saveImageToPhotosAlbum = ({pic, successCB, failCB}) => {
+  wx.saveImageToPhotosAlbum({
+    filePath: pic,
+    success: () => {
+      wx.hideLoading();
+      wx.showToast({
+        title: '保存到相册啦',
+        icon: 'success',
+        duration: 1500
+      })
+      if (successCB) successCB();
+    },
+    fail: () => {
+      wx.hideLoading();
+      if (failCB) failCB;
+    }
+  })
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  saveImageToPhotosAlbum: saveImageToPhotosAlbum
 }

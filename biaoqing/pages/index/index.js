@@ -25,10 +25,9 @@ Page({
   },
   onLoad: function () {
     this.getList();
-    this.getSetting();
   },
   onReady: function () {
-
+    this.getSetting();
   },
   onShow: function () {
 
@@ -161,8 +160,16 @@ Page({
   },
   saveImage: function () {
     if (!this.checkHasValue()) return;
+    wx.showLoading({
+      title: '保存中...'
+    })
     this.renderCanvas(res => {
-      this.saveImageToPhotosAlbum(res);
+      util.saveImageToPhotosAlbum({
+        pic: res,
+        failCB: () => {
+          this.getSetting();
+        }
+      })
     })
   },
   changeImage: function () {
@@ -208,26 +215,6 @@ Page({
           callBack(res.tempFilePath);
         }
       }, this)
-    })
-  },
-  saveImageToPhotosAlbum: function (pic) {
-    wx.showLoading({
-      title: '保存中...'
-    })
-    wx.saveImageToPhotosAlbum({
-      filePath: pic,
-      success: () => {
-        wx.hideLoading();
-        wx.showToast({
-          title: '保存到相册啦',
-          icon: 'success',
-          duration: 1500
-        })
-      },
-      fail: () => {
-        wx.hideLoading();
-        this.getSetting();
-      }
     })
   },
   onShareAppMessage: function () {
