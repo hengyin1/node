@@ -141,13 +141,19 @@ Page({
     })
   },
   getImageInfo: function (src) {
+    wx.showLoading({
+      title: '加载图片中...',
+      mask: true
+    })
     return new Promise((resolve, reject) => {
       wx.getImageInfo({
         src: src,
         success: res => {
+          wx.hideLoading();
           resolve(res);
         },
         fail: () => {
+          wx.hideLoading();
           reject();
         }
       })

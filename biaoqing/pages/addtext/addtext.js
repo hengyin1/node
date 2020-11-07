@@ -49,10 +49,26 @@ Page({
   },
   toggle: function (e) {
     const { index } = e.currentTarget.dataset;
+    if (!this.data.texts[index].value) {
+      wx.showToast({
+        title: '请先输入文字',
+        icon: 'none',
+        duration: 1500
+      })
+      return;
+    }
     this.setData({
-      isShow: !this.data.isShow,
+      isShow: !0,
       toggleIndex: index
     })
+  },
+  hide: function () {
+    this.setData({
+      isShow: !1
+    })
+  },
+  stop: function () {
+    
   },
   touchColor: function (e) {
     const { r, g, b } = e.detail;
