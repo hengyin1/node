@@ -6,7 +6,7 @@
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "表情",
+    "navigationBarTitleText": "表情包制作助手",
     "navigationBarTextStyle":"black"
   },
   "sitemapLocation": "sitemap.json"
