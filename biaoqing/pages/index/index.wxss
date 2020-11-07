@@ -75,23 +75,6 @@
   text-align: center;
 }
 
-.button {
-  width: 330rpx;
-  height: 80rpx;
-  line-height: 80rpx;
-  text-align: center;
-}
-
-button::after {
-  border: none;
-}
-
-.ch-button {
-  color: #07c160;
-  border: 1px solid #07c160;
-  background-color: transparent;
-}
-
 .canvas {
   position: fixed;
   left: 800rpx;

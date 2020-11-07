@@ -1,6 +1,6 @@
 <!--pages/addtext/addtext.wxml-->
 <view class="container">
-  <view class="flex-row-center">
+  <view class="flex-row-center" style="background-color: #ffffff;">
     <view style="position: relative;">
       <image src="{{src}}" style="display: block;width: {{width}}px;height: {{height}}px;" />
       <block wx:for="{{texts}}" wx:key="index">
@@ -13,6 +13,12 @@
 
   <view class="input-box">
     <text-editor wx:for="{{texts}}" wx:key="index" value="{{item.value}}" index="{{index}}" data-index="{{index}}" bind:changeVal="changeVal" bind:add="add" bind:del="del" bind:toggle="toggle"></text-editor>
+  </view>
+
+  <view class="buttons flex-row-center">
+    <button class="button ch-button" open-type="share">分享给朋友</button>
+    <button wx:if="{{!authWritePhotosAlbum}}" type="primary" class="button" style="background-color: #07c160;" bindtap="saveImage">保存</button>
+    <button wx:else class="button" type="primary" open-type="openSetting" style="background-color: #07c160;" bindopensetting="openSetting">保存</button>
   </view>
 
   <view wx:if="{{isShow}}" class="bg-cover" bind:tap="hide">

@@ -19,6 +19,16 @@ page {
   margin-top: 40rpx;
 }
 
+.buttons {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 30rpx 0;
+  background-color: #ffffff;
+  z-index: 10000;
+}
+
 .bg-cover {
   position: fixed;
   left: 0;
