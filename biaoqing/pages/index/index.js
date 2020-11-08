@@ -258,6 +258,8 @@ Page({
 
     context.draw(false, () => {
       wx.canvasToTempFilePath({
+        destWidth: tem_width,
+        destHeight: tem_height,
         canvasId: 'drawer',
         fileType: 'jpg',
         success: res => {
