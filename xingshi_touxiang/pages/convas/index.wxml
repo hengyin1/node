@@ -13,6 +13,9 @@
     <button class="back" open-type="share">邀请朋友玩</button>
     <button class="save" type="primary" bindtap="save">保存到相册</button>
 </view>
+<view style="margin-top: 30rpx;">
+    <ad unit-id="249eb2a2898ca21acbb5e17345b751e5" type="card"></ad>
+</view>
 <!-- <view class="adcontainer" wx:if="{{globalAdunit}}">
     <ad adTheme="white" adType="video" unitId="{{globalAdunit}}"></ad>
 </view> -->

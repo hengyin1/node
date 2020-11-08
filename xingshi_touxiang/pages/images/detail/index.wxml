@@ -35,6 +35,9 @@
         <view bindtap="goTab" class="text">生成图片</view>
     </view> -->
 </view>
+<view style="margin-top: 30rpx;">
+    <ad unit-id="249eb2a2898ca21acbb5e17345b751e5" type="card"></ad>
+</view>
 <!-- <view class="adcontainer" wx:if="{{globalAdunit!==null}}">
     <ad adIntervals="1000" adTheme="white" adType="video" unitId="{{globalAdunit}}"></ad>
 </view> -->

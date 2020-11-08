@@ -1,4 +1,5 @@
 // pages/category/index.js
+const util = require('../../utils/util.js');
 const app = getApp();
 
 Page({
@@ -53,7 +54,9 @@ Page({
     /**
    * 生命周期函数--监听页面显示
    */
-    onShow: function() {},
+    onShow: function() {
+        util.createInterstitialAd();
+    },
     /**
    * 生命周期函数--监听页面隐藏
    */
