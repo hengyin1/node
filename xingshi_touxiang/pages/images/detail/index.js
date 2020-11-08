@@ -168,7 +168,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
     onReady: function() {
-        this.adload();
+        this.createRewardedVideoAd('dea576be2610beeca421b8c2faba699f');
     },
     /**
    * 生命周期函数--监听页面显示
@@ -184,27 +184,6 @@ Page({
    * 生命周期函数--监听页面卸载
    */
     onUnload: function() {},
-    adload: function() {
-        var _this = this;
-        if (wx.createRewardedVideoAd) {
-            console.log("视频预载中");
-            // 加载激励视频广告
-                        videoAd = wx.createRewardedVideoAd({
-                adUnitId: this.data.videoAdunit
-            });
-            _this.setData({
-                iscanpaly: true
-            });
-            //捕捉错误
-                        videoAd.onError(err => {
-                console.log("视频加载失败");
-                _this.setData({
-                    iscanpaly: false
-                });
-            });
-            videoAd.load();
-        }
-    },
     /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
@@ -344,6 +323,18 @@ Page({
         }
     }, 1e3),
     qushengcheng: function() {
+        if (wx.createRewardedVideoAd && !this.isVideoAdError) {
+            this.setData({
+                isShowVideoDialog: true,
+                videoContent: '观看视频广告，才能生成头像哦',
+                confirmText: '确定',
+                videoType: 'save'
+            })
+        } else {
+            this._qushengcheng()
+        }
+    },
+    _qushengcheng: function() {
         this.data.lists.font = this.data.font;
         this.data.lists.fontcolor = this.data.color;
         this.data.lists.filepath = this.data.fontid;
@@ -515,5 +506,57 @@ Page({
         wx.navigateTo({
             url: "/pages/faxian/index"
         });
-    }
+    },
+    viewRewardedVideoAd: function () {
+        wx.showToast({
+          title: '加载中...',
+          icon: 'loading',
+          duration: 3000
+        });
+        this.videoAd.show().then(() => wx.hideToast()).catch(err => {
+          this.videoAd.load().then(() => this.videoAd.show().then(() => wx.hideToast())).catch(err => {
+            wx.hideToast();
+            this._qushengcheng();
+          });
+        });
+    },
+    createRewardedVideoAd: function (adUnitId) {
+        if (wx.createRewardedVideoAd) {
+          if (this.videoAd) {
+            this.videoAd.offLoad();
+            this.videoAd.offError();
+            this.videoAd.offClose();
+            this.videoAd.destroy();
+            this.videoAd = null;
+          }
+
+          this.videoAd = wx.createRewardedVideoAd({
+            adUnitId: adUnitId
+          });
+          if (!this.videoAd) this.isVideoAdError = true;
+          this.videoAd.load();
+    
+          this.videoAd.onLoad(() => {
+            console.log('videoAd_onLoad');
+          });
+    
+          this.videoAd.onError(res => {
+            console.log('videoAd_erro', res);
+            this.isVideoAdError = true;
+          });
+    
+          this.videoAd.onClose(status => {
+            console.log('videoAd_status', status);
+            if (status && status.isEnded || status === undefined) {
+                this._qushengcheng();
+            } else {
+                this.setData({
+                  isShowVideoDialog: true,
+                  videoContent: '观看完整视频广告，才能生成头像哦',
+                  confirmText: '继续观看'
+                });
+            }
+          });
+        }
+    },
 });

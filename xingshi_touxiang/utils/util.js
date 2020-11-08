@@ -37,10 +37,10 @@ function createInterstitialAd () {
     if (!interstitialAd) return;
     interstitialAd.onLoad(() => {
       interstitialAd.show(() => {
-        if (interstitialAd.destroy) interstitialAd.destroy();
+        // if (interstitialAd.destroy) interstitialAd.destroy();
       }).catch(err => {
         console.log("interstitialAd_err", err);
-        if (interstitialAd.destroy) interstitialAd.destroy();
+        // if (interstitialAd.destroy) interstitialAd.destroy();
       })
     })
   }

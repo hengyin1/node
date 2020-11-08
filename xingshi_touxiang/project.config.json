@@ -46,7 +46,11 @@
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"qqappid": "1111159234",
-	"scripts": {},
+	"scripts": {
+		"beforeCompile": "",
+		"beforePreview": "",
+		"beforeUpload": ""
+	},
 	"condition": {
 		"search": {
 			"list": []

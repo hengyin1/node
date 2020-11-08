@@ -1,6 +1,7 @@
 {
     "usingComponents": {
         "i-input": "/dist/input/index",
+        "video-dialog": "/components/videodialog/dialog",
         "color-picker": "/dist/color-picker/color-picker"
     }
 }
