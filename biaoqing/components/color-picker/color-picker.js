@@ -1,5 +1,5 @@
 const { windowWidth } = wx.getSystemInfoSync()
-let context
+// let context
 
 Component({
 	properties: {
