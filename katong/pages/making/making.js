@@ -155,7 +155,7 @@ Page({
                                     wx.hideLoading(), "检测成功" == t.data.msg ? (wx.setStorageSync("userImage", c), a.setData({
                                         uploadImage: "https://image.faxingwu.com/" + c
                                     }), a.makeInfo(o, i)) : wx.showToast({
-                                        title: "请选择正脸照",
+                                        title: t.data.msg,
                                         icon: "none",
                                         duration: 1e3
                                     });
@@ -270,11 +270,11 @@ Page({
             this.videoAd.destroy();
             this.videoAd = null;
           }
-          if (!this.videoAd) this.isVideoAdError = true;
-
+          
           this.videoAd = wx.createRewardedVideoAd({
             adUnitId: adUnitId
           });
+          if (!this.videoAd) this.isVideoAdError = true;
           this.videoAd.load();
     
           this.videoAd.onLoad(() => {

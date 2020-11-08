@@ -48,7 +48,7 @@ Page({
                                 },
                                 success: function(e) {
                                     wx.hideLoading(), "检测成功" == e.data.msg ? (wx.setStorageSync("userImage", s), a.makeInfo(s, t)) : wx.showToast({
-                                        title: "请上传正脸照",
+                                        title: e.data.msg,
                                         icon: "none",
                                         duration: 1e3
                                     });
