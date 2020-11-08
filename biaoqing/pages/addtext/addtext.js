@@ -1,4 +1,5 @@
 // pages/addtext/addtext.js
+import { checkText } from '../../api.js'
 const util = require('../../utils/util.js')
 
 Page({
@@ -127,17 +128,35 @@ Page({
     this.startPoint = { pageX, pageY };
   },
   saveImage: function () {
+    const next = () => {
+      this.renderCanvas(res => {
+        util.saveImageToPhotosAlbum({
+          pic: res,
+          failCB: () => {
+            this.getSetting();
+          }
+        })
+      })
+    }
+
     wx.showLoading({
       title: '保存中...'
     })
-    this.renderCanvas(res => {
-      util.saveImageToPhotosAlbum({
-        pic: res,
-        failCB: () => {
-          this.getSetting();
-        }
+    const textStr = this.data.texts.reduce((pre, cur) => pre += cur.value, '');
+    if (!textStr) {
+      next();
+    } else {
+      checkText(textStr, () => {
+        next();
+      }, () => {
+        wx.hideLoading();
+        wx.showToast({
+          title: '文字含有敏感信息',
+          icon: 'none',
+          duration: 1500
+        })
       })
-    })
+    }
   },
   renderCanvas: function (callBack) {
     const context = wx.createCanvasContext('drawer');

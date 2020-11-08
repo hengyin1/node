@@ -34,8 +34,7 @@
     "userConfirmedUseCompilerModuleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true,
-    "remoteDebugLogEnable": false
+    "minifyWXSS": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.14.0",
@@ -52,6 +51,8 @@
   "isGameTourist": false,
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
+  "cloudfunctionRoot": "functions/",
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "qqappid": "1111147234",
   "condition": {
     "search": {
