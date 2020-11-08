@@ -14,12 +14,17 @@ http.createServer(function (request, response) {
   
   if (parsedUrl.pathname == '/') {
     response.writeHead(200);
-    fs.createReadStream(__dirname + '/3d-model/axis-angle.html').pipe(response);
+    fs.createReadStream(__dirname + '/normal-maps/cube/cube.html').pipe(response);
   }
 
   if (parsedUrl.pathname == '/dist/bundle.js') {
     response.writeHead(200);
-    fs.createReadStream(__dirname + '/3d-model/dist/bundle.js').pipe(response);
+    fs.createReadStream(__dirname + '/normal-maps/cube/dist/bundle.js').pipe(response);
+  }
+
+  if (parsedUrl.pathname == '/assets/normal_map.png') {
+    response.writeHead(200);
+    fs.createReadStream(__dirname + '/assets/normal_map.png').pipe(response);
   }
 
   if (parsedUrl.pathname == '/assets/airplane.jpg') {
