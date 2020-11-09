@@ -222,7 +222,7 @@ Page({
         return {
             title: "[@你]这个姓氏头像制作工具很棒,推荐给你",
             imageUrl: "/images/share.jpeg",
-            path: "/pages/images/list/index"
+            path: "/pages/category/index"
         };
     },
     handleInputBlur: function(e) {

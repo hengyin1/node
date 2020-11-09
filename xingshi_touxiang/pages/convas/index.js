@@ -58,7 +58,7 @@ Page({
         return {
             title: "[@你]这个姓氏头像制作工具很棒,推荐给你",
             imageUrl: this.data.imgurl,
-            path: "/pages/images/list/index"
+            path: "/pages/category/index"
         };
     },
     //点击保存图片
