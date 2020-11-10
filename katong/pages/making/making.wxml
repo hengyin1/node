@@ -1,7 +1,7 @@
 <view class="container">
     <image class="make-result-img" mode="aspectFit" src="{{userImage}}"></image>
 
-    <view>
+    <view wx:if="{{!shenhe}}">
         <scroll-view class="nav" scrollLeft="{{navScrollLeft}}" scrollWithAnimation="{{true}}" scrollX="true">
             <view class="nav-list">
                 <view bindtap="switchNav" class="nav-item {{currentTab==idx?'active':''}}" data-current="{{idx}}" wx:for="{{navData}}" wx:for-index="idx" wx:for-item="navItem" wx:key="idx">{{navItem.text}}</view>
@@ -25,8 +25,8 @@
     </view>
 
     <view class="flex-row-center" style="margin: 34rpx 0;">
-        <button bindtap="changeImage" class="button ch-button">更换正面照</button>
-        <button bindtap="saveImage" type="primary" class="button">保存</button>
+        <button wx:if="{{!shenhe}}" bindtap="changeImage" class="button ch-button">更换正面照</button>
+        <button bindtap="saveImage" type="primary" class="button" style="width: {{shenhe ? '80%' : ''}}">保存</button>
     </view>
 
     <video-dialog isShowVideoDialog="{{isShowVideoDialog}}" content="{{videoContent}}" confirmText="{{confirmText}}" bind:viewVideo="viewRewardedVideoAd"></video-dialog>

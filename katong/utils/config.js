@@ -1,5 +1,6 @@
 var config = {
-    adUnitId: ""
+    adUnitId: "",
+    shenhe: new Date(2020, 10, 11) > new Date()
 }
 module.exports = {
     config: config,

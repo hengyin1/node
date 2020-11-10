@@ -1,6 +1,7 @@
 import { stylelist } from '../../utils/localdata'
 const t = require("../../utils/config");
 const util = require("../../utils/util");
+const config = require("../../utils/config")
 
 Page({
     data: {
@@ -16,7 +17,8 @@ Page({
             text: "夏季风"
         }],
         currentTab: 0,
-        navScrollLeft: 0
+        navScrollLeft: 0,
+        shenhe: config.config.shenhe
     },
     onLoad: function(options) {
         wx.getSystemInfo({
