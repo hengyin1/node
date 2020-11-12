@@ -14,6 +14,23 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const createInterstitialAd = () => {
+  if (wx.createInterstitialAd) {
+    const interstitialAd = wx.createInterstitialAd({
+      adUnitId: '694734d7be8c703dd7e8833d1c167138'
+    })
+    if (!interstitialAd) return;
+    interstitialAd.onLoad(() => {
+      interstitialAd.show(() => {
+        // if (interstitialAd.destroy) interstitialAd.destroy();
+      }).catch(err => {
+        console.log("interstitialAd_err", err);
+        // if (interstitialAd.destroy) interstitialAd.destroy();
+      })
+    })
+  }
+}
+
 const saveImageToPhotosAlbum = ({pic, successCB, failCB}) => {
   wx.saveImageToPhotosAlbum({
     filePath: pic,
@@ -35,5 +52,6 @@ const saveImageToPhotosAlbum = ({pic, successCB, failCB}) => {
 
 module.exports = {
   formatTime: formatTime,
+  createInterstitialAd: createInterstitialAd,
   saveImageToPhotosAlbum: saveImageToPhotosAlbum
 }

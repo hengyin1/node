@@ -26,9 +26,11 @@ Page({
   },
   onReady: function () {
     this.getSetting();
+
+    this.createRewardedVideoAd('dea576be2610beeca421b8c2faba699f');
   },
   onShow: function () {
-
+    util.createInterstitialAd();
   },
   getSetting: function () {
     wx.getSetting({
@@ -47,7 +49,7 @@ Page({
         authWritePhotosAlbum: false
       })
 
-      this.saveImage();
+      this.beforeSaveImage();
     }
   },
   add: function () {
@@ -127,6 +129,17 @@ Page({
     })
     this.startPoint = { pageX, pageY };
   },
+  beforeSaveImage: function () {
+    if (wx.createRewardedVideoAd && !this.isVideoAdError) {
+      this.setData({
+        isShowVideoDialog: true,
+        videoContent: '观看视频广告，才能保存哦',
+        confirmText: '确定'
+      })
+    } else {
+      this.saveImage();
+    }
+  },
   saveImage: function () {
     const next = () => {
       this.renderCanvas(res => {
@@ -182,6 +195,58 @@ Page({
         }
       }, this)
     })
+  },
+  viewRewardedVideoAd: function () {
+    wx.showToast({
+      title: '加载中...',
+      icon: 'loading',
+      duration: 3000
+    })
+    this.videoAd.show().then(() => wx.hideToast()).catch(err => {
+      this.videoAd.load().then(() => this.videoAd.show().then(() => wx.hideToast())).catch(err => {
+        wx.hideToast();
+        this.saveImage();
+      })
+    })
+  },
+  createRewardedVideoAd: function (adUnitId) {
+    if (wx.createRewardedVideoAd) {
+      if (this.videoAd) {
+        this.videoAd.offLoad();
+        this.videoAd.offError();
+        this.videoAd.offClose();
+        this.videoAd.destroy();
+        this.videoAd = null;
+      }
+
+      this.videoAd = wx.createRewardedVideoAd({
+        adUnitId: adUnitId
+      })
+      if (!this.videoAd) this.isVideoAdError = true;
+      this.videoAd.load();
+
+      this.videoAd.onLoad(() => {
+        console.log('videoAd_onLoad');
+      })
+
+      this.videoAd.onError(res => {
+        console.log('videoAd_erro', res);
+        this.isVideoAdError = true;
+      })
+
+      this.videoAd.onClose(status => {
+        console.log('videoAd_status', status);
+        if (status && status.isEnded || status === undefined) {
+          this.saveImage();
+        } else {
+          this.setData({
+            isShowVideoDialog: true,
+            videoContent: '观看完整视频广告，才能保存哦',
+            confirmText: '继续观看'
+          })
+        }
+      })
+    }
   },
   onShareAppMessage: function () {
     return {

@@ -15,9 +15,13 @@
     <text-editor wx:for="{{texts}}" wx:key="index" value="{{item.value}}" index="{{index}}" data-index="{{index}}" bind:changeVal="changeVal" bind:add="add" bind:del="del" bind:toggle="toggle"></text-editor>
   </view>
 
+  <view style="margin-top: 30rpx;">
+    <ad unit-id="249eb2a2898ca21acbb5e17345b751e5" type="card"></ad>
+  </view>
+
   <view class="buttons flex-row-center">
     <button class="button ch-button" open-type="share">邀请朋友玩</button>
-    <button wx:if="{{!authWritePhotosAlbum}}" type="primary" class="button" style="background-color: #07c160;" bindtap="saveImage">保存</button>
+    <button wx:if="{{!authWritePhotosAlbum}}" type="primary" class="button" style="background-color: #07c160;" bindtap="beforeSaveImage">保存</button>
     <button wx:else class="button" type="primary" open-type="openSetting" style="background-color: #07c160;" bindopensetting="openSetting">保存</button>
   </view>
 
@@ -30,6 +34,8 @@
       <slider min="8" max="64" block-size="22" value="{{texts[toggleIndex].fontSize}}" bindchange="changeFontSize" show-value/>
     </view>
   </view>
+
+  <video-dialog isShowVideoDialog="{{isShowVideoDialog}}" content="{{videoContent}}" confirmText="{{confirmText}}" bind:viewVideo="viewRewardedVideoAd"></video-dialog>
 
   <canvas class="canvas" canvas-id="drawer" style="width: {{width}}px;height: {{height}}px;"></canvas>
 </view>

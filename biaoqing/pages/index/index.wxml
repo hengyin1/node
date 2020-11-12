@@ -32,14 +32,17 @@
         </view>
       </view>
       <view class="to-bottom">...到底啦...</view>
+      <ad unit-id="249eb2a2898ca21acbb5e17345b751e5" type="card"></ad>
     </scroll-view>
 
-    <view class="flex-row-center" style="padding: 30rpx 0;">
-      <button wx:if="{{!authWritePhotosAlbum}}" class="button ch-button" bindtap="saveImage">保存</button>
+    <view class="flex-row-center" style="padding: 30rpx 0;z-index: 10000;">
+      <button wx:if="{{!authWritePhotosAlbum}}" class="button ch-button" bindtap="beforeSaveImage">保存</button>
       <button wx:else class="button ch-button" open-type="openSetting" bindopensetting="openSetting">保存</button>
       <button class="button" type="primary" bindtap="addText" style="background-color: #07c160;">加文字</button>
     </view>
   </view>
+
+  <video-dialog isShowVideoDialog="{{isShowVideoDialog}}" content="{{videoContent}}" confirmText="{{confirmText}}" bind:viewVideo="viewRewardedVideoAd"></video-dialog>
 
    <canvas class="canvas" canvas-id="drawer" style="width: {{temInfo.width}}px;height: {{temInfo.height}}px;"></canvas>
 </view>

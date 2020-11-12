@@ -1,0 +1,19 @@
+<view wx:if="{{isShowVideoDialog}}">
+	<view class="videoDialogCover"></view>
+	<view class="videoDialog">
+		<view class="content">
+			{{content}}
+		</view>
+		<!-- <view class="button" bindtap="viewVideo">
+			<image src="/styles/video_white.png"></image>
+			{{confirmText}}
+		</view> -->
+		<button class="button" type="primary" bindtap="viewVideo">{{confirmText}}</button>
+
+		<ad adIntervals="120" type="card" unitId="249eb2a2898ca21acbb5e17345b751e5"></ad>
+
+		<view style="position: absolute;right: 0;top: 0;" bindtap="closeDialog">
+			<image lazy-load="{{true}}" src="./image/fork.png" style="width: 48rpx;height: 48rpx;margin: 20rpx;"></image>
+		</view>
+	</view>
+</view>
