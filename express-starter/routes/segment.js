@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
           "Mouth": true,
           "Face": true
       },
-      "Url": "https://youtupics.maiyizhi.cn/temp_upload_16051048543.jpeg"
+      "Url": "https://youtupics.maiyizhi.cn/temp_upload_16052472957.jpeg"
   };
   client.SegmentCustomizedPortraitPic(params).then(
     (data) => {
