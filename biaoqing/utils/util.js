@@ -1,37 +1,39 @@
-const formatTime = date => {
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  const hour = date.getHours()
-  const minute = date.getMinutes()
-  const second = date.getSeconds()
+import config from './config.js'
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+export const formatTime = date => {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const hour = date.getHours();
+  const minute = date.getMinutes();
+  const second = date.getSeconds();
+
+  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':');
 }
 
 const formatNumber = n => {
-  n = n.toString()
-  return n[1] ? n : '0' + n
+  n = n.toString();
+  return n[1] ? n : '0' + n;
 }
 
-const createInterstitialAd = () => {
-  if (wx.createInterstitialAd) {
+export const createInterstitialAd = () => {
+  if (wx.createInterstitialAd && config.adUnitId) {
     const interstitialAd = wx.createInterstitialAd({
-      adUnitId: '36c05d310d97f64ec03fea3d5fd406d2'
+      adUnitId: config.adUnitId
     })
     if (!interstitialAd) return;
     interstitialAd.onLoad(() => {
       interstitialAd.show(() => {
-        // if (interstitialAd.destroy) interstitialAd.destroy();
+        if (interstitialAd) interstitialAd.destroy();
       }).catch(err => {
-        console.log("interstitialAd_err", err);
-        // if (interstitialAd.destroy) interstitialAd.destroy();
+        console.log('interstitialAd_err', err);
+        if (interstitialAd.destroy) interstitialAd.destroy();
       })
     })
   }
 }
 
-const saveImageToPhotosAlbum = ({pic, successCB, failCB}) => {
+export const saveImageToPhotosAlbum = ({pic, successCB, failCB}) => {
   wx.saveImageToPhotosAlbum({
     filePath: pic,
     success: () => {
@@ -50,8 +52,19 @@ const saveImageToPhotosAlbum = ({pic, successCB, failCB}) => {
   })
 }
 
-module.exports = {
-  formatTime: formatTime,
-  createInterstitialAd: createInterstitialAd,
-  saveImageToPhotosAlbum: saveImageToPhotosAlbum
+export const readFile = (filePath, encoding) => {
+  return new Promise((resolve, reject) => {
+    if (!wx.getFileSystemManager) reject('请升级版本');
+    const fileManager = wx.getFileSystemManager();
+    fileManager.readFile({
+      filePath: filePath,
+      encoding: encoding,
+      success: res => {
+        resolve(res.data);
+      },
+      fail: () => {
+        reject('失败啦');
+      }
+    })
+  })
 }

@@ -1,5 +1,5 @@
 //app.js
-const config = require('./utils/config.js')
+import config from './utils/config.js'
 
 App({
   onLaunch: function () {

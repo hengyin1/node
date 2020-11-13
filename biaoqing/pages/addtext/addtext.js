@@ -1,7 +1,7 @@
 // pages/addtext/addtext.js
+import config from '../../utils/config.js'
+import { createInterstitialAd, saveImageToPhotosAlbum } from '../../utils/util.js'
 import { checkText } from '../../api.js'
-const util = require('../../utils/util.js')
-const config = require('../../utils/config.js')
 
 Page({
   data: {
@@ -31,7 +31,7 @@ Page({
     this.createRewardedVideoAd('10a88f42f5b25e1cfe493af999df2d5f');
   },
   onShow: function () {
-    util.createInterstitialAd();
+    createInterstitialAd();
   },
   getSetting: function () {
     wx.getSetting({
@@ -144,7 +144,7 @@ Page({
   saveImage: function () {
     const next = () => {
       this.renderCanvas(res => {
-        util.saveImageToPhotosAlbum({
+        saveImageToPhotosAlbum({
           pic: res,
           failCB: () => {
             this.getSetting();

@@ -33,13 +33,18 @@
     </scroll-view>
 
     <scroll-view class="lists-box" scroll-y="{{true}}">
-      <view class="lists flex-row flex-wrap">
-        <view wx:for="{{list}}" wx:key="index" data-index="{{index}}" bind:tap="chooseItem">
-          <image class="list-item-image" src="{{item.url}}" mode="aspectFit" lazy-load="{{true}}" />
-        </view>
+      <view wx:if="{{isSelfDefine}}">
+        <button bind:tap="chooseImage">上传图片</button>
       </view>
-      <view class="to-bottom">...到底啦...</view>
-      <ad unit-id="86d40a908e8ecfd121c9adb443de0e30" type="card"></ad>
+      <block wx:else>
+        <view class="lists flex-row flex-wrap">
+          <view wx:for="{{list}}" wx:key="index" data-index="{{index}}" bind:tap="chooseItem">
+            <image class="list-item-image" src="{{item.url}}" mode="aspectFit" lazy-load="{{true}}" />
+          </view>
+        </view>
+        <view class="to-bottom">...到底啦...</view>
+        <ad unit-id="86d40a908e8ecfd121c9adb443de0e30" type="card"></ad>
+      </block>
     </scroll-view>
 
     <view class="flex-row-center" style="padding: 30rpx 0;z-index: 10000;">

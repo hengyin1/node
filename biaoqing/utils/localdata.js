@@ -43,8 +43,12 @@ export const tabs = {
         "name":"卡通"
     },
     {
-      "value":999,
-      "name":"其他"
+       "value":999,
+       "name":"其他"
+    },
+    {
+       "value":10000,
+       "name":"自定义"
     }
   ]
 }

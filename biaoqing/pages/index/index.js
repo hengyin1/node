@@ -1,8 +1,8 @@
 //index.js
 //获取应用实例
+import { myRequest } from '../../utils/request.js'
+import { createInterstitialAd, readFile, saveImageToPhotosAlbum } from '../../utils/util.js'
 import { tabs, templates, faces } from '../../utils/localdata.js'
-
-const util = require('../../utils/util.js')
 
 const app = getApp()
 const { windowWidth, windowHeight } = wx.getSystemInfoSync()
@@ -27,6 +27,9 @@ Page({
   },
   onLoad: function () {
     this.getList();
+    myRequest({
+      url: 'http://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/segment'
+    })
   },
   onReady: function () {
     this.getSetting();
@@ -34,7 +37,7 @@ Page({
     this.createRewardedVideoAd('10a88f42f5b25e1cfe493af999df2d5f');
   },
   onShow: function () {
-    util.createInterstitialAd();
+    createInterstitialAd();
   },
   getSetting: function () {
     wx.getSetting({
@@ -66,10 +69,17 @@ Page({
   },
   tapDownTab: function (e) {
     const { index } = e.currentTarget.dataset;
-    this.setData({
-      [`${this.data.selectedUpTab}TabIndex`]: index
-    })
-    this.getList();
+    if (index == 10000) {
+      this.setData({
+        list: [],
+        isSelfDefine: true
+      })
+    } else {
+      this.setData({
+        [`${this.data.selectedUpTab}TabIndex`]: index
+      })
+      this.getList();
+    }
   },
   getList: function () {
     let list = [];
@@ -104,6 +114,18 @@ Page({
         this.setFaceSize({width, height, path});
       }, () => {})
     }
+  },
+  chooseImage: function () {
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['compressed'],
+      sourceType: ['album','camera'],
+      success: res => {
+        readFile(res.tempFilePaths[0], 'base64').then(base64 => {
+
+        }, () => {})
+      }
+    })
   },
   setTemSize: function (pic, item) {
     const { width, height } = pic;
@@ -226,7 +248,7 @@ Page({
       title: '保存中...'
     })
     this.renderCanvas(res => {
-      util.saveImageToPhotosAlbum({
+      saveImageToPhotosAlbum({
         pic: res,
         failCB: () => {
           this.getSetting();
