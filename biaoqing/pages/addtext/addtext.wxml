@@ -15,9 +15,9 @@
     <text-editor wx:for="{{texts}}" wx:key="index" value="{{item.value}}" index="{{index}}" data-index="{{index}}" bind:changeVal="changeVal" bind:add="add" bind:del="del" bind:toggle="toggle"></text-editor>
   </view>
 
-  <view style="margin-top: 30rpx;">
-    <ad unit-id="249eb2a2898ca21acbb5e17345b751e5" type="card"></ad>
-  </view>
+  <!-- <view style="margin-top: 30rpx;">
+    <ad unit-id="86d40a908e8ecfd121c9adb443de0e30" type="card"></ad>
+  </view> -->
 
   <view class="buttons flex-row-center">
     <button class="button ch-button" open-type="share">邀请朋友玩</button>

@@ -17,7 +17,7 @@ const formatNumber = n => {
 const createInterstitialAd = () => {
   if (wx.createInterstitialAd) {
     const interstitialAd = wx.createInterstitialAd({
-      adUnitId: '694734d7be8c703dd7e8833d1c167138'
+      adUnitId: '36c05d310d97f64ec03fea3d5fd406d2'
     })
     if (!interstitialAd) return;
     interstitialAd.onLoad(() => {

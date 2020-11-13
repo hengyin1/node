@@ -1,6 +1,7 @@
 // pages/addtext/addtext.js
 import { checkText } from '../../api.js'
 const util = require('../../utils/util.js')
+const config = require('../../utils/config.js')
 
 Page({
   data: {
@@ -27,7 +28,7 @@ Page({
   onReady: function () {
     this.getSetting();
 
-    this.createRewardedVideoAd('dea576be2610beeca421b8c2faba699f');
+    this.createRewardedVideoAd('10a88f42f5b25e1cfe493af999df2d5f');
   },
   onShow: function () {
     util.createInterstitialAd();
@@ -156,7 +157,7 @@ Page({
       title: '保存中...'
     })
     const textStr = this.data.texts.reduce((pre, cur) => pre += cur.value, '');
-    if (!textStr) {
+    if (!textStr || config.appPlatform == 'qq') {
       next();
     } else {
       checkText(textStr, () => {

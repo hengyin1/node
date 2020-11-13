@@ -31,7 +31,7 @@ Page({
   onReady: function () {
     this.getSetting();
 
-    this.createRewardedVideoAd('dea576be2610beeca421b8c2faba699f');
+    this.createRewardedVideoAd('10a88f42f5b25e1cfe493af999df2d5f');
   },
   onShow: function () {
     util.createInterstitialAd();

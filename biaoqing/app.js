@@ -1,7 +1,9 @@
 //app.js
+const config = require('./utils/config.js')
+
 App({
   onLaunch: function () {
-    if (wx.cloud) {
+    if (config.appPlatform == 'wechat' && wx.cloud) {
       wx.cloud.init({
         env: 'biaoqing-2g73u0gn88edff24'
       })

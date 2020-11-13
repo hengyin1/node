@@ -10,7 +10,7 @@
 		</view> -->
 		<button class="button" type="primary" bindtap="viewVideo">{{confirmText}}</button>
 
-		<ad adIntervals="120" type="card" unitId="249eb2a2898ca21acbb5e17345b751e5"></ad>
+		<ad adIntervals="120" type="card" unitId="86d40a908e8ecfd121c9adb443de0e30"></ad>
 
 		<view style="position: absolute;right: 0;top: 0;" bindtap="closeDialog">
 			<image lazy-load="{{true}}" src="./image/fork.png" style="width: 48rpx;height: 48rpx;margin: 20rpx;"></image>
