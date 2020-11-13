@@ -1,7 +1,8 @@
 //index.js
 //获取应用实例
 import { myRequest } from '../../utils/request.js'
-import { createInterstitialAd, readFile, saveImageToPhotosAlbum } from '../../utils/util.js'
+import { createInterstitialAd, readFile, writeFile, saveImageToPhotosAlbum } from '../../utils/util.js'
+import { uploadFile } from '../../utils/upload.js'
 import { tabs, templates, faces } from '../../utils/localdata.js'
 
 const app = getApp()
@@ -27,9 +28,6 @@ Page({
   },
   onLoad: function () {
     this.getList();
-    myRequest({
-      url: 'http://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/segment'
-    })
   },
   onReady: function () {
     this.getSetting();
@@ -121,9 +119,22 @@ Page({
       sizeType: ['compressed'],
       sourceType: ['album','camera'],
       success: res => {
-        readFile(res.tempFilePaths[0], 'base64').then(base64 => {
-
-        }, () => {})
+        uploadFile(res.tempFilePaths[0], 'temp_')
+        // readFile(res.tempFilePaths[0], 'base64').then(base64 => {
+        //   myRequest({
+        //     url: 'http://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/segment',
+        //     data: {
+        //       Image: base64
+        //     },
+        //     method: 'POST'
+        //   }).then(res => {
+        //     writeFile(res.data.PortraitImage).then(({ fileManager, filePath }) => {
+        //       this.setData({
+        //         filePath: filePath
+        //       })
+        //     })
+        //   })
+        // }, () => {})
       }
     })
   },

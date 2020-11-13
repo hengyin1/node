@@ -33,7 +33,7 @@ export const createInterstitialAd = () => {
   }
 }
 
-export const saveImageToPhotosAlbum = ({pic, successCB, failCB}) => {
+export const saveImageToPhotosAlbum = ({ pic, successCB, failCB }) => {
   wx.saveImageToPhotosAlbum({
     filePath: pic,
     success: () => {
@@ -52,7 +52,7 @@ export const saveImageToPhotosAlbum = ({pic, successCB, failCB}) => {
   })
 }
 
-export const readFile = (filePath, encoding) => {
+export const readFile = (filePath, encoding = 'base64') => {
   return new Promise((resolve, reject) => {
     if (!wx.getFileSystemManager) reject('请升级版本');
     const fileManager = wx.getFileSystemManager();
@@ -61,6 +61,25 @@ export const readFile = (filePath, encoding) => {
       encoding: encoding,
       success: res => {
         resolve(res.data);
+      },
+      fail: () => {
+        reject('失败啦');
+      }
+    })
+  })
+}
+
+export const writeFile = (base64, extend = '.png') => {
+  return new Promise((resolve, reject) => {
+    if (!wx.getFileSystemManager) reject('请升级版本');
+    const fileManager = wx.getFileSystemManager();
+    const filePath = wx.env.USER_DATA_PATH + '/'+ new Date().getTime() + extend;
+    fileManager.writeFile({
+      filePath: filePath,
+      data: base64,
+      encoding: 'base64',
+      success: () => {
+        resolve({ fileManager, filePath });
       },
       fail: () => {
         reject('失败啦');
