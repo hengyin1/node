@@ -35,6 +35,9 @@
     <scroll-view class="lists-box" scroll-y="{{true}}">
       <block wx:if="{{isSelfDefine}}">
         <view wx:if="{{list.length}}" class="lists flex-row flex-wrap">
+          <view class="camera-icon-box" style="margin: 10rpx;" bind:tap="chooseImage">
+            <image class="camera-icon" src="/images/camera.png" />
+          </view>
           <view wx:for="{{list}}" wx:key="index" data-index="{{index}}" bind:tap="chooseItem">
             <image class="list-item-image" src="{{item.url}}" mode="aspectFit" lazy-load="{{true}}" />
           </view>
