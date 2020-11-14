@@ -1,7 +1,7 @@
 const config = {
-  appName: 'biaoqingbaozhizuozhushou',
+  appName: 'biaoqingbaozhizuozhushou_wechat',
   version: '1.0.0',
-  appPlatform: 'qq',
+  appPlatform: 'wechat',
   adUnitId: '36c05d310d97f64ec03fea3d5fd406d2'
 }
 

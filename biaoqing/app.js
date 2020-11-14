@@ -1,4 +1,5 @@
 //app.js
+import user from './utils/user.js'
 import config from './utils/config.js'
 
 App({
@@ -8,6 +9,8 @@ App({
         env: 'biaoqing-2g73u0gn88edff24'
       })
     }
+
+    user.init();
   },
   globalData: {
     userInfo: null
