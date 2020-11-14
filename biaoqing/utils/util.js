@@ -87,3 +87,20 @@ export const writeFile = (base64, extend = '.png') => {
     })
   })
 }
+
+export const chooseImage = (count = 1, sizeType = ['compressed'], sourceType = ['album','camera']) => {
+  return new Promise((resolve, reject) => {
+    wx.chooseImage({
+      count: count,
+      sizeType: sizeType,
+      sourceType: sourceType,
+      success: res => {
+        resolve(res.tempFilePaths);
+      },
+      fail: () => {
+        reject();
+      }
+    }) 
+  })
+}
+

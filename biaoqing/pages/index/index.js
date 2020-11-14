@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 import { myRequest } from '../../utils/request.js'
-import { createInterstitialAd, readFile, writeFile, saveImageToPhotosAlbum } from '../../utils/util.js'
+import { createInterstitialAd, chooseImage, readFile, writeFile, saveImageToPhotosAlbum } from '../../utils/util.js'
 import { uploadFile } from '../../utils/upload.js'
 import { tabs, templates, faces } from '../../utils/localdata.js'
 
@@ -70,7 +70,8 @@ Page({
     if (index == 10000) {
       this.setData({
         list: [],
-        isSelfDefine: true
+        isSelfDefine: true,
+        [`${this.data.selectedUpTab}TabIndex`]: index
       })
     } else {
       this.setData({
@@ -113,30 +114,28 @@ Page({
       }, () => {})
     }
   },
-  chooseImage: function () {
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['compressed'],
-      sourceType: ['album','camera'],
-      success: res => {
-        uploadFile(res.tempFilePaths[0], 'temp_')
-        // readFile(res.tempFilePaths[0], 'base64').then(base64 => {
-        //   myRequest({
-        //     url: 'http://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/segment',
-        //     data: {
-        //       Image: base64
-        //     },
-        //     method: 'POST'
-        //   }).then(res => {
-        //     writeFile(res.data.PortraitImage).then(({ fileManager, filePath }) => {
-        //       this.setData({
-        //         filePath: filePath
-        //       })
-        //     })
-        //   })
-        // }, () => {})
+  chooseImage: async function () {
+    try {
+      const tempFilePaths = await chooseImage();
+      const base64 = await readFile(tempFilePaths[0], 'base64');
+      const res = await myRequest({
+        url: 'http://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/segment',
+        data: {
+          Image: base64
+        },
+        method: 'POST'
+      })
+      const { fileManager, filePath } = await writeFile(res.data.PortraitImage);
+      const url = await uploadFile(filePath, 'biaoqing_user_face_');
+    } catch (error) {
+      if (error) {
+        wx.showToast({
+          title: error,
+          icon: 'none',
+          duration: 1500
+        })
       }
-    })
+    }
   },
   setTemSize: function (pic, item) {
     const { width, height } = pic;

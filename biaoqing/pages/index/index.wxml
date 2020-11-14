@@ -1,8 +1,8 @@
 <!--index.wxml-->
 <view class="container">
   <view class="pic-box flex-row-center" bind:touchstart="touchstart" bind:touchmove="touchmove">
-    <view wx:if="{{!temInfo.path}}" style="font-size: 32rpx;">
-      <view style="margin-bottom: 10rpx;color: #d81e06;">*使用说明</view>
+    <view wx:if="{{!temInfo.path}}" style="font-size: 36rpx;">
+      <view style="margin-bottom: 10rpx;color: #d81e06;font-size: 32rpx;">*使用说明</view>
       <view>1.选择一个形象</view>
       <view>2.选择一个表情</view>
       <view>3.单指可拖动表情位置</view>
@@ -33,10 +33,17 @@
     </scroll-view>
 
     <scroll-view class="lists-box" scroll-y="{{true}}">
-      <view wx:if="{{isSelfDefine}}">
-        <button bind:tap="chooseImage">上传图片</button>
-        <image src="{{filePath}}" style="width: 100rpx;height: 100rpx;" />
-      </view>
+      <block wx:if="{{isSelfDefine}}">
+        <view wx:if="{{list.length}}">
+        </view>
+        <view wx:else class="camera-box flex-column-center" bind:tap="chooseImage">
+          <view class="camera-icon-box">
+            <image class="camera-icon" src="/images/camera.png" />
+          </view>
+          <view style="margin-bottom: 10rpx;font-size: 34rpx;">选择正脸照</view>
+          <view style="font-size: 26rpx;">将会抠出正脸照的人脸部分</view>
+        </view>
+      </block>
       <block wx:else>
         <view class="lists flex-row flex-wrap">
           <view wx:for="{{list}}" wx:key="index" data-index="{{index}}" bind:tap="chooseItem">

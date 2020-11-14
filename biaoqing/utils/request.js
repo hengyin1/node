@@ -27,7 +27,7 @@ export const myRequest = ({ url, data = {}, method = 'GET', contentType = 'appli
           icon: 'none',
           duration: 1500
         })
-        reject(err);
+        reject();
       }
     })
   })

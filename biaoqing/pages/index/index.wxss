@@ -84,3 +84,22 @@
   color: #999999;
   text-align: center;
 }
+
+.camera-box {
+  height: 100%;
+}
+
+.camera-icon-box {
+  width: 110rpx;
+  height: 110rpx;
+  margin-bottom: 30rpx;
+  border: 1px dashed #2c2c2c;
+  border-radius: 10rpx;
+}
+
+.camera-icon {
+  display: block;
+  width: 61rpx;
+  height: 48rpx;
+  margin: 31rpx auto;
+}

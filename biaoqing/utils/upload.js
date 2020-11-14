@@ -63,7 +63,8 @@ var getAuthorization = function (options, callback, reject) {
 // 上传文件
 export var uploadFile = function (filePath, filePrefix) {
 	return new Promise((resolve, reject) => {
-		var Key = filePrefix + filePath.substr(filePath.lastIndexOf('/') + 1); // 这里指定上传的文件名
+        // var Key = filePrefix + filePath.substr(filePath.lastIndexOf('/') + 1); // 这里指定上传的文件名
+        var Key = filePrefix + randomString() + getExtand(filePath); // 这里指定上传的文件名
 		getAuthorization({Method: 'POST', Pathname: '/'}, function (AuthData) {
 			var requestTask = wx.uploadFile({
 				url: prefix,
@@ -95,3 +96,22 @@ export var uploadFile = function (filePath, filePrefix) {
 		}, reject);
 	});
 };
+
+/* 随机生产字符串 */
+function randomString(len) {
+    len = len || 32;
+    var $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var maxPos = $chars.length;
+    var pwd = '';
+    for (let i = 0; i < len; i++) {
+        pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+    }
+    return pwd;
+}
+
+// 获取扩展名
+function getExtand(path) {
+    var index1 = path.lastIndexOf(".");
+    var index2 = path.length;
+    return path.substring(index1, index2);
+}
