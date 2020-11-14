@@ -1,8 +1,9 @@
 //index.js
 //获取应用实例
 import { myRequest } from '../../utils/request.js'
-import { createInterstitialAd, chooseImage, readFile, writeFile, saveImageToPhotosAlbum } from '../../utils/util.js'
+import { createInterstitialAd, getImageInfo, chooseImage, readFile, writeFile, canvasToTempFilePath, saveImageToPhotosAlbum } from '../../utils/util.js'
 import { uploadFile } from '../../utils/upload.js'
+import { grayscale } from '../../utils/pixel.js'
 import { tabs, templates, faces } from '../../utils/localdata.js'
 
 const app = getApp()
@@ -69,7 +70,12 @@ Page({
     const { index } = e.currentTarget.dataset;
     if (index == 10000) {
       this.setData({
-        list: [],
+        list: [
+          // {
+          //   id: 1000,
+          //   url: 'https://pic-1253504664.cos.ap-shanghai.myqcloud.com/biaoqing_user_face_gWYDpSnmKubO3wsRX2d4dcomdY6zm6L8.png?imageMogr2/scrop/200x200'
+          // }
+        ],
         isSelfDefine: true,
         [`${this.data.selectedUpTab}TabIndex`]: index
       })
@@ -95,10 +101,17 @@ Page({
     const { index } = e.currentTarget.dataset;
     const item = this.data.list[index];
     if (this.data.selectedUpTab == 'tem') {
-      this.getImageInfo(item.url).then(res => {
+      wx.showLoading({
+        title: '加载图片中...',
+        mask: true
+      })
+      getImageInfo(item.url).then(res => {
+        wx.hideLoading();
         const { width, height, path } = res;
         this.setTemSize({width, height, path}, item);
-      }, () => {})
+      }, () => {
+        wx.hideLoading();
+      })
     } else {
       if (!this.data.temInfo || !this.data.temInfo.path) {
         wx.showToast({
@@ -108,10 +121,17 @@ Page({
         })
         return;
       }
-      this.getImageInfo(item.url).then(res => {
+      wx.showLoading({
+        title: '加载图片中...',
+        mask: true
+      })
+      getImageInfo(item.url).then(res => {
+        wx.hideLoading();
         const { width, height, path } = res;
         this.setFaceSize({width, height, path});
-      }, () => {})
+      }, () => {
+        wx.hideLoading();
+      })
     }
   },
   chooseImage: async function () {
@@ -126,9 +146,22 @@ Page({
         method: 'POST'
       })
       const { fileManager, filePath } = await writeFile(res.data.PortraitImage);
-      const url = await uploadFile(filePath, 'biaoqing_user_face_');
+      let url = await uploadFile(filePath, 'biaoqing_user_face_');
+      url += '?imageMogr2/scrop/200x200';
+
+      await grayscale(url);
+      const tempFilePath = await canvasToTempFilePath({
+        width: 200,
+        height: 200,
+        destWidth: 200,
+        destHeight: 200,
+        canvasId: 'pixel',
+        fileType: 'png'
+      })
+      const grayurl = await uploadFile(tempFilePath, 'biaoqing_user_face_');
     } catch (error) {
-      if (error) {
+      console.log('error', error);
+      if (typeof(error) == 'string') {
         wx.showToast({
           title: error,
           icon: 'none',
@@ -173,25 +206,6 @@ Page({
     
     this.setData({
       faceInfo: pic
-    })
-  },
-  getImageInfo: function (src) {
-    wx.showLoading({
-      title: '加载图片中...',
-      mask: true
-    })
-    return new Promise((resolve, reject) => {
-      wx.getImageInfo({
-        src: src,
-        success: res => {
-          wx.hideLoading();
-          resolve(res);
-        },
-        fail: () => {
-          wx.hideLoading();
-          reject();
-        }
-      })
     })
   },
   touchstart: function (e) {

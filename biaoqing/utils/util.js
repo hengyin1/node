@@ -27,7 +27,7 @@ export const createInterstitialAd = () => {
         if (interstitialAd) interstitialAd.destroy();
       }).catch(err => {
         console.log('interstitialAd_err', err);
-        if (interstitialAd.destroy) interstitialAd.destroy();
+        if (interstitialAd) interstitialAd.destroy();
       })
     })
   }
@@ -101,6 +101,33 @@ export const chooseImage = (count = 1, sizeType = ['compressed'], sourceType = [
         reject();
       }
     }) 
+  })
+}
+
+export const getImageInfo = (src) => {
+  return new Promise((resolve, reject) => {
+    wx.getImageInfo({
+      src: src,
+      success: res => {
+        resolve(res);
+      },
+      fail: () => {
+        reject();
+      }
+    })
+  })
+}
+
+export const canvasToTempFilePath = (data) => {
+  return new Promise((resolve, reject) => {
+    wx.canvasToTempFilePath(Object.assign(data, {
+      success: res => {
+        resolve(res.tempFilePath);
+      },
+      fail: () => {
+        reject();
+      }
+    }))
   })
 }
 

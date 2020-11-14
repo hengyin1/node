@@ -34,7 +34,10 @@
 
     <scroll-view class="lists-box" scroll-y="{{true}}">
       <block wx:if="{{isSelfDefine}}">
-        <view wx:if="{{list.length}}">
+        <view wx:if="{{list.length}}" class="lists flex-row flex-wrap">
+          <view wx:for="{{list}}" wx:key="index" data-index="{{index}}" bind:tap="chooseItem">
+            <image class="list-item-image" src="{{item.url}}" mode="aspectFit" lazy-load="{{true}}" />
+          </view>
         </view>
         <view wx:else class="camera-box flex-column-center" bind:tap="chooseImage">
           <view class="camera-icon-box">
@@ -44,15 +47,11 @@
           <view style="font-size: 26rpx;">将会抠出正脸照的人脸部分</view>
         </view>
       </block>
-      <block wx:else>
-        <view class="lists flex-row flex-wrap">
-          <view wx:for="{{list}}" wx:key="index" data-index="{{index}}" bind:tap="chooseItem">
-            <image class="list-item-image" src="{{item.url}}" mode="aspectFit" lazy-load="{{true}}" />
-          </view>
+      <view wx:else class="lists flex-row flex-wrap">
+        <view wx:for="{{list}}" wx:key="index" data-index="{{index}}" bind:tap="chooseItem">
+          <image class="list-item-image" src="{{item.url}}" mode="aspectFit" lazy-load="{{true}}" />
         </view>
-        <view class="to-bottom">...到底啦...</view>
-        <ad unit-id="86d40a908e8ecfd121c9adb443de0e30" type="card"></ad>
-      </block>
+      </view>
     </scroll-view>
 
     <view class="flex-row-center" style="padding: 30rpx 0;z-index: 10000;">
@@ -65,4 +64,5 @@
   <video-dialog isShowVideoDialog="{{isShowVideoDialog}}" content="{{videoContent}}" confirmText="{{confirmText}}" bind:viewVideo="viewRewardedVideoAd"></video-dialog>
 
   <canvas class="canvas" canvas-id="drawer" style="width: {{temInfo.width}}px;height: {{temInfo.height}}px;"></canvas>
+  <canvas class="canvas" canvas-id="pixel" style="width: 220px;height: 220px;"></canvas>
 </view>

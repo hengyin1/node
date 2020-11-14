@@ -78,13 +78,6 @@
   margin: 10rpx;
 }
 
-.to-bottom {
-  padding: 30rpx;
-  font-size: 28rpx;
-  color: #999999;
-  text-align: center;
-}
-
 .camera-box {
   height: 100%;
 }
