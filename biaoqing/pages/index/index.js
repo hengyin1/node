@@ -61,30 +61,38 @@ Page({
   },
   tapUpTab: function (e) {
     const { index } = e.currentTarget.dataset;
+    const isSelfDefine = this.data[`${index}TabIndex`] == 10000;
+    
     this.setData({
       selectedUpTab: index,
-      downTabs: tabs[index]
+      downTabs: tabs[index],
+      isSelfDefine: isSelfDefine
     })
-    this.getList();
+    
+    if (isSelfDefine) {
+      this.getListServer();
+    } else {
+      this.getList();
+    }
   },
   tapDownTab: function (e) {
     const { index } = e.currentTarget.dataset;
-    if (index == 10000) {
-      this.setData({
-        list: [],
-        isSelfDefine: true,
-        [`${this.data.selectedUpTab}TabIndex`]: index
-      })
+    const isSelfDefine = index == 10000;
+    this.setData({
+      isSelfDefine: isSelfDefine,
+      [`${this.data.selectedUpTab}TabIndex`]: index
+    })
+    if (isSelfDefine) {
       this.getListServer();
     } else {
-      this.setData({
-        isSelfDefine: false,
-        [`${this.data.selectedUpTab}TabIndex`]: index
-      })
       this.getList();
     }
   },
   getListServer: function () {
+    this.setData({
+      list: []
+    })
+    
     wx.showLoading({
       title: '加载中...',
       mask: true
