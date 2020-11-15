@@ -21,7 +21,7 @@
   </view> -->
 
   <view class="buttons flex-row-center">
-    <button class="button ch-button" open-type="share">邀请朋友玩</button>
+    <button class="button ch-button" open-type="share">发送给朋友</button>
     <button wx:if="{{!authWritePhotosAlbum}}" type="primary" class="button" style="background-color: #07c160;" bindtap="beforeSaveImage">保存</button>
     <button wx:else class="button" type="primary" open-type="openSetting" style="background-color: #07c160;" bindopensetting="openSetting">保存</button>
   </view>

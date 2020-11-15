@@ -1,0 +1,71 @@
+
+.jion-box  {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: fixed;
+  right: 5%;
+  padding: 8rpx 20rpx;
+  padding-right: 0;
+  border-radius: 8rpx;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 110;
+}
+.jion-box ::after {
+  content: "";
+  border: 6px solid transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  right: 20%;
+  top: -12px;
+}
+.des-text {
+  font-size: 24rpx;
+  color: #fff;
+  flex: 1;
+  text-align: center;
+}
+.cancel {
+  display: block;
+  width: 32rpx;
+  height: 32rpx;
+  margin: 0 20rpx;
+}
+@-webkit-keyframes scale {
+  from {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  to {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@keyframes scale {
+  from {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  to {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+.scale {
+  -webkit-animation-name: scale;
+  animation-name: scale;
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-out;
+  animation-timing-function: ease-out;
+}

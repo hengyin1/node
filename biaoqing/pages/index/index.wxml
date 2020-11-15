@@ -1,5 +1,6 @@
 <!--index.wxml-->
 <view class="container">
+  <jion-mini></jion-mini>
   <view class="pic-box flex-row-center" bind:touchstart="touchstart" bind:touchmove="touchmove">
     <view wx:if="{{!temInfo.path}}" style="font-size: 36rpx;">
       <view style="margin-bottom: 10rpx;color: #d81e06;font-size: 32rpx;">*使用说明</view>

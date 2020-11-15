@@ -1,0 +1,7 @@
+
+<view wx:if="{{isShowJoinMini}}" class="jion-box scale" bindtap="cancelJoinMini" style="top: {{top + 8}}px;">
+  <view class="des-text">点击···添加到我的小程序，微信首页下滑即可快速访问</view>
+  <view>
+    <image class="cancel" src="https://qpics.maiyizhi.cn/upload_file_to_tx_15465678253_cancel.png" lazy-load="{{true}}"></image>
+  </view>
+</view>
