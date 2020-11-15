@@ -28,7 +28,9 @@ Page({
   onReady: function () {
     this.getSetting();
 
-    this.createRewardedVideoAd('10a88f42f5b25e1cfe493af999df2d5f');
+    if (config.appPlatform == 'qq') {
+      this.createRewardedVideoAd('10a88f42f5b25e1cfe493af999df2d5f');
+    }
   },
   onShow: function () {
     createInterstitialAd();

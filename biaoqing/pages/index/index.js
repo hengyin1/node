@@ -6,6 +6,7 @@ import { createInterstitialAd, getImageInfo, chooseImage, readFile, writeFile, c
 import { uploadFile } from '../../utils/upload.js'
 import { grayscale } from '../../utils/pixel.js'
 import cache from '../../utils/globalcache.js'
+import config from '../../utils/config.js'
 import { tabs, templates, faces } from '../../utils/localdata.js'
 
 const app = getApp()
@@ -35,7 +36,9 @@ Page({
   onReady: function () {
     this.getSetting();
 
-    this.createRewardedVideoAd('10a88f42f5b25e1cfe493af999df2d5f');
+    if (config.appPlatform == 'qq') {
+      this.createRewardedVideoAd('10a88f42f5b25e1cfe493af999df2d5f');
+    }
   },
   onShow: function () {
     createInterstitialAd();
