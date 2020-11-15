@@ -1,4 +1,4 @@
-import { getImageInfo } from './util.js'
+import { getImageInfo, render } from './util.js'
 
 const imageDataContext = new Map();
 export const grayscale = async (src, canvasId = 'pixel') => {
@@ -88,14 +88,6 @@ const putImageData = (canvasId, imageData) => {
       fail: () => {
         reject();
       }
-    })
-  })
-}
-
-const render = (context) => {
-  return new Promise((resolve, reject) => {
-    context.draw(false, () => {
-      resolve();
     })
   })
 }

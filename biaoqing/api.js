@@ -28,7 +28,7 @@ export const checkText = (text, successCB, failCB) => {
 export const checkImage = (image) => {
   return new Promise((resolve, reject) => {
     if (wx.cloud) {
-      readFile(image, 'binary').then(data => {
+      readFile(image).then(data => {
         const extendArr = image.split('.');
         const extend = extendArr[extendArr.length - 1];
 

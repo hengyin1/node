@@ -52,20 +52,32 @@ export const saveImageToPhotosAlbum = ({ pic, successCB, failCB }) => {
   })
 }
 
-export const readFile = (filePath, encoding = 'base64') => {
+export const readFile = (filePath, encoding) => {
   return new Promise((resolve, reject) => {
     if (!wx.getFileSystemManager) reject('请升级版本');
     const fileManager = wx.getFileSystemManager();
-    fileManager.readFile({
-      filePath: filePath,
-      encoding: encoding,
-      success: res => {
-        resolve(res.data);
-      },
-      fail: () => {
-        reject('失败啦');
-      }
-    })
+    if (encoding) {
+      fileManager.readFile({
+        filePath: filePath,
+        encoding: encoding,
+        success: res => {
+          resolve(res.data);
+        },
+        fail: () => {
+          reject('失败啦');
+        }
+      })
+    } else {
+      fileManager.readFile({
+        filePath: filePath,
+        success: res => {
+          resolve(res.data);
+        },
+        fail: () => {
+          reject('失败啦');
+        }
+      })
+    }
   })
 }
 
@@ -118,6 +130,14 @@ export const getImageInfo = (src) => {
   })
 }
 
+const render = (context) => {
+  return new Promise((resolve, reject) => {
+    context.draw(false, () => {
+      resolve();
+    })
+  })
+}
+
 export const canvasToTempFilePath = (data) => {
   return new Promise((resolve, reject) => {
     wx.canvasToTempFilePath(Object.assign(data, {
@@ -137,6 +157,7 @@ export const compressImage = async (src) => {
   const height = info.height / info.width * width;
   const context = wx.createCanvasContext('pixel');
   context.drawImage(src, 0, 0, width, height);
+  await render(context);
   return await canvasToTempFilePath({
     width: width,
     height: height,
