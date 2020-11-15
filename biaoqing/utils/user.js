@@ -84,7 +84,7 @@ class User {
         wx.login({
           success: res => {
             myRequest({
-              url: 'http://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/login',
+              url: 'https://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/login',
               data: {
                 js_code: res.code
               }

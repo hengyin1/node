@@ -61,7 +61,7 @@ export const checkImage = (image) => {
 export const segment = (base64) => {
   return new Promise((resolve, reject) => {
     myRequest({
-      url: 'http://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/segment',
+      url: 'https://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/segment',
       data: {
         Image: base64
       },
@@ -80,7 +80,7 @@ export const getFace = (userId) => {
     return Promise.resolve(cache.get(key));
   } else {
     return myRequest({
-      url: 'http://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/face/getface',
+      url: 'https://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/face/getface',
       data: {
         userId: userId
       },
@@ -91,7 +91,7 @@ export const getFace = (userId) => {
 
 export const saveFace = (faces) => {
   return myRequest({
-    url: 'http://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/face/saveface',
+    url: 'https://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/face/saveface',
     data: {
       faces: faces
     }

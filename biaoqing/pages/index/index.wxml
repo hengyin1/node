@@ -48,7 +48,7 @@
           <view class="camera-icon-box">
             <image class="camera-icon" src="/images/camera.png" />
           </view>
-          <view style="margin-bottom: 10rpx;font-size: 34rpx;">选择正脸照</view>
+          <view style="margin-bottom: 10rpx;font-size: 34rpx;">选择单人正脸照</view>
           <view style="font-size: 26rpx;">将会抠出正脸照的人脸部分</view>
         </view>
       </block>

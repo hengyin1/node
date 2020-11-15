@@ -2,7 +2,7 @@ var CosAuth = require('./cos-auth.js');
 var config = {
 	Bucket: 'pic-1253504664',
 	Region: 'ap-shanghai',
-	stsUrl: 'http://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/credentials'
+	stsUrl: 'https://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/credentials'
 };
 
 // 请求用到的参数
