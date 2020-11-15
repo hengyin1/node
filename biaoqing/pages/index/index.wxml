@@ -17,7 +17,7 @@
     </view>
   </view>
 
-  <view>
+  <view style="position: relative;z-index: 10;">
     <view class="up-tab flex-row">
       <view class="up-tab-item" wx:for="{{upTabs}}" wx:key="index" data-index="{{item.value}}" bind:tap="tapUpTab">
         <view class="{{selectedUpTab == item.value ? 'up-tab-item-active' : ''}}">{{item.name}}</view>
@@ -28,6 +28,8 @@
       <view class="flex-row flex-align-items" style="width: {{downTabs.length * 110}}rpx;">
         <view class="down-tab-item" wx:for="{{downTabs}}" wx:key="index" data-index="{{item.value}}" bind:tap="tapDownTab">
           <view class="{{(selectedUpTab == 'tem' && temTabIndex == item.value || selectedUpTab == 'face' && faceTabIndex == item.value) ? 'down-tab-item-active' : ''}}">{{item.name}}</view>
+
+          <image wx:if="{{item.value == 10000}}" lazy-load="{{true}}" src="https://youtupics.maiyizhi.cn/new_1.png" style="position: absolute;right: -60rpx;top: 0rpx;width: 60rpx;height: 35rpx;"></image>
         </view>
       </view>
     </scroll-view>

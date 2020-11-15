@@ -9,6 +9,7 @@
   position: absolute;
   transform: translate(-50%, -50%);
   border: 1px solid #d81e06;
+  z-index: 0;
 }
 
 /* .scale-icon {
@@ -49,6 +50,7 @@
 }
 
 .down-tab-item {
+  position: relative;
   width: 130rpx;
   text-align: center;
 }
