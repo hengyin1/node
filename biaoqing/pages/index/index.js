@@ -5,6 +5,7 @@ import { segment, getFace, saveFace } from '../../api.js'
 import { createInterstitialAd, getImageInfo, chooseImage, readFile, writeFile, canvasToTempFilePath, saveImageToPhotosAlbum } from '../../utils/util.js'
 import { uploadFile } from '../../utils/upload.js'
 import { grayscale } from '../../utils/pixel.js'
+import cache from '../../utils/globalcache.js'
 import { tabs, templates, faces } from '../../utils/localdata.js'
 
 const app = getApp()
@@ -174,7 +175,7 @@ Page({
         url: url
       }]
 
-      const next = () => {
+      const next = async () => {
         let list = this.data.list;
         list = [...faces, ...list];
         this.setData({
@@ -183,7 +184,8 @@ Page({
           wx.hideLoading();
         })
 
-        saveFace(faces);
+        await saveFace(faces);
+        cache.remove('face_list');
       }
 
       try {

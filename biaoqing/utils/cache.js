@@ -1,6 +1,3 @@
-/**
- * Created by justin on 2018/5/13.
- */
 const cacheSign = '_appCache'
 const unionCaches = {}
 

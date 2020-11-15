@@ -1,4 +1,5 @@
 import { myRequest } from './utils/request.js'
+import cache from './utils/globalcache.js'
 
 export const checkText = (text, successCB, failCB) => {
   if (wx.cloud) {
@@ -33,12 +34,18 @@ export const segment = (base64) => {
 }
 
 export const getFace = (userId) => {
-  return myRequest({
-    url: 'http://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/face/getface',
-    data: {
-      userId: userId
-    }
-  })
+  const key = 'face_list';
+  if (cache.get(key)) {
+    return Promise.resolve(cache.get(key));
+  } else {
+    return myRequest({
+      url: 'http://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/face/getface',
+      data: {
+        userId: userId
+      },
+      key: key
+    })
+  }
 }
 
 export const saveFace = (faces) => {

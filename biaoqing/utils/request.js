@@ -1,8 +1,9 @@
 import config from './config.js'
+import cache from './globalcache.js'
 
 const { platform } = wx.getSystemInfoSync()
 
-export const myRequest = ({ url, data = {}, method = 'GET', contentType = 'application/json' }) => {
+export const myRequest = ({ url, data = {}, method = 'GET', contentType = 'application/json', key = '', time = 0 }) => {
   data['app'] = config.appName;
   data['version'] = config.version;
   data['appPlatform'] = config.appPlatform;
@@ -20,8 +21,12 @@ export const myRequest = ({ url, data = {}, method = 'GET', contentType = 'appli
         console.log('myRequest', res);
         if (res.statusCode == 200 && res.data) {
           if (res.data.data) {
+            if (key) cache.set(key, res.data.data, time);
+
             resolve(res.data.data);
           } else {
+            if (key) cache.set(key, res.data, time);
+
             resolve(res.data);
           }
         } else {
