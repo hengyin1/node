@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 import user from '../../utils/user.js'
-import { myRequest } from '../../utils/request.js'
+import { segment, getFace, saveFace } from '../../api.js'
 import { createInterstitialAd, getImageInfo, chooseImage, readFile, writeFile, canvasToTempFilePath, saveImageToPhotosAlbum } from '../../utils/util.js'
 import { uploadFile } from '../../utils/upload.js'
 import { grayscale } from '../../utils/pixel.js'
@@ -92,23 +92,17 @@ Page({
     this.setData({
       list: []
     })
-    
+
     wx.showLoading({
       title: '加载中...',
       mask: true
     })
-    myRequest({
-      url: 'http://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/face/getface',
-      data: {
-        userId: user.openid
-      }
-    }).then(res => {
-      wx.hideLoading();
-      if (res.data.success) {
-        this.setData({
-          list: res.data.data
-        })
-      }
+    getFace(user.openid).then(res => {
+      this.setData({
+        list: res
+      }, () => {
+        wx.hideLoading();
+      })
     }, () => {
       wx.hideLoading();
     })
@@ -170,14 +164,8 @@ Page({
         mask: true
       })
       const base64 = await readFile(tempFilePaths[0], 'base64');
-      const res = await myRequest({
-        url: 'http://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/segment',
-        data: {
-          Image: base64
-        },
-        method: 'POST'
-      })
-      const { fileManager, filePath } = await writeFile(res.data.PortraitImage);
+      const res = await segment(base64);
+      const { fileManager, filePath } = await writeFile(res.PortraitImage);
       let url = await uploadFile(filePath, 'biaoqing_user_face_');
       url += '?imageMogr2/scrop/200x200';
       
@@ -195,12 +183,7 @@ Page({
           wx.hideLoading();
         })
 
-        myRequest({
-          url: 'http://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/face/saveface',
-          data: {
-            faces: faces
-          }
-        })
+        saveFace(faces);
       }
 
       try {

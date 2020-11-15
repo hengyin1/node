@@ -18,7 +18,15 @@ export const myRequest = ({ url, data = {}, method = 'GET', contentType = 'appli
       },
       success: res => {
         console.log('myRequest', res);
-        resolve(res);
+        if (res.statusCode == 200 && res.data) {
+          if (res.data.data) {
+            resolve(res.data.data);
+          } else {
+            resolve(res.data);
+          }
+        } else {
+          reject(res.data && res.data.msg || '');
+        }
       },
       fail: err => {
         console.log('myRequest_err', err);

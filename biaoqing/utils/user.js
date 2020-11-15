@@ -89,16 +89,12 @@ class User {
                 js_code: res.code
               }
             }).then(res => {
-              if (res.data.success) {
-                this._localLoginStatus = 1
-                const data = res.data.data
-                data.isLogin = 1
-                this.loginWithSession(data)
-                this.cacheSession()
-                resolve()
-              } else {
-                reject()
-              }
+              this._localLoginStatus = 1
+              const data = res
+              data.isLogin = 1
+              this.loginWithSession(data)
+              this.cacheSession()
+              resolve()
             }, () => reject())
           },
           fail: () => reject()
