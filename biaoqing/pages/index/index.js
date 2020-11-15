@@ -71,15 +71,11 @@ Page({
     const { index } = e.currentTarget.dataset;
     if (index == 10000) {
       this.setData({
-        list: [
-          // {
-          //   id: 1000,
-          //   url: 'https://pic-1253504664.cos.ap-shanghai.myqcloud.com/biaoqing_user_face_gWYDpSnmKubO3wsRX2d4dcomdY6zm6L8.png?imageMogr2/scrop/200x200'
-          // }
-        ],
+        list: [],
         isSelfDefine: true,
         [`${this.data.selectedUpTab}TabIndex`]: index
       })
+      this.getListServer();
     } else {
       this.setData({
         isSelfDefine: false,
@@ -87,6 +83,27 @@ Page({
       })
       this.getList();
     }
+  },
+  getListServer: function () {
+    wx.showLoading({
+      title: '加载中...',
+      mask: true
+    })
+    myRequest({
+      url: 'http://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/face/getface',
+      data: {
+        userId: user.openid
+      }
+    }).then(res => {
+      wx.hideLoading();
+      if (res.data.success) {
+        this.setData({
+          list: res.data.data
+        })
+      }
+    }, () => {
+      wx.hideLoading();
+    })
   },
   getList: function () {
     let list = [];
