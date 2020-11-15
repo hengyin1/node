@@ -161,7 +161,16 @@ Page({
   },
   chooseImage: async function () {
     try {
-      const tempFilePaths = await chooseImage();
+      const { tempFilePaths, size } = await chooseImage();
+      const { width, height } = await getImageInfo(tempFilePaths[0]);
+      if (size > 3100000 || width * height > 1600 * 1600) {
+        wx.showToast({
+          title: '图片太大啦',
+          icon: 'none',
+          duration: 1500
+        })
+        return;
+      }
       
       wx.showLoading({
         title: '抠脸中...',

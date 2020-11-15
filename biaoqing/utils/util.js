@@ -95,7 +95,7 @@ export const chooseImage = (count = 1, sizeType = ['compressed'], sourceType = [
       sizeType: sizeType,
       sourceType: sourceType,
       success: res => {
-        resolve(res.tempFilePaths);
+        resolve({ tempFilePaths: res.tempFilePaths, size: res.tempFiles[0].size });
       },
       fail: () => {
         reject();
