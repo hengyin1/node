@@ -19,7 +19,7 @@ page {
 }
 
 .input-box {
-  margin-top: 40rpx;
+  margin-top: 30rpx;
 }
 
 .buttons {

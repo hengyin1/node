@@ -327,7 +327,7 @@ Page({
   },
   beforeSaveImage: function () {
     if (!this.checkHasValue()) return;
-    if (wx.createRewardedVideoAd && !this.isVideoAdError) {
+    if (config.appPlatform == 'qq' && wx.createRewardedVideoAd && !this.isVideoAdError) {
       this.setData({
         isShowVideoDialog: true,
         videoContent: '观看视频广告，才能保存哦',

@@ -3,6 +3,8 @@ import config from '../../utils/config.js'
 import { createInterstitialAd, saveImageToPhotosAlbum } from '../../utils/util.js'
 import { checkText } from '../../api.js'
 
+const blankHeight = 50
+
 Page({
   data: {
     texts: [],
@@ -10,10 +12,12 @@ Page({
     isShow: !1
   },
   onLoad: function (options) {
-    const { src, width, height } = options;
+    let { src, width, height } = options;
+    width = Number(width);
+    height = Number(height);
     this.textItem = {
       left: 0.5 * width,
-      top: 0.5 * height,
+      top: height + blankHeight * 0.5,
       fontSize: 20,
       color: '#000000',
       value: ''
@@ -22,6 +26,7 @@ Page({
       src: src,
       width: width,
       height: height,
+      blankHeight: blankHeight,
       texts: [JSON.parse(JSON.stringify(this.textItem))]
     })
   },
@@ -133,7 +138,7 @@ Page({
     this.startPoint = { pageX, pageY };
   },
   beforeSaveImage: function () {
-    if (wx.createRewardedVideoAd && !this.isVideoAdError) {
+    if (config.appPlatform == 'qq' && wx.createRewardedVideoAd && !this.isVideoAdError) {
       this.setData({
         isShowVideoDialog: true,
         videoContent: '观看视频广告，才能保存哦',
@@ -176,10 +181,14 @@ Page({
   },
   renderCanvas: function (callBack) {
     const context = wx.createCanvasContext('drawer');
-    context.drawImage(this.data.src, 0, 0, this.data.width, this.data.height);
+    let height = this.data.height;
+    context.drawImage(this.data.src, 0, 0, this.data.width, height);
 
+    let maxTop = 0;
     this.data.texts.filter(item => item.value).forEach(element => {
       const { left, top, fontSize, color, value } = element;
+      const curTop = top + 0.8 * fontSize;
+      if (curTop > maxTop) maxTop = curTop;
       context.save();
       context.setFontSize(fontSize);
       context.setFillStyle(color);
@@ -189,8 +198,12 @@ Page({
       context.restore();
     })
 
+    maxTop += 10;
+    if (maxTop > height) height = maxTop;
+    if (height > this.data.height + this.data.blankHeight) height = this.data.height + this.data.blankHeight;
     context.draw(false, () => {
       wx.canvasToTempFilePath({
+        height: height,
         canvasId: 'drawer',
         fileType: 'jpg',
         success: res => {
