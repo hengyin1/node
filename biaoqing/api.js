@@ -1,5 +1,6 @@
 import { myRequest } from './utils/request.js'
 import cache from './utils/globalcache.js'
+import { readFile } from './utils/util.js'
 import { segmentErrorCode } from './utils/localdata.js'
 
 export const checkText = (text, successCB, failCB) => {
@@ -22,6 +23,39 @@ export const checkText = (text, successCB, failCB) => {
   } else {
     successCB();
   }
+}
+
+export const checkImage = (image) => {
+  return new Promise((resolve, reject) => {
+    if (wx.cloud) {
+      readFile(image, 'binary').then(data => {
+        const extendArr = image.split('.');
+        const extend = extendArr[extendArr.length - 1];
+
+        wx.cloud.callFunction({
+          name: 'imagecheck',
+          data: {
+            contentType: `image/${extend}`,
+            buffer: data
+          }
+        }).then(res => {
+          console.log('checkImage', res);
+          if (res.result.errCode == 87014) {
+            reject('图片违规，请替换一张');
+          } else {
+            resolve();
+          }
+        }).catch(err => {
+          console.log('checkImage_err', err);
+          resolve();
+        })
+      }, () => {
+        resolve();
+      })
+    } else {
+      resolve();
+    }
+  })
 }
 
 export const segment = (base64) => {

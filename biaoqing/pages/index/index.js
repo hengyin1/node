@@ -1,8 +1,8 @@
 //index.js
 //获取应用实例
 import user from '../../utils/user.js'
-import { segment, getFace, saveFace } from '../../api.js'
-import { createInterstitialAd, getImageInfo, chooseImage, readFile, writeFile, canvasToTempFilePath, saveImageToPhotosAlbum } from '../../utils/util.js'
+import { checkImage, segment, getFace, saveFace } from '../../api.js'
+import { createInterstitialAd, getImageInfo, chooseImage, compressImage, readFile, writeFile, canvasToTempFilePath, saveImageToPhotosAlbum } from '../../utils/util.js'
 import { uploadFile } from '../../utils/upload.js'
 import { grayscale } from '../../utils/pixel.js'
 import cache from '../../utils/globalcache.js'
@@ -176,6 +176,9 @@ Page({
         title: '抠脸中...',
         mask: true
       })
+      const compressSrc = await compressImage(tempFilePaths[0]);
+      await checkImage(compressSrc);
+
       const base64 = await readFile(tempFilePaths[0], 'base64');
       const res = await segment(base64);
       const { fileManager, filePath } = await writeFile(res.PortraitImage);
