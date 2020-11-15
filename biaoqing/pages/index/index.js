@@ -1,5 +1,6 @@
 //index.js
 //获取应用实例
+import user from '../../utils/user.js'
 import { myRequest } from '../../utils/request.js'
 import { createInterstitialAd, getImageInfo, chooseImage, readFile, writeFile, canvasToTempFilePath, saveImageToPhotosAlbum } from '../../utils/util.js'
 import { uploadFile } from '../../utils/upload.js'
@@ -81,6 +82,7 @@ Page({
       })
     } else {
       this.setData({
+        isSelfDefine: false,
         [`${this.data.selectedUpTab}TabIndex`]: index
       })
       this.getList();
@@ -137,6 +139,11 @@ Page({
   chooseImage: async function () {
     try {
       const tempFilePaths = await chooseImage();
+      
+      wx.showLoading({
+        title: '抠脸中...',
+        mask: true
+      })
       const base64 = await readFile(tempFilePaths[0], 'base64');
       const res = await myRequest({
         url: 'http://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/segment',
@@ -148,19 +155,57 @@ Page({
       const { fileManager, filePath } = await writeFile(res.data.PortraitImage);
       let url = await uploadFile(filePath, 'biaoqing_user_face_');
       url += '?imageMogr2/scrop/200x200';
+      
+      let faces = [{
+        userId: user.openid,
+        url: url
+      }]
 
-      await grayscale(url);
-      const tempFilePath = await canvasToTempFilePath({
-        width: 200,
-        height: 200,
-        destWidth: 200,
-        destHeight: 200,
-        canvasId: 'pixel',
-        fileType: 'png'
+      const next = () => {
+        let list = this.data.list;
+        list = [...faces, ...list];
+        this.setData({
+          list: list
+        }, () => {
+          wx.hideLoading();
+        })
+
+        myRequest({
+          url: 'http://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/face/saveface',
+          data: {
+            faces: faces
+          }
+        })
+      }
+
+      try {
+        await grayscale(url);
+        const tempFilePath = await canvasToTempFilePath({
+          width: 200,
+          height: 200,
+          destWidth: 200,
+          destHeight: 200,
+          canvasId: 'pixel',
+          fileType: 'png'
+        })
+        const grayurl = await uploadFile(tempFilePath, 'biaoqing_user_face_');
+
+        faces.push({
+          userId: user.openid,
+          url: grayurl
+        })
+
+        next();
+      } catch (error) {
+        next();
+      }
+
+      fileManager.unlink({
+        filePath: filePath
       })
-      const grayurl = await uploadFile(tempFilePath, 'biaoqing_user_face_');
     } catch (error) {
       console.log('error', error);
+      wx.hideLoading();
       if (typeof(error) == 'string') {
         wx.showToast({
           title: error,
