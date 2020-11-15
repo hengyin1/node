@@ -130,7 +130,7 @@ export const getImageInfo = (src) => {
   })
 }
 
-const render = (context) => {
+export const render = (context) => {
   return new Promise((resolve, reject) => {
     context.draw(false, () => {
       resolve();
