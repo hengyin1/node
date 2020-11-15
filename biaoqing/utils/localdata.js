@@ -2936,3 +2936,29 @@ export const faces = {
     }
   ]
 }
+
+
+export const segmentErrorCode = {
+    'FailedOperation.BodyFeatureFail': '请上传单人正脸照',
+    'FailedOperation.BodyJointsFail': '请上传单人正脸照',
+    'FailedOperation.BodyQualityNotQualified': '请上传清晰单人正脸照',
+    'FailedOperation.ImageDecodeFailed': '图片解码失败，请稍后再试',
+    'FailedOperation.ImageDownloadError': '图片下载错误，请稍后再试',
+    'FailedOperation.ImageFacedetectFailed': '请上传单人正脸照',
+    'FailedOperation.ImageResolutionExceed': '图片太大',
+    'FailedOperation.ImageResolutionInsufficient': '图片太小',
+    'FailedOperation.ImageSizeExceed': '图片太大',
+    'FailedOperation.InnerError': '服务内部错误，请稍后再试',
+    'FailedOperation.NoBodyInPhoto': '请上传单人正脸照',
+    'FailedOperation.ProfileNumExceed': '图片中人像过多',
+    'FailedOperation.RequestEntityTooLarge': '图片太大',
+    'FailedOperation.RequestTimeout': '请稍后再试',
+    'FailedOperation.SegmentFailed': '请稍后再试',
+    'FailedOperation.ServerError': '请稍后再试',
+    'FailedOperation.UnKnowError': '请稍后再试',
+    'InvalidParameter.InvalidParameter': '参数不合法',
+    'InvalidParameterValue.ImageEmpty': '请上传单人正脸照',
+    'nvalidParameterValue.NoFaceInPhoto': '请上传单人正脸照',
+    'LimitExceeded.TooLargeFileError': '图片太大',
+    'MissingParameter.ErrorParameterEmpty': '必选参数为空'
+}

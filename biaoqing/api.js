@@ -1,5 +1,6 @@
 import { myRequest } from './utils/request.js'
 import cache from './utils/globalcache.js'
+import { segmentErrorCode } from './utils/localdata.js'
 
 export const checkText = (text, successCB, failCB) => {
   if (wx.cloud) {
@@ -24,12 +25,18 @@ export const checkText = (text, successCB, failCB) => {
 }
 
 export const segment = (base64) => {
-  return myRequest({
-    url: 'http://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/segment',
-    data: {
-      Image: base64
-    },
-    method: 'POST'
+  return new Promise((resolve, reject) => {
+    myRequest({
+      url: 'http://xiaoyi-9gbmzgun8d099b01.service.tcloudbase.com/express-starter/segment',
+      data: {
+        Image: base64
+      },
+      method: 'POST'
+    }).then(res => {
+      resolve(res);
+    }, err => {
+      reject(segmentErrorCode[err] || err);
+    })
   })
 }
 
