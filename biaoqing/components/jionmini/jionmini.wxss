@@ -14,9 +14,9 @@
 .jion-box ::after {
   content: "";
   border: 6px solid transparent;
-  border-bottom-color: rgba(0, 0, 0, 0.6);
+  border-bottom-color: rgba(0, 0, 0, 0.17);
   position: absolute;
-  right: 20%;
+  right: 17%;
   top: -12px;
 }
 .des-text {
