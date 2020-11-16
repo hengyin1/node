@@ -41,8 +41,8 @@
           <view class="camera-icon-box" style="margin: 10rpx;" bind:tap="chooseImage">
             <image class="camera-icon" src="/images/camera.png" />
           </view>
-          <view wx:for="{{list}}" wx:key="index" data-index="{{index}}" bind:tap="chooseItem">
-            <image class="list-item-image" src="{{item.url}}" mode="aspectFit" lazy-load="{{true}}" />
+          <view wx:for="{{list}}" wx:key="index" class="list-item" data-index="{{index}}" bind:tap="chooseItem">
+            <image class="list-item-image face-image" src="{{item.url}}" mode="aspectFit" lazy-load="{{true}}" />
           </view>
         </view>
         <view wx:else class="camera-box flex-column-center" bind:tap="chooseImage">
@@ -54,7 +54,7 @@
         </view>
       </block>
       <view wx:else class="lists flex-row flex-wrap">
-        <view wx:for="{{list}}" wx:key="index" data-index="{{index}}" bind:tap="chooseItem">
+        <view wx:for="{{list}}" wx:key="index" class="list-item" data-index="{{index}}" bind:tap="chooseItem">
           <image class="list-item-image" src="{{item.url}}" mode="aspectFit" lazy-load="{{true}}" />
         </view>
       </view>
