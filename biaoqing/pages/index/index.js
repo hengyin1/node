@@ -176,7 +176,7 @@ Page({
         title: '抠脸中...',
         mask: true
       })
-      const compressSrc = await compressImage(tempFilePaths[0]);
+      const compressSrc = await compressImage(tempFilePaths[0], { width, height });
       await checkImage(compressSrc);
 
       const base64 = await readFile(tempFilePaths[0], 'base64');
@@ -367,14 +367,14 @@ Page({
       })
       return false;
     }
-    if (!this.data.faceInfo || !this.data.faceInfo.path) {
-      wx.showToast({
-        title: '还没选择表情',
-        icon: 'none',
-        duration: 1500
-      })
-      return false;
-    }
+    // if (!this.data.faceInfo || !this.data.faceInfo.path) {
+    //   wx.showToast({
+    //     title: '还没选择表情',
+    //     icon: 'none',
+    //     duration: 1500
+    //   })
+    //   return false;
+    // }
     return true;
   },
   renderCanvas: function (callBack) {

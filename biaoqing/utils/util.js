@@ -151,8 +151,8 @@ export const canvasToTempFilePath = (data) => {
   })
 }
 
-export const compressImage = async (src) => {
-  const info = await getImageInfo(src);
+export const compressImage = async (src, info) => {
+  if (!info) info = await getImageInfo(src);
   const width = 100;
   const height = info.height / info.width * width;
   const context = wx.createCanvasContext('pixel');
