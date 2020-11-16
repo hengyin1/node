@@ -72,12 +72,8 @@ Page({
       downTabs: tabs[index],
       isSelfDefine: isSelfDefine
     })
-    
-    if (isSelfDefine) {
-      this.getListServer();
-    } else {
-      this.getList();
-    }
+
+    this.getData(isSelfDefine);
   },
   tapDownTab: function (e) {
     const { index } = e.currentTarget.dataset;
@@ -86,13 +82,26 @@ Page({
       isSelfDefine: isSelfDefine,
       [`${this.data.selectedUpTab}TabIndex`]: index
     })
+
+    this.getData(isSelfDefine);
+  },
+  getData: function (isSelfDefine) {
     if (isSelfDefine) {
-      this.getListServer();
+      if (this.data.selectedUpTab == 'tem') {
+        this.getTemList();
+      } else if (this.data.selectedUpTab == 'face') {
+        this.getFaceList();
+      }
     } else {
       this.getList();
     }
   },
-  getListServer: function () {
+  getTemList: function () {
+    this.setData({
+      list: []
+    })
+  },
+  getFaceList: function () {
     this.setData({
       list: []
     })
@@ -159,7 +168,40 @@ Page({
       })
     }
   },
-  chooseImage: async function () {
+  chooseImage: function () {
+    if (this.data.selectedUpTab == 'tem') {
+      this.chooseTemImage();
+    } else if (this.data.selectedUpTab == 'face') {
+      this.chooseFaceImage();
+    }
+  },
+  chooseTemImage: async function () {
+    try {
+      const { tempFilePaths } = await chooseImage();
+      const { width, height, path } = await getImageInfo(tempFilePaths[0]);
+
+      wx.showLoading({
+        title: '加载中...',
+        mask: true
+      })
+      const compressSrc = await compressImage(tempFilePaths[0], { width, height });
+      await checkImage(compressSrc);
+
+      wx.hideLoading();
+      this.setTemSize({width, height, path}, { face_x: 0, face_y: 0, face_width: 120, face_height: 120 });
+    } catch (error) {
+      console.log('error', error);
+      wx.hideLoading();
+      if (typeof(error) == 'string') {
+        wx.showToast({
+          title: error,
+          icon: 'none',
+          duration: 1500
+        })
+      }
+    }
+  },
+  chooseFaceImage: async function () {
     try {
       const { tempFilePaths, size } = await chooseImage();
       const { width, height } = await getImageInfo(tempFilePaths[0]);
@@ -278,6 +320,11 @@ Page({
       faceInfo: pic
     })
   },
+  deleteFace: function () {
+    this.setData({
+      faceInfo: null
+    })
+  },
   touchstart: function (e) {
     let pageX, pageY;
     this.startPoint = { pageX, pageY } = e.touches[0];
@@ -382,8 +429,10 @@ Page({
     const { path: tem_path, width: tem_width, height: tem_height, face_center_x, face_center_y } = this.data.temInfo;
     context.drawImage(tem_path, 0, 0, tem_width, tem_height);
 
-    const { path, width, height } = this.data.faceInfo;
-    context.drawImage(path, face_center_x - 0.5 * width, face_center_y - 0.5 * height, width, height);
+    if (this.data.faceInfo) {
+      const { path, width, height } = this.data.faceInfo;
+      context.drawImage(path, face_center_x - 0.5 * width, face_center_y - 0.5 * height, width, height);
+    }
 
     context.draw(false, () => {
       wx.canvasToTempFilePath({

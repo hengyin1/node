@@ -3,7 +3,7 @@
   <jion-mini></jion-mini>
   <view class="pic-box flex-row-center" bind:touchstart="touchstart" bind:touchmove="touchmove">
     <view wx:if="{{!temInfo.path}}" style="font-size: 36rpx;">
-      <view style="margin-bottom: 10rpx;color: #d81e06;font-size: 32rpx;">*使用说明</view>
+      <view style="margin-bottom: 10rpx;color: #e1473c;font-size: 32rpx;">*使用说明</view>
       <view>1.选择一个形象</view>
       <view>2.选择一个表情</view>
       <view>3.单指可拖动表情位置</view>
@@ -13,7 +13,7 @@
       <image wx:if="{{temInfo.path}}" src="{{temInfo.path}}" style="display: block;width: {{temInfo.width}}px;height: {{temInfo.height}}px;" />
       <view wx:if="{{faceInfo.path}}" class="face-box" style="left: {{temInfo.face_center_x}}px;top: {{temInfo.face_center_y}}px;width: {{faceInfo.width}}px;height: {{faceInfo.height}}px;">
         <image src="{{faceInfo.path}}" style="display: block;width: 100%;height: 100%;" />
-        <!-- <image class="scale-icon" src="/images/scale.png" /> -->
+        <image class="cancel-icon" src="/images/cancel.png" bind:tap="deleteFace" />
       </view>
     </view>
   </view>
@@ -30,7 +30,7 @@
         <view class="down-tab-item" wx:for="{{downTabs}}" wx:key="index" data-index="{{item.value}}" bind:tap="tapDownTab">
           <view class="{{(selectedUpTab == 'tem' && temTabIndex == item.value || selectedUpTab == 'face' && faceTabIndex == item.value) ? 'down-tab-item-active' : ''}}">{{item.name}}</view>
 
-          <image wx:if="{{item.value == 10000}}" lazy-load="{{true}}" src="https://youtupics.maiyizhi.cn/new_1.png" style="position: absolute;right: -48rpx;top: 0rpx;width: 48rpx;height: 28rpx;"></image>
+          <view wx:if="{{item.value == 10000}}" class="new-icon"></view>
         </view>
       </view>
     </scroll-view>
@@ -49,8 +49,8 @@
           <view class="camera-icon-box">
             <image class="camera-icon" src="/images/camera.png" />
           </view>
-          <view style="margin-bottom: 10rpx;font-size: 34rpx;">选择单人正脸照</view>
-          <view style="font-size: 26rpx;">将抠出人脸部分，可作为表情使用</view>
+          <view style="margin-bottom: 10rpx;font-size: 34rpx;">{{selectedUpTab == 'tem' ? '上传图片' : '选择单人正脸照'}}</view>
+          <view style="font-size: 26rpx;">{{selectedUpTab == 'tem' ? '作为形象使用' : '抠出人脸部分，作为表情使用'}}</view>
         </view>
       </block>
       <view wx:else class="lists flex-row flex-wrap">

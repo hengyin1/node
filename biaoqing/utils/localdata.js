@@ -5,6 +5,10 @@ export const tabs = {
         "name":"热门"
     },
     {
+        "value":10000,
+        "name":"自定义"
+    },
+    {
         "value":1,
         "name":"熊猫头"
     },
@@ -31,8 +35,12 @@ export const tabs = {
   ],
   face: [
     {
-      "value":0,
-      "name":"热门"
+        "value":0,
+        "name":"热门"
+    },
+    {
+        "value":10000,
+        "name":"自定义"
     },
     {
         "value":1,
@@ -45,10 +53,6 @@ export const tabs = {
     {
        "value":999,
        "name":"其他"
-    },
-    {
-       "value":10000,
-       "name":"自定义"
     }
   ]
 }

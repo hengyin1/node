@@ -8,18 +8,18 @@
 .face-box {
   position: absolute;
   transform: translate(-50%, -50%);
-  border: 1px solid #d81e06;
+  border: 1px solid #e1473c;
   z-index: 0;
 }
 
-/* .scale-icon {
+.cancel-icon{
   position: absolute;
+  top: 0;
   right: 0;
-  bottom: 0;
-  width: 40rpx;
-  height: 40rpx;
-  transform: translate(50%, 50%);
-} */
+  width: 48rpx;
+  height: 48rpx;
+  transform: translate(50%, -50%);
+}
 
 .up-tab {
   margin: 10rpx auto;
@@ -61,6 +61,16 @@
   color: #ffffff;
   border-radius: 6rpx;
   background-color: #07c160;
+}
+
+.new-icon {
+  position: absolute;
+  top: 0rpx;
+  right: 0rpx;
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background-color: #e1473c;
 }
 
 .lists-box {
