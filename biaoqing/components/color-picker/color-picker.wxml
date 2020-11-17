@@ -1,1 +1,0 @@
-<canvas canvas-id="colorpicker" class="colorpicker" bindtouchstart="touchstart" bindtouchmove="touchmove" disableScroll="{{true}}"></canvas>

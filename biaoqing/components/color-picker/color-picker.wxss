@@ -1,6 +1,0 @@
-.colorpicker {
-	display: block;
-	width: 720rpx;
-	height: 72rpx;
-	margin: 0 auto;
-}

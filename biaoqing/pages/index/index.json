@@ -1,7 +1,0 @@
-{
-  "disableScroll": true,
-  "usingComponents": {
-    "jion-mini": "/components/jionmini/jionmini",
-    "video-dialog": "/components/videodialog/dialog"
-  }
-}
