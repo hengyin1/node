@@ -1,5 +1,0 @@
-<view class="container">
-    <image class="image" src="/images/index.gif"></image>
-    <view style="color: rgb(204, 88, 73);font-size: 32rpx;margin-bottom: 10rpx;">*请选择正脸照</view>
-    <button class="button" type="primary" bind:tap="upload">点击制作卡通头像</button>
-</view>

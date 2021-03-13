@@ -1,6 +1,0 @@
-{
-    "enablePullDownRefresh": true,
-    "usingComponents": {
-        "custom-button": "../../components/custom-button/index"
-    }
-}
