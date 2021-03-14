@@ -1,5 +1,4 @@
 const path = require('path');
-const Webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
@@ -11,15 +10,16 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
     library: 'largeNumber',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    libraryExport: 'default' 
   },
   mode: 'none',
   optimization: {
     minimize: true,
-    // minimizer: [
-    //   new TerserPlugin({
-    //     include: /\.min\.js$/
-    //   })
-    // ]
+    minimizer: [
+      new TerserPlugin({
+        // include: /\.min\.js$/
+      })
+    ]
   }
 }
