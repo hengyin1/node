@@ -1,4 +1,6 @@
 const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin'); 
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
@@ -14,12 +16,25 @@ module.exports = {
     libraryExport: 'default' 
   },
   mode: 'none',
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        use: 'babel-loader'
+      }
+    ]
+  },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new FriendlyErrorsWebpackPlugin()
+  ],
   optimization: {
     minimize: true,
     minimizer: [
       new TerserPlugin({
-        // include: /\.min\.js$/
+        include: /\.min\.js$/
       })
     ]
-  }
+  },
+  stats: 'errors-only'
 }

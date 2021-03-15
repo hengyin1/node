@@ -6,8 +6,7 @@ module.exports = {
   entry: './src/search/index.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name]-server.js',
-    libraryTarget: 'umd'
+    filename: '[name]-[chunkhash:8].js',
   },
   mode: 'production',
   module: {
@@ -20,11 +19,11 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    // new HtmlWebpackPlugin({
-    //   filename: 'search.html',
-    //   template: '/src/search/index.html',
-    //   inject: true
-    // })
+    new HtmlWebpackPlugin({
+      filename: 'search.html',
+      template: '/src/search/index.html',
+      inject: true
+    })
   ]
   // optimization: {
   //   minimize: true,

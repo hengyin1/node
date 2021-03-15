@@ -1,5 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+const React = require('react');
 
 class Search extends React.Component {
   constructor(props) {
@@ -11,5 +12,6 @@ class Search extends React.Component {
   }
 }
 
+module.exports = <Search />;
 // export default Search;
-ReactDOM.render(<Search />, document.getElementById('root'))
+// ReactDOM.render(<Search />, document.getElementById('root'))
