@@ -24,7 +24,29 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']
+        use: [
+          MiniCssExtractPlugin.loader, 
+          {
+            loader: "css-loader",
+            options: { importLoaders: 1 }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    "autoprefixer",
+                    {
+                      // 选项
+                    }
+                  ]
+                ]
+              }
+            }
+          },
+          'less-loader'
+        ]
       },
       {
         test: /\.(png|jpg|gif)$/i,
