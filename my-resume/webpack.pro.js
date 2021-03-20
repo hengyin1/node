@@ -1,6 +1,9 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default;
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: './src/search/index.jsx',
@@ -21,7 +24,7 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'less-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']
       },
       {
         test: /\.(png|jpg|gif)$/i,
@@ -31,18 +34,23 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    }),
     new HtmlWebpackPlugin({
       filename: 'search.html',
       template: '/src/search/index.html',
       inject: true
-    })
-  ]
-  // optimization: {
-  //   minimize: true,
-  //   minimizer: [
-  //     new TerserPlugin({
-  //       // include: /\.min\.js$/
-  //     })
-  //   ]
-  // }
+    }),
+    new HTMLInlineCSSWebpackPlugin(),
+  ],
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        // include: /\.min\.js$/
+      })
+    ]
+  }
 }
