@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // const React = require('react');
 import './index.less';
-import blog from '../images/blog.png';
+import blog from './images/blog.png';
 
 class Search extends React.Component {
   constructor(props) {

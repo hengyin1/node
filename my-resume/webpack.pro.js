@@ -1,3 +1,4 @@
+const glob = require('glob');
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -6,11 +7,41 @@ const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').def
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 // const TerserPlugin = require('terser-webpack-plugin');
 
+const setMPA = () => {
+  const entry = {};
+  const htmlWebpackPlugins = [];
+
+  const entryFiles = glob.sync(path.resolve(__dirname, './src/*/index.jsx'));
+  entryFiles.forEach(entryFile => {
+    const match = entryFile.match(/src\/(.*)\//);
+    if (match && match[1]) {
+      const pageName = match[1];
+      entry[pageName] = entryFile;
+  
+      htmlWebpackPlugins.push(
+        new HtmlWebpackPlugin({
+          filename: `${pageName}.html`,
+          template: `/src/${pageName}/index.html`,
+          chunks: [pageName],
+          inject: true
+        })
+      )
+    }
+  })
+
+  return { 
+    entry,
+    htmlWebpackPlugins
+  }
+}
+
+const { entry, htmlWebpackPlugins } = setMPA(); 
+
 module.exports = {
-  entry: './src/search/index.jsx',
+  entry: entry,
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name]-[chunkhash:8].js',
+    filename: '[name].js',
   },
   mode: 'production',
   module: {
@@ -61,11 +92,7 @@ module.exports = {
       filename: "[name].css",
       chunkFilename: "[id].css"
     }),
-    new HtmlWebpackPlugin({
-      filename: 'search.html',
-      template: '/src/search/index.html',
-      inject: true
-    }),
+   ...htmlWebpackPlugins,
     new HTMLInlineCSSWebpackPlugin(),
   ],
   optimization: {
