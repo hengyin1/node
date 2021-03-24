@@ -77,7 +77,14 @@ module.exports = {
               }
             }
           },
-          'less-loader'
+          'less-loader',
+          {
+            loader: 'px2rem-loader',
+            options: {
+              remUni: 75,
+              remPrecision: 8
+            }
+          }
         ]
       },
       {
