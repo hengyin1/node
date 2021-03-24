@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default;
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-// const TerserPlugin = require('terser-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const setMPA = () => {
   const entry = {};
@@ -105,9 +105,9 @@ module.exports = {
   optimization: {
     minimize: true,
     minimizer: [
-      // new TerserPlugin({
-      //   // include: /\.min\.js$/
-      // })
+      new TerserPlugin({
+        // include: /\.min\.js$/
+      }),
       new CssMinimizerPlugin()
     ]
   }

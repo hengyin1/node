@@ -7,12 +7,27 @@ import blog from './images/blog.png';
 class Search extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      Text: null
+    }
+  }
+
+  loadComponent() {
+    import('./text.jsx').then(res => {
+      this.setState({
+        Text: res.default
+      })
+    })
   }
    
   render() {
-    return <div>
+    const { Text } = this.state;
+    return <div onClick={this.loadComponent.bind(this)}>
       hello, world
       <img src={blog}></img>
+      {
+        Text ? <Text></Text> : null 
+      }
     </div>
   }
 }
