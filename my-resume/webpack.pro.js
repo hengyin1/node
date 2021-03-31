@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default;
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const setMPA = () => {
   const entry = {};
@@ -101,6 +102,7 @@ module.exports = {
     }),
    ...htmlWebpackPlugins,
     new HTMLInlineCSSWebpackPlugin(),
+    new ESLintPlugin()
   ],
   optimization: {
     minimize: true,
