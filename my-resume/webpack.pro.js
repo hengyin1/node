@@ -1,5 +1,6 @@
 const glob = require('glob');
 const path = require('path');
+const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -7,6 +8,9 @@ const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').def
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin'); 
+
+const compiler = new webpack.Compiler();
 
 const setMPA = () => {
   const entry = {};
@@ -96,13 +100,19 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new FriendlyErrorsWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css"
     }),
    ...htmlWebpackPlugins,
     new HTMLInlineCSSWebpackPlugin(),
-    new ESLintPlugin()
+    new ESLintPlugin(),
+    function () {
+      compiler.hooks.done.tap('done', (stats) => {
+        console.log('build stats', stats);
+      });
+    },
   ],
   optimization: {
     minimize: true,
