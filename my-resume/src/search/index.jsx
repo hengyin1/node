@@ -26,7 +26,7 @@ class Search extends React.Component {
       hello, world
       <img src={blog}></img>
       {
-        Text ? <Text></Text> : null 
+        Text ? <Text /> : null 
       }
     </div>
   }

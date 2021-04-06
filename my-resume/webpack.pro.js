@@ -7,10 +7,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default;
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin'); 
-
-const compiler = new webpack.Compiler();
+// const ESLintPlugin = require('eslint-webpack-plugin');
+// const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 const setMPA = () => {
   const entry = {};
@@ -53,7 +51,10 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
-        use: ['babel-loader', 'eslint-loader']
+        use: [
+          'babel-loader', 
+          // 'eslint-loader'
+        ]
       },
       {
         test: /\.css$/,
@@ -100,17 +101,19 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new FriendlyErrorsWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css"
     }),
-   ...htmlWebpackPlugins,
+    ...htmlWebpackPlugins,
     new HTMLInlineCSSWebpackPlugin(),
-    new ESLintPlugin(),
+    // new ESLintPlugin(),
+    // new FriendlyErrorsWebpackPlugin(),
     function () {
-      compiler.hooks.done.tap('done', (stats) => {
-        console.log('build stats', stats);
+      this.hooks.done.tap('done', (stats) => {
+        if (stats.compilation.errors && stats.compilation.errors.length && process.argv.indexOf('--watch') == -1) {
+          process.exit(1);
+        }
       });
     },
   ],
