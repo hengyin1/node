@@ -5,14 +5,14 @@ const baseConfig = require('./webpack.base.js');
 const devConfig = {
   mode: 'development',
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
   ],
   devServer: {
     contentBase: './dist',
     hot: true,
-    stats: 'errors-only'
+    stats: 'errors-only',
   },
-  devtool: 'source-map'
+  devtool: 'source-map',
 };
 
 module.exports = merge(baseConfig, devConfig);

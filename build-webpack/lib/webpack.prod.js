@@ -7,7 +7,7 @@ const baseConfig = require('./webpack.base.js');
 const prodConfig = {
   mode: 'production',
   plugins: [
-    new HTMLInlineCSSWebpackPlugin()
+    new HTMLInlineCSSWebpackPlugin(),
   ],
   optimization: {
     minimize: true,
@@ -15,9 +15,9 @@ const prodConfig = {
       new TerserPlugin({
         // include: /\.min\.js$/
       }),
-      new CssMinimizerPlugin()
-    ]
-  }
+      new CssMinimizerPlugin(),
+    ],
+  },
 };
 
 module.exports = merge(baseConfig, prodConfig);

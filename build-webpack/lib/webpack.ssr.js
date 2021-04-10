@@ -6,21 +6,21 @@ const ssrConfig = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name]-server.js',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
   },
   mode: 'production',
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: 'ignore-loader'
+        use: 'ignore-loader',
       },
       {
         test: /\.less$/,
-        use: 'ignore-loader'
-      }
-    ]
-  }
+        use: 'ignore-loader',
+      },
+    ],
+  },
 };
 
 module.exports = merge(baseConfig, ssrConfig);

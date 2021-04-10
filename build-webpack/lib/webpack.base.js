@@ -10,19 +10,19 @@ const setMPA = () => {
   const htmlWebpackPlugins = [];
 
   const entryFiles = glob.sync(path.resolve(__dirname, './src/*/index.jsx'));
-  entryFiles.forEach(entryFile => {
+  entryFiles.forEach((entryFile) => {
     const match = entryFile.match(/src\/(.*)\//);
     if (match && match[1]) {
       const pageName = match[1];
       entry[pageName] = entryFile;
-  
+
       htmlWebpackPlugins.push(
         new HtmlWebpackPlugin({
           filename: `${pageName}.html`,
           template: `/src/${pageName}/index.html`,
           chunks: [pageName],
-          inject: true
-        })
+          inject: true,
+        }),
       );
     }
   });
@@ -30,31 +30,31 @@ const setMPA = () => {
   return { entry, htmlWebpackPlugins };
 };
 
-const { entry, htmlWebpackPlugins } = setMPA(); 
+const { entry, htmlWebpackPlugins } = setMPA();
 
 module.exports = {
-  entry: entry,
+  entry,
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js'
+    filename: '[name].js',
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
-        use: ['babel-loader']
+        use: ['babel-loader'],
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.less$/,
         use: [
-          MiniCssExtractPlugin.loader, 
+          MiniCssExtractPlugin.loader,
           {
-            loader: "css-loader",
-            options: { importLoaders: 1 }
+            loader: 'css-loader',
+            options: { importLoaders: 1 },
           },
           {
             loader: 'postcss-loader',
@@ -62,37 +62,37 @@ module.exports = {
               postcssOptions: {
                 plugins: [
                   [
-                    "autoprefixer",
+                    'autoprefixer',
                     {
                       // 选项
-                    }
-                  ]
-                ]
-              }
-            }
+                    },
+                  ],
+                ],
+              },
+            },
           },
           'less-loader',
           {
             loader: 'px2rem-loader',
             options: {
               remUni: 75,
-              remPrecision: 8
-            }
-          }
-        ]
+              remPrecision: 8,
+            },
+          },
+        ],
       },
       {
         test: /\.(png|jpg|gif)$/i,
-        use: 'file-loader'
-      }
-    ]
+        use: 'file-loader',
+      },
+    ],
   },
   plugins: [
     new CleanWebpackPlugin(),
     new FriendlyErrorsWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     }),
     ...htmlWebpackPlugins,
     function () {
@@ -101,7 +101,7 @@ module.exports = {
           process.exit(1);
         }
       });
-    }
+    },
   ],
-  stats: 'errors-only'
-}
+  stats: 'errors-only',
+};
