@@ -5,11 +5,13 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const projectRoot = process.cwd();
+
 const setMPA = () => {
   const entry = {};
   const htmlWebpackPlugins = [];
 
-  const entryFiles = glob.sync(path.resolve(__dirname, './src/*/index.jsx'));
+  const entryFiles = glob.sync(path.resolve(projectRoot, './src/*/index.jsx'));
   entryFiles.forEach((entryFile) => {
     const match = entryFile.match(/src\/(.*)\//);
     if (match && match[1]) {
@@ -35,7 +37,7 @@ const { entry, htmlWebpackPlugins } = setMPA();
 module.exports = {
   entry,
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(projectRoot, 'dist'),
     filename: '[name].js',
   },
   module: {
