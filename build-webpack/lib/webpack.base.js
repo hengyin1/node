@@ -21,7 +21,7 @@ const setMPA = () => {
       htmlWebpackPlugins.push(
         new HtmlWebpackPlugin({
           filename: `${pageName}.html`,
-          template: `/src/${pageName}/index.html`,
+          template: path.resolve(projectRoot, `./src/${pageName}/index.html`),
           chunks: [pageName],
           inject: true,
         }),
@@ -97,13 +97,13 @@ module.exports = {
       chunkFilename: '[id].css',
     }),
     ...htmlWebpackPlugins,
-    function () {
-      this.hooks.done.tap('done', (stats) => {
-        if (stats.compilation.errors && stats.compilation.errors.length && process.argv.indexOf('--watch') === -1) {
-          process.exit(1);
-        }
-      });
-    },
+    // function () {
+    //   this.hooks.done.tap('done', (stats) => {
+    //     if (stats.compilation.errors && stats.compilation.errors.length && process.argv.indexOf('--watch') === -1) {
+    //       process.exit(1);
+    //     }
+    //   });
+    // },
   ],
   stats: 'errors-only',
 };
