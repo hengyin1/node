@@ -1,6 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
 const rimraf = require('rimraf');
+const Mocha = require('mocha');
+
+const mocha = new Mocha({
+  timeout: '10000ms'
+});
 
 process.chdir(path.join(__dirname, 'template'));
 
@@ -17,5 +22,9 @@ rimraf('./dist', () => {
       module: false,
       children: false
     }));
+
+    mocha.addFile(path.join(__dirname, 'html-test.js'));
+
+    mocha.run();
   });
 });
