@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/.bin/_mocha",
     "eslint": "./node_modules/.bin/eslint lib/ --fix"
   },
   "author": "",
@@ -37,6 +37,7 @@
     "@babel/core": "^7.13.15",
     "@babel/preset-env": "^7.13.15",
     "@babel/preset-react": "^7.13.13",
+    "assert": "^2.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.24.0",
     "eslint-config-airbnb-base": "^14.2.1",
