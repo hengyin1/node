@@ -3,8 +3,11 @@ const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').def
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const baseConfig = require('./webpack.base.js');
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 
-const prodConfig = {
+const smp = new SpeedMeasurePlugin();
+
+const prodConfig = smp.wrap({
   mode: 'production',
   plugins: [
     new HTMLInlineCSSWebpackPlugin(),
@@ -18,6 +21,6 @@ const prodConfig = {
       new CssMinimizerPlugin(),
     ],
   },
-};
+});
 
 module.exports = merge(baseConfig, prodConfig);
