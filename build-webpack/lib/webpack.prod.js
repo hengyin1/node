@@ -2,8 +2,9 @@ const { merge } = require('webpack-merge');
 const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default;
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const baseConfig = require('./webpack.base.js');
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const baseConfig = require('./webpack.base.js');
 
 const smp = new SpeedMeasurePlugin();
 
@@ -19,6 +20,7 @@ const prodConfig = smp.wrap({
         // include: /\.min\.js$/
       }),
       new CssMinimizerPlugin(),
+      new BundleAnalyzerPlugin(),
     ],
   },
 });
