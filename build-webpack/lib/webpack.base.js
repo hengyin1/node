@@ -44,7 +44,15 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
-        use: ['babel-loader'],
+        use: [
+          {
+            loader: 'thread-loader',
+            options: {
+              workers: 3
+            }
+          },
+          'babel-loader'
+        ],
       },
       {
         test: /\.css$/,
