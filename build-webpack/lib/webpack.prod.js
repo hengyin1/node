@@ -17,7 +17,8 @@ const prodConfig = smp.wrap({
     minimize: true,
     minimizer: [
       new TerserPlugin({
-        // include: /\.min\.js$/
+        // include: /\.min\.js$/,
+        parallel: true
       }),
       new CssMinimizerPlugin(),
       new BundleAnalyzerPlugin(),
