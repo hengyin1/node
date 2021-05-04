@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default;
 const TerserPlugin = require('terser-webpack-plugin');
@@ -12,6 +13,9 @@ const prodConfig = smp.wrap({
   mode: 'production',
   plugins: [
     new HTMLInlineCSSWebpackPlugin(),
+    new webpack.DllReferencePlugin({
+      manifest: require('./build/library/library.json')
+    })
   ],
   optimization: {
     minimize: true,

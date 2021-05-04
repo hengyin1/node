@@ -6,7 +6,8 @@
   "scripts": {
     "test": "./node_modules/.bin/_mocha",
     "coverage": "nyc npm run test",
-    "eslint": "./node_modules/.bin/eslint lib/ --fix"
+    "eslint": "./node_modules/.bin/eslint lib/ --fix",
+    "dll": "webpack --config webpack.dll.js"
   },
   "author": "",
   "license": "ISC",
