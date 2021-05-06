@@ -51,7 +51,7 @@ module.exports = {
               workers: 3
             }
           },
-          'babel-loader'
+          'babel-loader?cacheDirectory'
         ],
       },
       {
