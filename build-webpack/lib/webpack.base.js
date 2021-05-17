@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 const projectRoot = process.cwd();
 
@@ -105,6 +106,7 @@ module.exports = {
       chunkFilename: '[id].css',
     }),
     ...htmlWebpackPlugins,
+    new HardSourceWebpackPlugin()
     // function () {
     //   this.hooks.done.tap('done', (stats) => {
     //     if (stats.compilation.errors && stats.compilation.errors.length && process.argv.indexOf('--watch') === -1) {
