@@ -115,5 +115,8 @@ module.exports = {
     //   });
     // },
   ],
+  performance: {
+    hints: false
+  },
   stats: 'errors-only',
 };
