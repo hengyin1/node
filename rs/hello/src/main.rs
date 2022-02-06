@@ -1,19 +1,36 @@
-#[derive(Debug)]
-struct Matrix(f32, f32, f32, f32);
+// #[derive(Debug)]
+// struct Matrix(f32, f32, f32, f32);
+// use std::mem;
 
 fn main() {
-    println!("{0}, this is {1}. {1}, this is {0}", "Alice", "Bob");
+    let numbers = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-    println!("{subject} {verb} {object}",
-    object="the lazy dog",
-    subject="the quick brown fox",
-    verb="jumps over");
+    let even_numbers = numbers
+        .into_iter()
+        .filter(|n| n % 2 == 0)
+        .collect::<Vec<_>>();
 
-    println!("{} of {:b} people know binary, the other half doesn't", 1, 2);
+    println!("{:?}", even_numbers);
 
-    println!("{number:>width$}", number=1, width=6);
+    // let xs: [i32; 5] = [1, 2, 3, 4, 5];
+    // println!("array occupies {} bytes", mem::size_of_val(&xs));
 
-    println!("{number:0>width$}", number=1, width=6);
+    // let ys: [i32 ; 500] = [0 ; 500];
+    // println!("ys len is {}", ys.len());
+    // println!("ys is {:?}", ys);
+    // println!("{:?}", &ys[1 .. 4]);
+    // println!("{0}, this is {1}. {1}, this is {0}", "Alice", "Bob");
+
+    // println!("{subject} {verb} {object}",
+    // object="the lazy dog",
+    // subject="the quick brown fox",
+    // verb="jumps over");
+
+    // println!("{} of {:b} people know binary, the other half doesn't", 1, 2);
+
+    // println!("{number:>width$}", number=1, width=6);
+
+    // println!("{number:0>width$}", number=1, width=6);
 
     // let pair = (1, false);
     // println!("the pair first value is {}", pair.0);
