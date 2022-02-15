@@ -1,31 +1,3 @@
-// use clsp::{AppSettings, Clap};
-
-// #[derive(Clap, Debug)]
-// struct Opts {
-//     subcmd: SubCommand,
-// }
-
-// enum SubCommand {
-//     Get(Get),
-//     Post(Post),
-// }
-
-// struct Get {
-//     url: String,
-// }
-
-// struct Post {
-//     url: String,
-//     body: Vec<String>,
-// }
-
-
-// fn main() {
-//     let opts = Opts::parse();
-//     println!("{}", opts);
-// }
-
-
 use clap::{AppSettings, Clap};
 
 // 定义 HTTPie 的 CLI 的主入口，它包含若干个子命令
@@ -72,4 +44,4 @@ struct Post {
 fn main() {
     let opts: Opts = Opts::parse();
     println!("{:?}", opts);
-} 
+}

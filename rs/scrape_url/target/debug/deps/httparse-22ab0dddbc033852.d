@@ -1,0 +1,12 @@
+/Users/yinheng/Desktop/code/node/rs/scrape_url/target/debug/deps/httparse-22ab0dddbc033852.rmeta: /Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/lib.rs /Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/iter.rs /Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/macros.rs /Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/simd/mod.rs /Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/simd/sse42.rs /Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/simd/avx2.rs
+
+/Users/yinheng/Desktop/code/node/rs/scrape_url/target/debug/deps/libhttparse-22ab0dddbc033852.rlib: /Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/lib.rs /Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/iter.rs /Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/macros.rs /Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/simd/mod.rs /Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/simd/sse42.rs /Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/simd/avx2.rs
+
+/Users/yinheng/Desktop/code/node/rs/scrape_url/target/debug/deps/httparse-22ab0dddbc033852.d: /Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/lib.rs /Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/iter.rs /Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/macros.rs /Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/simd/mod.rs /Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/simd/sse42.rs /Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/simd/avx2.rs
+
+/Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/lib.rs:
+/Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/iter.rs:
+/Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/macros.rs:
+/Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/simd/mod.rs:
+/Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/simd/sse42.rs:
+/Users/yinheng/.cargo/registry/src/github.com-1ecc6299db9ec823/httparse-1.6.0/src/simd/avx2.rs:
