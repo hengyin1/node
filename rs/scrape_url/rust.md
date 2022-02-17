@@ -48,7 +48,7 @@ type inspections, an auto-formatter, and more.
  Build it in Rust
 ----------
 
- In 2018, the Rust community decided to improve programming experience
+ In 2018, the Rust community decided to improve the programming experience
 for a few distinct domains (see [the 2018
 roadmap](https://blog.rust-lang.org/2018/03/12/roadmap.html)). For these, you can find many high-quality crates and some
 awesome guides on how to get started.
@@ -161,7 +161,6 @@ The Rust project receives support from companies through the donation of infrast
 * [Documentation](/learn)
 * [Rust Forge (Contributor Documentation)](http://forge.rust-lang.org)
 * [Ask a Question on the Users Forum](https://users.rust-lang.org)
-* [Check Website Status](http://ping.rust-lang.org)
 
 Language English (en-US)Español (es)Français (fr)Italiano (it)日本語 (ja)Português (pt-BR)Русский (ru)Türkçe (tr)简体中文 (zh-CN)正體中文 (zh-TW)
 
