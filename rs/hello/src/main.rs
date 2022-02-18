@@ -25,12 +25,12 @@
 //   owner: UserId,
 // }
 
-// #[derive(Debug)]
-// enum Event {
-//   Join((UserId, TopicId)),
-//   Leave((UserId, TopicId)),
-//   Message((UserId, TopicId, String)),
-// }
+#[derive(Debug)]
+enum Event {
+  Join((UserId, TopicId)),
+  Leave((UserId, TopicId)),
+  Message((UserId, TopicId, String)),
+}
 
 fn fib_loop(n: u8) {
   let mut a = 1;
@@ -75,10 +75,16 @@ fn fib_for(n: u8) {
   }
 }
 
+fn process_message(event: &Event) {
+  if let Event::Message((_, _, msg)) = event {
+    println!("broadcast: {}", msg);
+  }
+}
+
 fn main() {
-  fib_loop(10);
-  fib_while(10);
-  fib_for(10);
+  // fib_loop(10);
+  // fib_while(10);
+  // fib_for(10);
   // let alice = User { id: UserId(1), name: "Alice".into(), gender: Gender::Female };
   // let bob = User { id: UserId(2), name: "Bob".into(), gender: Gender::Male };
   
