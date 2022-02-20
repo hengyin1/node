@@ -105,9 +105,26 @@ fn main() {
   // println!("data1: {:?}", data1); // error1 
   // println!("sum of data: {}", sum(&data)); // error2
 
-  let a = Rc::new(1);
-  let b = a.clone();
-  let c = a.clone();
+  // let a = Rc::new(1);
+  // let b = a.clone();
+  // let c = a.clone();
+  let s = "hello world".to_owned();
+  let mut s1 = s.as_str();
+  let hello = stroke(&mut s1, ' ');
+  println!("hello is: {}, s1: {}, s: {}", hello, s1, s);
+}
+
+fn stroke<'a>(s: &'a mut &str, delimiter: char) -> &'a str {
+  if let Some(i) = s.find(delimiter) {
+    let prefix = &s[..i];
+    let suffix = &s[i + delimiter.len_utf8()..];
+    *s = suffix;
+    prefix
+  } else {
+    let prefix = *s;
+    *s = "";
+    prefix
+  }
 }
 
 // fn sum(data: &Vec<u32>) -> u32 {
