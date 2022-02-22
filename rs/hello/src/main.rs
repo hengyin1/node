@@ -1,4 +1,4 @@
-use std::rc::Rc;
+// use std::rc::Rc;
 // #[derive(Debug)]
 // enum Gender {
 //   Unspecified = 0,
@@ -82,7 +82,7 @@ use std::rc::Rc;
 //   }
 // }
 
-fn main() {
+// fn main() {
   // fib_loop(10);
   // fib_while(10);
   // fib_for(10);
@@ -108,26 +108,71 @@ fn main() {
   // let a = Rc::new(1);
   // let b = a.clone();
   // let c = a.clone();
-  let s = "hello world".to_owned();
-  let mut s1 = s.as_str();
-  let hello = stroke(&mut s1, ' ');
-  println!("hello is: {}, s1: {}, s: {}", hello, s1, s);
-}
+//   let s = "hello world".to_owned();
+//   let mut s1 = s.as_str();
+//   let hello = stroke(&mut s1, ' ');
+//   println!("hello is: {}, s1: {}, s: {}", hello, s1, s);
+// }
 
-fn stroke<'a>(s: &'a mut &str, delimiter: char) -> &'a str {
-  if let Some(i) = s.find(delimiter) {
-    let prefix = &s[..i];
-    let suffix = &s[i + delimiter.len_utf8()..];
-    *s = suffix;
-    prefix
-  } else {
-    let prefix = *s;
-    *s = "";
-    prefix
-  }
-}
+// fn stroke<'a>(s: &'a mut &str, delimiter: char) -> &'a str {
+//   if let Some(i) = s.find(delimiter) {
+//     let prefix = &s[..i];
+//     let suffix = &s[i + delimiter.len_utf8()..];
+//     *s = suffix;
+//     prefix
+//   } else {
+//     let prefix = *s;
+//     *s = "";
+//     prefix
+//   }
+// }
 
 // fn sum(data: &Vec<u32>) -> u32 {
 //     println!("addr of value: {:p}, addr of ref: {:p}", data, &data);
 //     data.iter().fold(0, |acc, x| acc + x)
 // }
+
+
+
+use std::collections::HashMap;
+use std::mem::size_of;
+
+enum E {
+    A(f64),
+    B(HashMap<String, String>),
+    C(Result<Vec<u8>, String>),
+}
+
+// 这是一个声明宏，它会打印各种数据结构本身的大小，在 Option 中的大小，以及在 Result 中的大小
+macro_rules! show_size {
+    (header) => {
+        println!(
+            "{:<24} {:>4}    {}    {}",
+            "Type", "T", "Option<T>", "Result<T, io::Error>"
+        );
+        println!("{}", "-".repeat(64));
+    };
+    ($t:ty) => {
+        println!(
+            "{:<24} {:4} {:8} {:12}",
+            stringify!($t),
+            size_of::<$t>(),
+            size_of::<Option<$t>>(),
+            size_of::<Result<$t, std::io::Error>>(),
+        )
+    };
+}
+
+fn main() {
+    show_size!(header);
+    show_size!(u8);
+    show_size!(f64);
+    show_size!(&u8);
+    show_size!(Box<u8>);
+    show_size!(&[u8]);
+
+    show_size!(String);
+    show_size!(Vec<u8>);
+    show_size!(HashMap<String, String>);
+    show_size!(E);
+}
