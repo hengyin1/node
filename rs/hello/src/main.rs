@@ -188,55 +188,93 @@
 
 
 
-use std::{
-  collections::LinkedList,
-  ops::{Deref, DerefMut, Index},
-};
-struct List<T>(LinkedList<T>);
+// use std::{
+//   collections::LinkedList,
+//   ops::{Deref, DerefMut, Index},
+// };
+// struct List<T>(LinkedList<T>);
 
-impl<T> Deref for List<T> {
-  type Target = LinkedList<T>;
+// impl<T> Deref for List<T> {
+//   type Target = LinkedList<T>;
 
-  fn deref(&self) -> &Self::Target {
-      &self.0
-  }
+//   fn deref(&self) -> &Self::Target {
+//       &self.0
+//   }
+// }
+
+// impl<T> DerefMut for List<T> {
+//   fn deref_mut(&mut self) -> &mut Self::Target {
+//       &mut self.0
+//   }
+// }
+
+// impl<T> Default for List<T> {
+//   fn default() -> Self {
+//       Self(Default::default())
+//   }
+// }
+
+// impl<T> Index<isize> for List<T> {
+//   type Output = T;
+
+//   fn index(&self, index: isize) -> &Self::Output {
+//       let len = self.len() as isize;
+//       let n = (len + index % len) % len;
+//       let iter = self.iter();
+//       iter.skip(n as usize).next().unwrap()
+//   }
+// }
+
+// #[test]
+// fn it_works() {
+//   let mut list: List<u32> = List::default();
+//   for i in 0..16 {
+//       list.push_back(i);
+//   }
+
+//   assert_eq!(list[0], 0);
+//   assert_eq!(list[5], 5);
+//   assert_eq!(list[15], 15);
+//   assert_eq!(list[16], 0);
+//   assert_eq!(list[-1], 15);
+//   assert_eq!(list[128], 0);
+//   assert_eq!(list[-128], 0);
+// }
+
+
+
+
+
+use std::collections::HashMap;
+
+fn main() {
+    let mut map = HashMap::new();
+    explain("empty", &map);
+
+    map.insert('a', 1);
+    explain("added 1", &map);
+
+    map.insert('b', 2);
+    map.insert('c', 3);
+    explain("added 3", &map);
+
+    map.insert('d', 4);
+    explain("added 4", &map);
+
+    // get 时需要使用引用，并且也返回引用
+    assert_eq!(map.get(&'a'), Some(&1));
+    assert_eq!(map.get_key_value(&'b'), Some((&'b', &2)));
+
+    map.remove(&'a');
+    // 删除后就找不到了
+    assert_eq!(map.contains_key(&'a'), false);
+    assert_eq!(map.get(&'a'), None);
+    explain("removed", &map);
+    // shrink 后哈希表变小
+    map.shrink_to_fit();
+    explain("shrinked", &map);
 }
 
-impl<T> DerefMut for List<T> {
-  fn deref_mut(&mut self) -> &mut Self::Target {
-      &mut self.0
-  }
-}
-
-impl<T> Default for List<T> {
-  fn default() -> Self {
-      Self(Default::default())
-  }
-}
-
-impl<T> Index<isize> for List<T> {
-  type Output = T;
-
-  fn index(&self, index: isize) -> &Self::Output {
-      let len = self.len() as isize;
-      let n = (len + index % len) % len;
-      let iter = self.iter();
-      iter.skip(n as usize).next().unwrap()
-  }
-}
-
-#[test]
-fn it_works() {
-  let mut list: List<u32> = List::default();
-  for i in 0..16 {
-      list.push_back(i);
-  }
-
-  assert_eq!(list[0], 0);
-  assert_eq!(list[5], 5);
-  assert_eq!(list[15], 15);
-  assert_eq!(list[16], 0);
-  assert_eq!(list[-1], 15);
-  assert_eq!(list[128], 0);
-  assert_eq!(list[-128], 0);
+fn explain<K, V>(name: &str, map: &HashMap<K, V>) {
+    println!("{}: len: {}, cap: {}", name, map.len(), map.capacity());
 }
