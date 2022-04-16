@@ -306,7 +306,7 @@ dependencies = [
  "clap",
  "colored",
  "jsonxf",
- "mine",
+ "mime",
  "reqwest",
  "tokio",
 ]
@@ -457,12 +457,6 @@ name = "mime"
 version = "0.3.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2a60c7ce501c71e03a9c9c0d35b861413ae925bd979cc7a4e30d060069aaac8d"
-
-[[package]]
-name = "mine"
-version = "999999999.999999999.999999999"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b846ef306d8f2832f21c9727ce319d294ebd1a2a9ea741472b7d18689a3f325a"
 
 [[package]]
 name = "mio"
