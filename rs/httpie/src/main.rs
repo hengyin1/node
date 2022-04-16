@@ -1,47 +1,87 @@
-use clap::{AppSettings, Clap};
+use clap::Parser;
+use anyhow::{anyhow, Result};
+use reqwest::{header, Client, Response, Url};
+use std::{collections::HashMap, str::FromStr};
 
-// 定义 HTTPie 的 CLI 的主入口，它包含若干个子命令
-// 下面 /// 的注释是文档，clap 会将其作为 CLI 的帮助
-
-/// A naive httpie implementation with Rust, can you imagine how easy it is?
-#[derive(Clap, Debug)]
-#[clap(version = "1.0", author = "Tyr Chen <tyr@chen.com>")]
-#[clap(setting = AppSettings::ColoredHelp)]
+#[derive(Parser, Debug)]
+#[clap(version = "3.1.9", author = "herman")]
 struct Opts {
     #[clap(subcommand)]
     subcmd: SubCommand,
 }
 
-// 子命令分别对应不同的 HTTP 方法，目前只支持 get / post
-#[derive(Clap, Debug)]
+#[derive(Parser, Debug)]
 enum SubCommand {
     Get(Get),
     Post(Post),
     // 我们暂且不支持其它 HTTP 方法
 }
 
-// get 子命令
-
-/// feed get with an url and we will retrieve the response for you
-#[derive(Clap, Debug)]
+#[derive(Parser, Debug)]
 struct Get {
-    /// HTTP 请求的 URL
+    #[clap(parse(try_from_str = parse_url))]
     url: String,
 }
 
-// post 子命令。需要输入一个 URL，和若干个可选的 key=value，用于提供 json body
-
-/// feed post with an url and optional key=value pairs. We will post the data
-/// as JSON, and retrieve the response for you
-#[derive(Clap, Debug)]
+#[derive(Parser, Debug)]
 struct Post {
-    /// HTTP 请求的 URL
+    #[clap(parse(try_from_str = parse_url))]
     url: String,
-    /// HTTP 请求的 body
-    body: Vec<String>,
+    #[clap(parse(try_from_str = parse_kv_pair))]
+    body: Vec<KvPair>,
 }
 
-fn main() {
+#[derive(Debug)]
+struct KvPair {
+    k: String,
+    v: String,
+}
+
+impl FromStr for KvPair {
+    type Err = anyhow::Error;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let mut split = s.split("=");
+        Ok(Self {
+            k: split.next().unwrap().to_string(),
+            v: split.next().unwrap().to_string(),
+        })
+    }
+}
+
+fn parse_url(s: &str) -> Result<String> {
+    let _url: Url = s.parse()?;
+    Ok(s.into())
+}
+
+fn parse_kv_pair(s: &str) -> Result<KvPair> {
+   Ok(s.parse()?)
+}
+
+#[tokio::main]
+async fn main() -> Result<()> {
     let opts: Opts = Opts::parse();
-    println!("{:?}", opts);
+    // println!("opts{:?}", opts);
+    let client = Client::new();
+    let result = match opts.subcmd {
+        SubCommand::Get(ref args) => get(client, args).await?,
+        SubCommand::Post(ref args) => post(client, args).await?,
+    };
+
+    Ok(result)
+}
+
+async fn get(client: Client, args: &Get) -> Result<()> {
+    let res = client.get(&args.url).send().await?;
+    println!("{:?}", res.text().await?);
+    Ok(())
+}
+
+async fn post(client: Client, args: &Post) -> Result<()> {
+    let mut body = HashMap::new();
+    for kv in args.body.iter() {
+        body.insert(&kv.k, &kv.v);
+    }
+    let res = client.post(&args.url).json(&body).send().await?;
+    println!("{:?}", res.text().await?);
+    Ok(())
 }
