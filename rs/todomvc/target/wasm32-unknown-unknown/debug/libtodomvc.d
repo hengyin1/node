@@ -1,0 +1,1 @@
+/Users/yinheng/Desktop/code/node/rs/todomvc/target/wasm32-unknown-unknown/debug/libtodomvc.rlib: /Users/yinheng/Desktop/code/node/rs/todomvc/src/lib.rs /Users/yinheng/Desktop/code/node/rs/todomvc/src/style.css
