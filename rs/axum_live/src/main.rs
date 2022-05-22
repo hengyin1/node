@@ -8,6 +8,7 @@ use axum::{
 use serde::{ Serialize, Deserialize };
 use std::net::SocketAddr;
 use jsonwebtoken::{ encode, decode, Header, Validation, EncodingKey, DecodingKey };
+use std::time::SystemTime;
 
 #[derive(Debug, Serialize, Deserialize)]
 struct Login {
@@ -24,7 +25,7 @@ struct LoginResponse {
 struct Claims {
     id: usize,
     name: String,
-    exp: usize,
+    exp: u64,
 }
 
 #[tokio::main]
@@ -50,7 +51,7 @@ async fn login_handler(Json(payload): Json<Login>) -> Json<LoginResponse> {
     let claims = Claims {
         id: 1,
         name: "Axum".to_string(),
-        exp: 1654358400,
+        exp: get_epoch() + 7 * 24 * 60 * 60,
     };
 
     let token = encode(&Header::default(), &claims, &EncodingKey::from_secret("secret".as_ref())).unwrap();
@@ -66,4 +67,11 @@ async fn todo_handler(TypedHeader(Authorization(bearer)): TypedHeader<Authorizat
     let user = decode::<Claims>(&token, &DecodingKey::from_secret("secret".as_ref()), &Validation::default()).unwrap();
     println!("user: {:?}", user);
     Json("Hello, World!".to_string())
+}
+
+fn get_epoch() -> u64 {
+    match SystemTime::now().duration_since(SystemTime::UNIX_EPOCH) {
+        Ok(n) => n.as_secs(),
+        Err(_) => 0,
+    }
 }
