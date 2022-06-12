@@ -1,22 +1,16 @@
 class Promise {
     constructor(executor) {
         this.dep = [];
-        this.depErrors = [];
-        this.pending = true;
-        this.fulfilled = false;
-        this.rejected = false;
+        this.status = "pending";
         this.value = undefined;
-        this.error = undefined;
         this.resolve = (value) => {
-            this.pending = false;
-            this.fulfilled = true;
+            this.status = "fulfilled";
             this.value = this.wrapToThenable(value);
-            for (const onFulfilled of this.dep) {
-                this.value.then(onFulfilled);
+            for (const handlers of this.dep) {
+                this.value.then.apply(this.value, handlers);
             }
 
             // this.value = value;
-
             // if (this.isPromise(value)) {
             //     for (const onFulfilled of this.dep) {
             //         value.then(onFulfilled);
@@ -29,44 +23,55 @@ class Promise {
 
             this.dep = [];
         }
-        this.reject = (error) => {
-            this.pending = false;
-            this.rejected = true;
-            this.error = error;
-            for (const onRejected of this.depErrors) {
-                onRejected(error);
+        this.reject = (value) => {
+            this.status = "rejected";
+            this.value = this.wrapToRejected(value);
+            for (const handlers of this.dep) {
+                this.value.then.apply(this.value, handlers);
             }
-            this.depErrors = [];
+            this.dep = [];
         }
-        executor(this.resolve, this.reject);
+
+        try {
+            executor(this.resolve, this.reject);
+        } catch (error) {
+            this.reject(error);
+        }
     }
 
     then(onFulfilled, onRejected) {
         const prev = this;
+
+        onFulfilled = this.errHandler(onFulfilled);
+        onRejected = this.errHandler(onRejected);
 
         const promise = new Promise((resolve, reject) => {
             const onSpreadFulfilled = (value) => {
                 resolve(onFulfilled(value));
             }
 
-            if (prev.pending) {
-                prev.dep.push(onSpreadFulfilled);
-                onRejected && prev.depErrors.push(onRejected);
+            const onSpreadRejected = (value) => {
+                reject(onRejected(value));
+            }
+
+            if (prev.status === "pending") {
+                prev.dep.push([onSpreadFulfilled, onSpreadRejected]);
             } else {
-                if (prev.fulfilled) {
-                    prev.value.then(onSpreadFulfilled);
-                    // if (this.isPromise(prev.value)) {
-                    //     prev.value.then(onSpreadFulfilled);
-                    // } else {
-                    //     onSpreadFulfilled(prev.value);
-                    // }
-                } else if (prev.rejected) { 
-                    onRejected && reject(onRejected(prev.error));
-                }
+                prev.value.then(onSpreadFulfilled, onSpreadRejected);
+
+                // if (this.isPromise(prev.value)) {
+                //     prev.value.then(onSpreadFulfilled);
+                // } else {
+                //     onSpreadFulfilled(prev.value);
+                // }
             }
         })
 
         return promise;
+    }
+
+    catch(onRejected) {
+        return this.then(null, onRejected);
     }
 
     isPromise(value) {
@@ -79,8 +84,26 @@ class Promise {
         } else {
             return {
                 then: (onFulfilled) => {
-                    return this.wrapToThenable(onFulfilled(value));
+                    return onFulfilled(value);
                 }
+            }
+        }
+    }
+
+    wrapToRejected(value) {
+        return {
+            then: (_, onRejected) => {
+                return onRejected(value);
+            }
+        } 
+    }
+
+    errHandler(fun) {
+        return (...args) => {
+            try {
+                return fun(...args);
+            } catch (error) {
+                this.reject(error);
             }
         }
     }
