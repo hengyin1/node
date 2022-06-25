@@ -1,3 +1,7 @@
+function isPromise(value) {
+    return value && typeof value.then === "function";
+}
+
 class Promise {
     constructor(executor) {
         this.dep = [];
@@ -11,7 +15,7 @@ class Promise {
             }
 
             // this.value = value;
-            // if (this.isPromise(value)) {
+            // if (isPromise(value)) {
             //     for (const onFulfilled of this.dep) {
             //         value.then(onFulfilled);
             //     }
@@ -42,6 +46,14 @@ class Promise {
     then(onFulfilled, onRejected) {
         const prev = this;
 
+        onFulfilled = onFulfilled || ((value) => {
+            return value;
+        })
+
+        onRejected = onRejected || ((value) => {
+            return value;
+        })
+
         onFulfilled = this.errHandler(onFulfilled);
         onRejected = this.errHandler(onRejected);
 
@@ -59,7 +71,7 @@ class Promise {
             } else {
                 prev.value.then(onSpreadFulfilled, onSpreadRejected);
 
-                // if (this.isPromise(prev.value)) {
+                // if (isPromise(prev.value)) {
                 //     prev.value.then(onSpreadFulfilled);
                 // } else {
                 //     onSpreadFulfilled(prev.value);
@@ -74,12 +86,54 @@ class Promise {
         return this.then(null, onRejected);
     }
 
-    isPromise(value) {
-        return value && typeof value.then === "function";
+    static resolve(value) {
+        return new Promise((resolve, reject) => {
+            if (isPromise(value)) {
+                value.then(res => {
+                    resolve(res);
+                })
+            } else {
+                resolve(value);
+            }
+        })
+    }
+
+    static reject(value) {
+        return new Promise((resolve, reject) => {
+            if (isPromise(value)) {
+                value.then((res) => {
+                    reject(res);
+                }).catch((err) => {
+                    reject(err);
+                })
+            } else {
+                reject(value);
+            }
+        })
+    }
+
+    static all(args) {
+        return new Promise((resolve, reject) => {
+            const promiseResults = [];
+            let totalNumber = 0;
+            let promiseLeng = args.length;
+            for (let i = 0; i < promiseLeng; i++) {
+                const promise = args[i];
+                promise.then((res) => {
+                    totalNumber++;
+                    promiseResults[i] = res;
+                    if (totalNumber == promiseLeng) {
+                        resolve(promiseResults);
+                    }
+                }).catch((err) => {
+                    reject(err);
+                })
+            }
+        })
     }
 
     wrapToThenable(value) {
-        if (this.isPromise(value)) {
+        if (isPromise(value)) {
             return value;
         } else {
             return {
